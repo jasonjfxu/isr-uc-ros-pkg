@@ -1,0 +1,23 @@
+plumesim:
+  frequency: 1
+  color:
+    r: 0.0
+    g: 0.0
+    b: 1.0
+    a: 0.8
+  type: gaussian
+  releasepoint:
+    x: 0.1
+    y: 1.5
+    z: 0.0
+  arena:
+    start:
+      x: 0.0
+      y: 0.0
+    end:
+      x: 4.0
+      y: 3.0
+  diffx: 0.2
+  diffy: 0.005
+  max_points_per_cell: 20
+  radius: 0.1

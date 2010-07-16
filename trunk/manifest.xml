@@ -1,0 +1,17 @@
+<package>
+  <description brief="plumesim">
+
+     plumesim
+
+  </description>
+  <author>Gonçalo Cabrita</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/plumesim</url>
+  <depend package="roscpp"/>
+  <depend package="visualization_msgs"/>
+  <depend package="nav_msgs"/>
+
+</package>
+
+
