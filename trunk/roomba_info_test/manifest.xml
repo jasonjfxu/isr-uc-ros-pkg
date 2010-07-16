@@ -1,0 +1,25 @@
+<package>
+  <description brief="roomba_info">
+
+     roomba_info was made to show informations about roomba robot. 
+
+  </description>
+  <author>Pedro Sousa</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/roomba_info</url>
+  <depend package="roscpp"/>
+  <depend package="roslib"/>
+  <depend package="rosconsole"/>
+  <depend package="std_srvs"/>
+  <depend package="std_msgs"/>
+  
+  <rosdep name="wxwidgets"/>
+
+  <export>
+    <cpp cflags="-I${prefix}/msg/cpp -I${prefix}/srv/cpp"/>
+  </export>
+
+</package>
+
+
