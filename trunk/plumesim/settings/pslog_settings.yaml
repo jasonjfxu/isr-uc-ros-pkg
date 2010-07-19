@@ -1,0 +1,10 @@
+plumesim:
+  frequency: 1
+  color:
+    r: 1.0
+    g: 1.0
+    b: 0.0
+    a: 1.0
+  type: pslog
+  file_name: /home/blazz/myStacks/plumesim/logs/pslog.txt
+  max_points_per_cell: 10
