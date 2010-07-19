@@ -1,0 +1,18 @@
+<package>
+  <description brief="2dnav_roomba">
+
+     2dnav_roomba
+
+  </description>
+  <author>roomba-ros2</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/2dnav_roomba</url>
+  <depend package="move_base"/>
+  <depend package="roomba_setup_tf"/>
+  <depend package="irobot"/>
+  <depend package="hokuyo_node"/>
+
+</package>
+
+

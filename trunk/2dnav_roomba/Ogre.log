@@ -1,0 +1,85 @@
+18:50:41: Creating resource group General
+18:50:41: Creating resource group Internal
+18:50:41: Creating resource group Autodetect
+18:50:41: SceneManagerFactory for type 'DefaultSceneManager' registered.
+18:50:41: Registering ResourceManager for type Material
+18:50:41: Registering ResourceManager for type Mesh
+18:50:41: Registering ResourceManager for type Skeleton
+18:50:41: MovableObjectFactory for type 'ParticleSystem' registered.
+18:50:41: OverlayElementFactory for type Panel registered.
+18:50:41: OverlayElementFactory for type BorderPanel registered.
+18:50:41: OverlayElementFactory for type TextArea registered.
+18:50:41: Registering ResourceManager for type Font
+18:50:41: ArchiveFactory for archive type FileSystem registered.
+18:50:41: ArchiveFactory for archive type Zip registered.
+18:50:41: FreeImage version: 3.10.0
+18:50:41: This program uses FreeImage, a free, open source image library supporting all common bitmap formats. See http://freeimage.sourceforge.net for details
+18:50:41: Supported formats: bmp,ico,jpg,jif,jpeg,jpe,jng,koa,iff,lbm,mng,pbm,pbm,pcd,pcx,pgm,pgm,png,ppm,ppm,ras,tga,targa,tif,tiff,wap,wbmp,wbm,psd,cut,xbm,xpm,gif,hdr,g3,sgi,exr,j2k,j2c,jp2
+18:50:41: DDS codec registering
+18:50:41: Registering ResourceManager for type HighLevelGpuProgram
+18:50:41: Registering ResourceManager for type Compositor
+18:50:41: MovableObjectFactory for type 'Entity' registered.
+18:50:41: MovableObjectFactory for type 'Light' registered.
+18:50:41: MovableObjectFactory for type 'BillboardSet' registered.
+18:50:41: MovableObjectFactory for type 'ManualObject' registered.
+18:50:41: MovableObjectFactory for type 'BillboardChain' registered.
+18:50:41: MovableObjectFactory for type 'RibbonTrail' registered.
+18:50:41: *-*-* OGRE Initialising
+18:50:41: *-*-* Version 1.6.3 (Shoggoth)
+18:50:41: Loading library RenderSystem_GL
+18:50:41: Installing plugin: GL RenderSystem
+18:50:41: OpenGL Rendering Subsystem created.
+18:50:42: Plugin successfully installed
+18:50:42: Loading library Plugin_OctreeSceneManager
+18:50:42: Installing plugin: Octree & Terrain Scene Manager
+18:50:42: Plugin successfully installed
+18:50:42: Loading library Plugin_ParticleFX
+18:50:42: Installing plugin: ParticleFX
+18:50:42: Particle Emitter Type 'Point' registered
+18:50:42: Particle Emitter Type 'Box' registered
+18:50:42: Particle Emitter Type 'Ellipsoid' registered
+18:50:42: Particle Emitter Type 'Cylinder' registered
+18:50:42: Particle Emitter Type 'Ring' registered
+18:50:42: Particle Emitter Type 'HollowEllipsoid' registered
+18:50:42: Particle Affector Type 'LinearForce' registered
+18:50:42: Particle Affector Type 'ColourFader' registered
+18:50:42: Particle Affector Type 'ColourFader2' registered
+18:50:42: Particle Affector Type 'ColourImage' registered
+18:50:42: Particle Affector Type 'ColourInterpolator' registered
+18:50:42: Particle Affector Type 'Scaler' registered
+18:50:42: Particle Affector Type 'Rotator' registered
+18:50:42: Particle Affector Type 'DirectionRandomiser' registered
+18:50:42: Particle Affector Type 'DeflectorPlane' registered
+18:50:42: Plugin successfully installed
+18:50:42: Loading library Plugin_CgProgramManager
+18:50:42: Installing plugin: Cg Program Manager
+18:50:42: Plugin successfully installed
+18:50:42: CPU Identifier & Features
+18:50:42: -------------------------
+18:50:42:  *   CPU ID: GenuineIntel: Intel(R) Atom(TM) CPU N270   @ 1.60GHz
+18:50:42:  *      SSE: yes
+18:50:42:  *     SSE2: yes
+18:50:42:  *     SSE3: yes
+18:50:42:  *      MMX: yes
+18:50:42:  *   MMXEXT: yes
+18:50:42:  *    3DNOW: no
+18:50:42:  * 3DNOWEXT: no
+18:50:42:  *     CMOV: yes
+18:50:42:  *      TSC: yes
+18:50:42:  *      FPU: yes
+18:50:42:  *      PRO: yes
+18:50:42:  *       HT: no
+18:50:42: -------------------------
+18:50:42: ******************************
+*** Starting GLX Subsystem ***
+******************************
+18:50:42: Creating resource group ogre_tools
+18:50:42: Added resource location '/home/roomba-ros2/ros/stacks/visualization_common/ogre_tools/media' of type 'FileSystem' to resource group 'ogre_tools'
+18:50:42: Added resource location '/home/roomba-ros2/ros/stacks/visualization_common/ogre_tools/media/fonts' of type 'FileSystem' to resource group 'ogre_tools'
+18:50:42: Added resource location '/home/roomba-ros2/ros/stacks/visualization_common/ogre_tools/media/models' of type 'FileSystem' to resource group 'ogre_tools'
+18:50:42: Added resource location '/home/roomba-ros2/ros/stacks/visualization_common/ogre_tools/media/materials' of type 'FileSystem' to resource group 'ogre_tools'
+18:50:42: Added resource location '/home/roomba-ros2/ros/stacks/visualization_common/ogre_tools/media/materials/scripts' of type 'FileSystem' to resource group 'ogre_tools'
+18:50:42: Added resource location '/home/roomba-ros2/ros/stacks/visualization_common/ogre_tools/media/materials/programs' of type 'FileSystem' to resource group 'ogre_tools'
+18:50:46: GLRenderSystem::_createRenderWindow "OgreRenderWindow1", 1024x525 windowed  miscParams: externalWindowHandle=153680384:0:8388685:0 
+18:50:46: GLXWindow::create: The externalWindowHandle parameter is deprecated.
+Use the parentWindowHandle or currentGLContext parameter instead.

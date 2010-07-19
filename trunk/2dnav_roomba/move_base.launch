@@ -1,0 +1,10 @@
+<launch>
+  <master auto="start"/>
+  <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+    <rosparam file="$(find 2dnav_roomba)/params/costmap_common_params.yaml" command="load" ns="global_costmap" />
+    <rosparam file="$(find 2dnav_roomba)/params/costmap_common_params.yaml" command="load" ns="local_costmap" />
+    <rosparam file="$(find 2dnav_roomba)/params/local_costmap_params.yaml" command="load" />
+    <rosparam file="$(find 2dnav_roomba)/params/global_costmap_params.yaml" command="load" />
+    <rosparam file="$(find 2dnav_roomba)/params/base_local_planner_params.yaml" command="load" />
+  </node>
+</launch>
