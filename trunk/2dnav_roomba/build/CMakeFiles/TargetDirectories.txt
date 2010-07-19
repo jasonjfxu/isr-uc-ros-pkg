@@ -1,0 +1,12 @@
+/home/roomba-ros1/myStacks/2dnav_roomba/build/CMakeFiles/ROSBUILD_genmsg_cpp.dir
+/home/roomba-ros1/myStacks/2dnav_roomba/build/CMakeFiles/ROSBUILD_gensrv_cpp.dir
+/home/roomba-ros1/myStacks/2dnav_roomba/build/CMakeFiles/clean-test-results.dir
+/home/roomba-ros1/myStacks/2dnav_roomba/build/CMakeFiles/rosbuild_precompile.dir
+/home/roomba-ros1/myStacks/2dnav_roomba/build/CMakeFiles/rospack_genmsg.dir
+/home/roomba-ros1/myStacks/2dnav_roomba/build/CMakeFiles/rospack_genmsg_libexe.dir
+/home/roomba-ros1/myStacks/2dnav_roomba/build/CMakeFiles/rospack_gensrv.dir
+/home/roomba-ros1/myStacks/2dnav_roomba/build/CMakeFiles/test.dir
+/home/roomba-ros1/myStacks/2dnav_roomba/build/CMakeFiles/test-future.dir
+/home/roomba-ros1/myStacks/2dnav_roomba/build/CMakeFiles/test-results.dir
+/home/roomba-ros1/myStacks/2dnav_roomba/build/CMakeFiles/test-results-run.dir
+/home/roomba-ros1/myStacks/2dnav_roomba/build/CMakeFiles/tests.dir
