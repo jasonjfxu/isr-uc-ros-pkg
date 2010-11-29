@@ -1,0 +1,12 @@
+<launch>
+  <node pkg="hokuyo_node" type="hokuyo_node" name="hokuyo_node" output="screen">
+    <param name="frame_id" value="base_laser" />
+  </node>
+
+  <node pkg="roomba_500_series" type="roomba560_node" name="roomba560_node" output="screen" />
+
+  <node pkg="ardusim" type="nose_node" name="nose_node" output="screen" />
+
+  <node pkg="lse_roomba_tf_setup" type="tf_broadcaster_nose" name="tf_broadcaster_nose" output="screen" />
+</launch>
+

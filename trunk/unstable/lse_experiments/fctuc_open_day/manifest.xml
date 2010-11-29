@@ -1,0 +1,23 @@
+<package>
+  <description brief="fctuc_open_day">
+
+      Small demo for the FCTUC open day.
+
+  </description>
+  <author>Maintained by Gonçalo Cabrita goncabrita@isr.uc.pt and Pedro Sousa pvsousa@isr.uc.pt</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/fctuc_open_day</url>
+  <depend package="roscpp"/>
+  <depend package="tf"/>
+  <depend package="actionlib"/>
+  <depend package="actionlib_msgs"/>
+  <depend package="nav_msgs"/>
+  <depend package="geometry_msgs"/>
+  <depend package="move_base_msgs"/>
+  <depend package="lse_sensor_msgs"/>
+  <depend package="roomba_500_series"/>
+
+</package>
+
+

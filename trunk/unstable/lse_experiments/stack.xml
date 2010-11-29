@@ -1,0 +1,13 @@
+<stack>
+  <description brief="lse experiments">
+  
+  	The purpose of this stack is to hold all the relevant experiments produced inside the LSE (ISR University of Coimbra). ROS code developed for papers, demos, etc should be placed here. Everything should be documented in such a way that reproduction of results is possible.
+  
+  </description>
+  <author>Maintained by Gonçalo Cabrita goncabrita@isr.uc.pt and Pedro Sousa pvsousa@isr.uc.pt</author>
+  <license>BSD</license>  
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/lse_experiments</url>
+  <depend stack="ros" />
+
+</stack>
