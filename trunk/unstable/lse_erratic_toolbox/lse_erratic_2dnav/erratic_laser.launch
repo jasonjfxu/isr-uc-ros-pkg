@@ -1,0 +1,12 @@
+<launch>
+  <node pkg="hokuyo_node" type="hokuyo_node" name="hokuyo_node" output="screen">
+    <param name="frame_id" value="base_laser" />
+  </node>
+
+  <node pkg="erratic_player" type="erratic_player" name="erratic_player" output="screen">
+  </node>
+
+  <node pkg="lse_erratic_tf_setup" type="tf_broadcaster" name="erratic_tf_setup" output="screen">
+  </node>
+</launch>
+

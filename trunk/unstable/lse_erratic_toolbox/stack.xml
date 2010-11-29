@@ -1,0 +1,13 @@
+<stack>
+  <description brief="lse_erratic_toolbox">
+  
+    Useful tools for the Erratic robots used at the LSE including popular tf setups, Stage world files and 2D navigation parameters and example launch files for the real and simulated robots.
+  
+  </description>
+  <author>Maintained by Gonçalo Cabrita goncabrita@isr.uc.pt and Pedro Sousa pvsousa@isr.uc.pt</author>
+  <license>BSD</license>  
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/lse_erratic_toolbox</url>
+  <depend stack="ros" />
+
+</stack>

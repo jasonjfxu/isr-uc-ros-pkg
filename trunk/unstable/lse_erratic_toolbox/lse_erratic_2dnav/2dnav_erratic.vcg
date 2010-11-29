@@ -1,0 +1,48 @@
+Background\ ColorR=0
+Background\ ColorG=0
+Background\ ColorB=0
+Fixed\ Frame=/map
+Target\ Frame=<Fixed Frame>
+Grid\ Cells.Alpha=1
+Grid\ Cells.ColorR=0.1
+Grid\ Cells.ColorG=1
+Grid\ Cells.ColorB=0
+Grid\ Cells.Enabled=1
+Grid\ Cells.Topic=/move_base/local_costmap/obstacles
+Grid\ Cells2.Alpha=1
+Grid\ Cells2.ColorR=0.0509804
+Grid\ Cells2.ColorG=0
+Grid\ Cells2.ColorB=1
+Grid\ Cells2.Enabled=1
+Grid\ Cells2.Topic=/move_base/local_costmap/inflated_obstacles
+Map.Alpha=0.7
+Map.Draw\ Behind=0
+Map.Enabled=1
+Map.Topic=/map
+Polygon.Alpha=1
+Polygon.ColorR=1
+Polygon.ColorG=0.0745098
+Polygon.ColorB=0
+Polygon.Enabled=1
+Polygon.Topic=/move_base/local_costmap/robot_footprint
+Tool\ 2D\ Nav\ GoalTopic=move_base_simple/goal
+Tool\ 2D\ Pose\ EstimateTopic=initialpose
+Camera\ Type=rviz::OrbitViewController
+Camera\ Config=0.231 0.0383303 47.0837 -14.9305 1.25441 -49.6881
+Property\ Grid\ State=selection=Grid Cells2.Enabled.Grid Cells2.Topic;expanded=.Global Options,Polygon.Enabled,Grid Cells.Enabled,Grid Cells2.Enabled;scrollpos=0,4;splitterpos=163,311;ispageselected=1
+[Display0]
+Name=Map
+Package=rviz
+ClassName=rviz::MapDisplay
+[Display1]
+Name=Polygon
+Package=rviz
+ClassName=rviz::PolygonDisplay
+[Display2]
+Name=Grid Cells
+Package=rviz
+ClassName=rviz::GridCellsDisplay
+[Display3]
+Name=Grid Cells2
+Package=rviz
+ClassName=rviz::GridCellsDisplay
