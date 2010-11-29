@@ -88,7 +88,7 @@ int main(int argc, char** argv)
 	ros::init(argc, argv, "windsonic_node");
 	ros::NodeHandle n("~");
 	
-	wind_pub = n.advertise<lse_sensor_msgs::Anemometer>("/windsonic", 10);
+	wind_pub = n.advertise<lse_sensor_msgs::Anemometer>("/wind", 10);
 	
 	std::string port;
 	int baudrate;
