@@ -1,10 +1,10 @@
 <package>
   <description brief="sensornet">
 
-     This package contains a node for connecting to the LSE SensorNet, a sensor network for monitoring odor and wind environmental data during odor search experiments. To find out more about SensorNet visit...
+     This package contains a node for connecting to the LSE SensorNet, a sensor network for monitoring odor and wind environmental data during odor search experiments.
 
   </description>
-  <author>Maintained by Gonçalo Cabrita goncabrita@isr.uc.pt and Pedro Sousa pvsousa@isr.uc.pt</author>
+  <author>Gonçalo Cabrita and Pedro Sousa</author>
   <license>BSD</license>
   <review status="unreviewed" notes=""/>
   <url>http://ros.org/wiki/sensornet</url>
