@@ -1,0 +1,13 @@
+<stack>
+  <description brief="lse_messages">
+  
+  	This stack contains messages that are commonly used on the LSE but are not available on the ROS messages stack.
+  
+  </description>
+  <author>Maintained by Gonçalo Cabrita goncabrita@isr.uc.pt and Pedro Sousa pvsousa@isr.uc.pt</author>
+  <license>BSD</license>  
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/lse_messages</url>
+  <depend stack="ros" />	<!-- roscpp -->
+
+</stack>

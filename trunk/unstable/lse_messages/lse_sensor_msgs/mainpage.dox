@@ -1,0 +1,7 @@
+/**
+\mainpage
+\htmlinclude manifest.html
+
+\b lse_sensor_msgs is a package which collects the common message data types used at the LSE not available at sensor_msgs.
+
+*/
