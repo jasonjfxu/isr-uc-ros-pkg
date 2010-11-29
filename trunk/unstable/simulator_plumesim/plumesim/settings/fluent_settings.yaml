@@ -1,0 +1,13 @@
+plumesim:
+  frequency: 1
+  color:
+    r: 0.0
+    g: 1.0
+    b: 0.0
+    a: 0.8
+  type: fluent
+  max_points_per_cell: 20
+  file_name: /home/blazz/myStacks/odor_search/plumesim/logs/fluent_logs/cont05-
+  num_of_frames: 60
+  cell_size: 0.1
+  max_concentration: 0.5

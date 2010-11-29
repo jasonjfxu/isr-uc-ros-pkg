@@ -1,0 +1,15 @@
+/**
+\mainpage
+\htmlinclude manifest.html
+
+\section codeapi PlumeSim Code API
+
+Current plumesim generation classes:
+- \link plumesim::PSMeadering Model generated meadering plume \endlink
+- \link plumesim::PSGaussian Model generated gaussian plume \endlink
+- \link plumesim::PSFluent CFD Fluent log file generated plume \endlink
+- \link plumesim::PSLog Plumesim txt log file plume \endlink
+
+Addins more plume generation sources to plumesim is easy by extending the \link plumesim::PSSource base source class \endlink.
+
+*/
