@@ -1,0 +1,16 @@
+<stack>
+  <description brief="scout_robot">
+  
+  	Packages to use with the Nomad Scout robot.
+  	
+  </description>
+  <author>Maintained by Gonçalo Cabrita goncabrita@isr.uc.pt and Pedro Sousa pvsousa@isr.uc.pt</author>
+  <license>BSD</license>  
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/scout_robot</url>
+  <depend stack="ros" />			<!-- roscpp -->
+  <depend stack="common_msgs" /> 	<!-- nav_msgs, geometry_msgs -->
+  <depend stack="geometry" /> 		<!-- tf -->
+  <depend stack="lse_messages" />	<!-- lse_sensor_msgs -->
+
+</stack>
