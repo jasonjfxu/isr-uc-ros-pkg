@@ -1,10 +1,10 @@
 <stack>
   <description brief="lse_ressources">
   
-  	This stack holds handy ressources like maps.
+  	This stack holds handy ressources for other stacks to find. Currently only has maps of ISR.
   	
   </description>
-  <author>Maintained by Gonçalo Cabrita goncabrita@isr.uc.pt and Pedro Sousa pvsousa@isr.uc.pt</author>
+  <author>Gonçalo Cabrita and Pedro Sousa</author>
   <license>BSD</license>  
   <review status="unreviewed" notes=""/>
   <url>http://ros.org/wiki/lse_ressources</url>
