@@ -1,10 +1,10 @@
 <package>
   <description brief="roomba_stage">
 
-     Stage world files for the Roomba robot. Also includes 2dnav launch files. Examples for multiple robots.
+     Stage world files for the Roomba robot. Also includes 2dnav launch files. An example for multiple roombas running in Stage with multiple move_bases running is also present.
 
   </description>
-  <author>Maintained by Gonçalo Cabrita goncabrita@isr.uc.pt and Pedro Sousa pvsousa@isr.uc.pt</author>
+  <author>Gonçalo Cabrita and Pedro Sousa</author>
   <license>BSD</license>
   <review status="unreviewed" notes=""/>
   <url>http://ros.org/wiki/roomba_stage</url>
