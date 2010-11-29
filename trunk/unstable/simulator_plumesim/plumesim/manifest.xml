@@ -1,10 +1,10 @@
 <package>
   <description brief="plumesim">
 
-     PlumeSim is an odor plume simulator for ROS. It is able to generate plumes for simulations or to real robots. Current plume sources include gaussian and meadering models, plumesim txt log files and CFD Fluent log files.
+     PlumeSim is an odor plume simulator for ROS. It is able to generate plumes for simulations or to real robots. Current plume sources include gaussian and meadering models, plumesim log files and CFD Fluent log files.
 
   </description>
-  <author>Maintained by Gonçalo Cabrita goncabrita@isr.uc.pt and Pedro Sousa pvsousa@isr.uc.pt</author>
+  <author>Gonçalo Cabrita and Pedro Sousa</author>
   <license>BSD</license>
   <review status="unreviewed" notes=""/>
   <url>http://ros.org/wiki/plumesim</url>
