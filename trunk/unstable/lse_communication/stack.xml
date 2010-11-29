@@ -1,0 +1,13 @@
+<stack>
+  <description brief="lse communication">
+  
+  	Communication stack holding some useful tools for serial port and can communication as well as a package for communication between robots. The foreign_relay package is not originally from this stack <url>http://ros.org/wiki/foreign_relay</url>, it is here for commodity.
+  
+  </description>
+  <author>Maintained by Gonçalo Cabrita goncabrita@isr.uc.pt and Pedro Sousa pvsousa@isr.uc.pt</author>
+  <license>BSD</license>  
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/lse_communication</url>
+  <depend stack="ros" /> <!-- roscpp -->
+
+</stack>

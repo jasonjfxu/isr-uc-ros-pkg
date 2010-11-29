@@ -1,0 +1,18 @@
+<package>
+  <description brief="cereal_port">
+
+     Simple C++ serial port class for ROS.
+
+  </description>
+  <author>Maintained by Gonçalo Cabrita goncabrita@isr.uc.pt and Pedro Sousa pvsousa@isr.uc.pt</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/cereal_port</url>
+  <export>
+    <cpp cflags="-I${prefix}/include" lflags="-L${prefix}/lib -Wl,-rpath,${prefix}/lib -lcereal_port"/>
+  </export>
+  <depend package="roscpp"/>
+
+</package>
+
+
