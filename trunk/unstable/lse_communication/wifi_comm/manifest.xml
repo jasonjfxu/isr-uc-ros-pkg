@@ -1,10 +1,10 @@
 <package>
   <description brief="wifi_comm">
 
-     Multi robot communication library and discovery node. Requires foreign_relay http://ros.org/wiki/foreign_relay for communication and OLSR http://www.olsr.org/ for discovery to work properly. Check the wiki page for usage.
+     Multi robot communication library and discovery node. Requires foreign_relay http://ros.org/wiki/foreign_relay for communication and olsrd http://www.olsr.org/ for discovery to work properly.
 
   </description>
-  <author>roomba-ros1</author>
+  <author>Gonçalo Cabrita and Pedro Sousa</author>
   <license>BSD</license>
   <review status="unreviewed" notes=""/>
   <url>http://ros.org/wiki/wifi_comm</url>
