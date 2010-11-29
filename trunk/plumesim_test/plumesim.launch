@@ -1,4 +1,0 @@
-<launch>
-    	<rosparam file="$(find plumesim)/settings/fluent_settings.yaml" command="load" />
-	<node pkg="plumesim" type="plumesim" name="plumesim" />
-</launch>
