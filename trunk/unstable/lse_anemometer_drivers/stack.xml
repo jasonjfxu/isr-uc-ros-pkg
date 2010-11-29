@@ -1,0 +1,13 @@
+<stack>
+  <description brief="lse anemometer drivers">
+  	A stack for anemometer drivers. Depends on the lse_messages stack for the lse_sensor_msgs/Anemometer message.
+  </description>
+  <author>Maintained by Gonçalo Cabrita goncabrita@isr.uc.pt and Pedro Sousa pvsousa@isr.uc.pt</author>
+  <license>BSD</license>  
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/lse_anemometer_drivers</url>
+  <depend stack="ros" />	<!-- roscpp -->
+  <depend stack="lse_communication" />	<!-- cereal_port -->
+  <depend stack="lse_messages" />	<!-- lse_sensor_msgs -->
+
+</stack>
