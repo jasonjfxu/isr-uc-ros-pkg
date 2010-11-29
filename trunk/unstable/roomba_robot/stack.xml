@@ -1,10 +1,10 @@
 <stack>
   <description brief="roomba_robot">
   
-  	Packages for using with the iRobot Roomba 500 series robot.
+  	iRobot Roomba 500 series robots stack.
   
   </description>
-  <author>Maintained by Gonçalo Cabrita goncabrita@isr.uc.pt</author>
+  <author>Gonçalo Cabrita</author>
   <license>BSD</license>  
   <review status="unreviewed" notes=""/>
   <url>http://ros.org/wiki/roomba_robot</url>
