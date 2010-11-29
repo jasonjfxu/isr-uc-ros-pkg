@@ -1,0 +1,15 @@
+<stack>
+  <description brief="roomba_robot">
+  
+  	Packages for using with the iRobot Roomba 500 series robot.
+  
+  </description>
+  <author>Maintained by Gonçalo Cabrita goncabrita@isr.uc.pt</author>
+  <license>BSD</license>  
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/roomba_robot</url>
+  <depend stack="ros" />			<!-- roscpp -->
+  <depend stack="common_msgs" /> 	<!-- nav_msgs, geometry_msgs -->
+  <depend stack="geometry" /> 		<!-- tf -->
+  
+</stack>
