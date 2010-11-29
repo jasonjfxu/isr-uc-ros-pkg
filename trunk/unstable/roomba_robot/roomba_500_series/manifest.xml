@@ -1,10 +1,10 @@
 <package>
   <description brief="roomba_500_series">
 
-     iRobot Roomba 500 package based on the iRobot Open Interface Specifications http://www.irobot.lv/uploaded_files/File/iRobot_Roomba_500_Open_Interface_Spec.pdf. There are two nodes available, a light node which exposes odometry and velocity commands, and a full node which exposes all capabilities of the underlying library. There is also a go dock service available.
+     iRobot Roomba 500 package based on the iRobot Open Interface Specifications http://www.irobot.lv/uploaded_files/File/iRobot_Roomba_500_Open_Interface_Spec.pdf. There are two nodes available, a light node which exposes odometry and velocity commands, and a full node which exposes all capabilities of the underlying library.
 
   </description>
-  <author>Author Gonçalo Cabrita goncabrita@isr.uc.pt</author>
+  <author>Gonçalo Cabrita</author>
   <license>BSD</license>
   <review status="unreviewed" notes=""/>
   <url>http://ros.org/wiki/roomba_500_series</url>
