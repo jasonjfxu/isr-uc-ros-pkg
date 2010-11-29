@@ -1,10 +1,10 @@
 <stack>
   <description brief="lse_sensor_network">
   
-  	Stack for the sensor networks developed at the LSE. Currently holds the sensornet package, however support for a wireless sensor network should be added in the future.
+  	Stack for the sensor networks developed at LSE. Currently holds the sensornet package, however support for a wireless sensor network should be added in the future.
   
   </description>
-  <author>Maintained by Gonçalo Cabrita goncabrita@isr.uc.pt and Pedro Sousa pvsousa@isr.uc.pt</author>
+  <author>Gonçalo Cabrita and Pedro Sousa</author>
   <license>BSD</license>  
   <review status="unreviewed" notes=""/>
   <url>http://ros.org/wiki/lse_sensor_network</url>
