@@ -4,7 +4,7 @@
      Odor bar node. Publishes a group of visualization_msgs/Marker as a bar for visually monitoring odor concentrations in rviz.
 
   </description>
-  <author>Author Pedro Sousa pvsousa@isr.uc.pt</author>
+  <author>Pedro Sousa</author>
   <license>BSD</license>
   <review status="unreviewed" notes=""/>
   <url>http://ros.org/wiki/odor_bar</url>
