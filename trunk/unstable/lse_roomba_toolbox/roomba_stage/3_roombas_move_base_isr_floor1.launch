@@ -1,0 +1,40 @@
+<launch>
+  <master auto="start"/>
+
+  <group ns="robot_0">
+    <node name="map_server" pkg="map_server" type="map_server" args="$(find isr_maps)/maps/isr_floor1.yaml"/>
+    <include file="$(find roomba_stage)/multiple_params/amcl_roomba0.launch" />
+    <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+      <rosparam file="$(find roomba_stage)/multiple_params/costmap_common_params0.yaml" command="load" ns="global_costmap" />
+      <rosparam file="$(find roomba_stage)/multiple_params/costmap_common_params0.yaml" command="load" ns="local_costmap" />
+      <rosparam file="$(find roomba_stage)/multiple_params/local_costmap_params0.yaml" command="load" />
+      <rosparam file="$(find roomba_stage)/multiple_params/global_costmap_params0.yaml" command="load" />
+      <rosparam file="$(find roomba_stage)/multiple_params/base_local_planner_params.yaml" command="load" />
+    </node>
+  </group>
+    
+  <group ns="robot_1">
+  <node name="map_server" pkg="map_server" type="map_server" args="$(find isr_maps)/maps/isr_floor1.yaml"/>
+  <include file="$(find roomba_stage)/multiple_params/amcl_roomba1.launch" />
+  <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+    <rosparam file="$(find roomba_stage)/multiple_params/costmap_common_params1.yaml" command="load" ns="global_costmap" />
+    <rosparam file="$(find roomba_stage)/multiple_params/costmap_common_params1.yaml" command="load" ns="local_costmap" />
+    <rosparam file="$(find roomba_stage)/multiple_params/local_costmap_params1.yaml" command="load" />
+    <rosparam file="$(find roomba_stage)/multiple_params/global_costmap_params1.yaml" command="load" />
+    <rosparam file="$(find roomba_stage)/multiple_params/base_local_planner_params.yaml" command="load" />
+  </node>
+  </group>
+  
+  <group ns="robot_2">
+  <node name="map_server" pkg="map_server" type="map_server" args="$(find isr_maps)/maps/isr_floor1.yaml"/>
+  <include file="$(find roomba_stage)/multiple_params/amcl_roomba2.launch" />
+  <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+    <rosparam file="$(find roomba_stage)/multiple_params/costmap_common_params2.yaml" command="load" ns="global_costmap" />
+    <rosparam file="$(find roomba_stage)/multiple_params/costmap_common_params2.yaml" command="load" ns="local_costmap" />
+    <rosparam file="$(find roomba_stage)/multiple_params/local_costmap_params2.yaml" command="load" />
+    <rosparam file="$(find roomba_stage)/multiple_params/global_costmap_params2.yaml" command="load" />
+    <rosparam file="$(find roomba_stage)/multiple_params/base_local_planner_params.yaml" command="load" />
+  </node>
+  </group>
+  
+</launch>
