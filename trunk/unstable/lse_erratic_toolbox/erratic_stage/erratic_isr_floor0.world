@@ -1,0 +1,78 @@
+define hokuyo laser
+(
+  	range_min 0.0
+  	range_max 2.0
+  	fov 270.25
+  	samples 1081
+  
+  	color "black"
+  	size [ 0.05 0.05 0.1 ]
+)
+
+define erratic position
+(
+  #size [0.415 0.392 0.25]
+  size [0.35 0.35 0.25]
+  origin [-0.05 0 0 0]
+  gui_nose 1
+  drive "diff"
+  color "blue"
+  
+  hokuyo(pose [ 0.050 0.000 0 0.000 ])
+)
+
+define floorplan model
+(
+  	# Sombre, sensible, artistic
+  	color "gray30"
+
+	# Most maps will need a bounding box
+	boundary 1
+
+	gui_nose 0
+	gui_grid 0
+	gui_move 0
+	gui_outline 0
+	gripper_return 0
+	fiducial_return 0
+	laser_return 1
+)
+
+# Set the resolution of the underlying raytrace model in meters
+resolution 0.02
+
+interval_sim 100  # simulation timestep in milliseconds
+
+# Configure the GUI window
+window
+(
+  	size [ 1200.000 600.000 ] 	# in pixels
+  	scale 20  			# pixels per meter
+  	center [ 34.0  12.0 ]
+  	rotate [ 0  0 ]
+  			
+  	show_data 1              	# 1=on 0=off
+)
+
+# load an environment bitmap
+floorplan
+( 
+  name "lab_maze"
+  size [76.20 26.10 1.00]
+  pose [38.10 13.05 0 0]
+  bitmap "/home/blazz/myStacks/ressources/isr_maps/maps/isr_floor0.pgm"
+)
+
+erratic
+(		  
+  	# Can refer to the robot by this name
+  	name "erratic0"
+  	pose [ 34.00 7.50 0 90.0 ]
+
+	drive "diff"
+
+  	# Report error-free position in world coordinates
+  	localization "gps"
+  	localization_origin [ 0 0 0 0 ]
+)
+
