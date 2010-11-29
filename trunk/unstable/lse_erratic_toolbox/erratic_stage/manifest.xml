@@ -4,7 +4,7 @@
      Stage world files for the Erratic robot. Also includes 2dnav launch files.
 
   </description>
-  <author>Maintained by Gonçalo Cabrita goncabrita@isr.uc.pt and Pedro Sousa pvsousa@isr.uc.pt</author>
+  <author>Gonçalo Cabrita and Pedro Sousa</author>
   <license>BSD</license>
   <review status="unreviewed" notes=""/>
   <url>http://ros.org/wiki/erratic_stage</url>
