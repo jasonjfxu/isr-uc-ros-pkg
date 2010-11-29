@@ -1,0 +1,17 @@
+<package>
+  <description brief="virtual_nose">
+
+     Reads data from plumesim and publishes it as a lse_sensor_msgs/Anemometer message.
+
+  </description>
+  <author>Author Gonçalo Cabrita</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/virtual_nose</url>
+  <depend package="roscpp"/>
+  <depend package="lse_sensor_msgs"/>
+  <depend package="plumesim"/>
+
+</package>
+
+
