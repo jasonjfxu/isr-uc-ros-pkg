@@ -1,10 +1,10 @@
 <package>
   <description brief="isr_maps">
 
-     The isr_maps package contains maps of the ISR and arenas throughout the research labs.
+     The isr_maps package contains maps of the ISR and arenas throughout the research labs. Centralized storage for commonly used maps for Stage world files and map_server nodes.
 
   </description>
-  <author>Maintained by Gonçalo Cabrita goncabrita@isr.uc.pt and Pedro Sousa pvsousa@isr.uc.pt</author>
+  <author>Gonçalo Cabrita and Pedro Sousa</author>
   <license>BSD</license>
   <review status="unreviewed" notes=""/>
   <url>http://ros.org/wiki/isr_maps</url>
