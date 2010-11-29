@@ -1,0 +1,14 @@
+<stack>
+  <description brief="lse arduino">
+  
+  	A stack for arduino related packages for ROS.
+  	
+  </description>
+  <author>Maintained by Gonçalo Cabrita goncabrita@isr.uc.pt and Pedro Sousa pvsousa@isr.uc.pt</author>
+  <license>BSD</license>  
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/lse_arduino</url>
+  <depend stack="ros" />	<!-- roscpp -->
+  <depend stack="lse_communication" />	<!-- cereal_port -->
+
+</stack>

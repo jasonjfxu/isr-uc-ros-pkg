@@ -1,0 +1,20 @@
+/**
+\mainpage
+\htmlinclude manifest.html
+
+\b Ardusim (Arduino Sensor Interface Module) is a library for interfacing a wide range of sensors available at the LSE with ROS over the Arduino microcontroller.
+
+\section codeapi Ardusim Code API
+- \link ardusim::Ardusim Ardusim (C++) \endlink
+
+\section sensors Supported Sensors
+
+The Ardusim library currently supports the following sensors:
+- \b ARDUSIM_RANGE - Devantech SRF08 sonar ranger
+- \b ARDUSIM_NOSE - LSE two MOX nostril chemical sensor
+- \b ARDUSIM_TPA -  Devantech TPA81 thermal array
+- \b ARDUSIM_ANEMOMETER	- LSE thermistor based anemometer
+- \b ARDUSIM_NUNCHUCK - Nintendo Wii Nunchuck controller (without the Wiimote)
+- \b ARDUSIM_SHTXX - Sensirion SHTxx humidity sensors
+
+*/
