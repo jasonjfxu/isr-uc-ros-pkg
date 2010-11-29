@@ -1,0 +1,12 @@
+<stack>
+  <description brief="lse_ressources">
+  
+  	This stack holds handy ressources like maps.
+  	
+  </description>
+  <author>Maintained by Gonçalo Cabrita goncabrita@isr.uc.pt and Pedro Sousa pvsousa@isr.uc.pt</author>
+  <license>BSD</license>  
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/lse_ressources</url>
+
+</stack>

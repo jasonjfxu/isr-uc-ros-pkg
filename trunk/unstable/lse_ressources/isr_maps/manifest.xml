@@ -1,0 +1,14 @@
+<package>
+  <description brief="isr_maps">
+
+     The isr_maps package contains maps of the ISR and arenas throughout the research labs.
+
+  </description>
+  <author>Maintained by Gonçalo Cabrita goncabrita@isr.uc.pt and Pedro Sousa pvsousa@isr.uc.pt</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/isr_maps</url>
+
+</package>
+
+
