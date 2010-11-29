@@ -4,7 +4,7 @@
       Small demo for the FCTUC open day.
 
   </description>
-  <author>Maintained by Gonçalo Cabrita goncabrita@isr.uc.pt and Pedro Sousa pvsousa@isr.uc.pt</author>
+  <author>Gonçalo Cabrita and Pedro Sousa</author>
   <license>BSD</license>
   <review status="unreviewed" notes=""/>
   <url>http://ros.org/wiki/fctuc_open_day</url>
