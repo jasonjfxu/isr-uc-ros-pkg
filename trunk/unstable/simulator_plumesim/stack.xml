@@ -1,0 +1,14 @@
+<stack>
+  <description brief="simulator_plumesim">
+  
+  	Odor plume simulator for ROS.
+  
+  </description>
+  <author>Maintained by Gonçalo Cabrita goncabrita@isr.uc.pt and Pedro Sousa pvsousa@isr.uc.pt</author>
+  <license>BSD</license>  
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/simulator_plumesim</url>
+  <depend stack="ros" />
+  <depend stack="lse_messages" />
+
+</stack>
