@@ -17,6 +17,7 @@
   <depend package="move_base_msgs"/>
   <depend package="lse_sensor_msgs"/>
   <depend package="roomba_500_series"/>
+  <depend package="isr_maps"/>
 
 </package>
 
