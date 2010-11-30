@@ -29,8 +29,8 @@ rosbuild_genmsg()
 #rosbuild_add_executable(example examples/example.cpp)
 #target_link_libraries(example ${PROJECT_NAME})
 
-#rosbuild_add_executable(wifi_discovery_node src/wifi_discovery_node.cpp)
-rosbuild_add_executable(wifi_comm_node src/wifi_comm_node.cpp)
+rosbuild_add_executable(wifi_discovery_node src/wifi_discovery_node.cpp)
+#rosbuild_add_executable(wifi_comm_node src/wifi_comm_node.cpp)
 
 rosbuild_add_library(wifi_comm src/wifi_comm_lib.cpp)
 
