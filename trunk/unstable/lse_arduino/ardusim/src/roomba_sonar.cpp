@@ -55,7 +55,7 @@ int main(int argc, char** argv)
 	
 	// Read of type c-string/char buffer
 	std::string port;
-	n.param<std::string>("ardusim/port", port, "/dev/ttyUSB1");
+	n.param<std::string>("port", port, "/dev/ttyUSB1");
 	std::string frame_id;
 	n.param<std::string>("frame_id", frame_id, "/base_sonar");
 
