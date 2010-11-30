@@ -50,7 +50,10 @@ int main(int argc, char** argv)
 	std::vector<lse_sensor_msgs::Nostril>::iterator odorIt;
 	ros::Publisher odor_pub = n.advertise<lse_sensor_msgs::Nostril>("/sensornet_odor", 1200);
 	
-	SensorNet sn(std::string("/dev/ttyUSB0"), 19200);
+	std::string port;
+	n.param<std::string>("sensornet/port", port, "/dev/ttyUSB0");
+	
+	SensorNet sn(port, 19200);
 	std::vector<SensorNet::Node>::iterator node;
 	
 	ROS_INFO("SensorNet - Scanning nodes...");
