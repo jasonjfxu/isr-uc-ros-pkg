@@ -45,7 +45,10 @@ int main(int argc, char** argv)
 	ros::init(argc, argv, "scan_nodes");
 	ros::NodeHandle n;
 
-	SensorNet sn(std::string("/dev/ttyUSB0"), 19200);
+	std::string port;
+	n.param<std::string>("sensornet/port", port, "/dev/ttyUSB0");
+	
+	SensorNet sn(port, 19200);
 	std::vector<SensorNet::Node>::iterator node;
 	
 	ROS_INFO("Scanning for nodes...");

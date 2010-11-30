@@ -51,7 +51,10 @@ int main(int argc, char** argv)
 		return -1;
 	}
 
-	SensorNet sn(std::string("/dev/ttyUSB0"), 19200);
+	std::string port;
+	n.param<std::string>("sensornet/port", port, "/dev/ttyUSB0");
+	
+	SensorNet sn(port, 19200);
 	SensorNet::Node node;
 	node.setAddress(argv[1][0]);
 	
