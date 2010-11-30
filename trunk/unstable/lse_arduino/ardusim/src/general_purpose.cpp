@@ -136,7 +136,7 @@ int main(int argc, char** argv)
 		}
 		else if(*it==ARDUSIM_ANEMOMETER)
 		{
-			anemometer_pub = n.advertise<lse_sensor_msgs::Anemometer>("anemometer", 1);
+			anemometer_pub = n.advertise<lse_sensor_msgs::Anemometer>("wind", 1);
 			ROS_INFO("Ardusim GPnode - Advertising lse_sensor_msgs::Anemometer on topic /anemometer");
 		}
 		else
