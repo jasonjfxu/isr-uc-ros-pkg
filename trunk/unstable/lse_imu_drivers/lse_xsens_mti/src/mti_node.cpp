@@ -42,15 +42,15 @@
 int main(int argc, char** argv)
 {
 	ros::init(argc, argv, "mti_node");
-	ros::NodeHandle n;
+	ros::NodeHandle n("~");
 	
 	// Params
 	std::string portname;
 	int baudrate;
 	std::string frame_id;
-	n.param<std::string>("mti/port", portname, "/dev/ttyUSB0");
-	n.param("mti/baudrate", baudrate, 115200);
-	n.param<std::string>("mti/frame_id", frame_id, "/base_mti");
+	n.param<std::string>("port", portname, "/dev/ttyUSB0");
+	n.param("baudrate", baudrate, 115200);
+	n.param<std::string>("frame_id", frame_id, "/base_imu");
 	
 	Xsens::MTi * mti = new Xsens::MTi();
 	
@@ -83,7 +83,7 @@ int main(int argc, char** argv)
 	}
 	ROS_INFO("MTi -- Setup complete! Initiating data streaming...");
 
-	ros::Publisher mti_pub = n.advertise<sensor_msgs::Imu>("/mti", 10);
+	ros::Publisher mti_pub = n.advertise<sensor_msgs::Imu>("imu/data", 10);
 
 	ros::Rate r(20);
   	while(ros::ok())
