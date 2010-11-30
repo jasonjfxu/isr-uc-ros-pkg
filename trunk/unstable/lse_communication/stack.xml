@@ -1,5 +1,5 @@
 <stack>
-  <description brief="lse communication">
+  <description brief="lse_communication">
   
   	Communication stack holding some useful tools for serial port communication, CerealPort, as well as a package for communication between robots, WifiComm. The foreign_relay package is not originally from this stack http://ros.org/wiki/foreign_relay, it is here for commodity since it is used by WifiComm. For WifiComm to work properly you will also need to download olsrd http://http://www.olsr.org.
   
