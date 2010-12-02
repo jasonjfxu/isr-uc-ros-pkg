@@ -1,7 +1,7 @@
 <package>
   <description brief="virtual_nose">
 
-     Reads data from PlumeSim and publishes it as a lse_sensor_msgs/Anemometer message.
+     Reads data from PlumeSim and publishes it as a lse_sensor_msgs/Nostril message.
 
   </description>
   <author>Gonçalo Cabrita</author>
