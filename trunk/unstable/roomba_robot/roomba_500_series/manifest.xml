@@ -1,7 +1,7 @@
 <package>
   <description brief="roomba_500_series">
 
-     iRobot Roomba 500 package based on the iRobot Open Interface Specifications http://www.irobot.lv/uploaded_files/File/iRobot_Roomba_500_Open_Interface_Spec.pdf. There are two nodes available, a light node which exposes odometry and velocity commands, and a full node which exposes all capabilities of the underlying library.
+     iRobot Roomba 500 package based on the iRobot Open Interface Specifications. There are two nodes available, a light node which exposes odometry and velocity commands, and a full node which exposes all capabilities of the underlying library.
 
   </description>
   <author>Gonçalo Cabrita</author>
