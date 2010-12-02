@@ -57,7 +57,8 @@
 
 #include <string>
 
-irobot::OpenInterface roomba("/dev/ttyUSB0");
+std::string port;
+irobot::OpenInterface * roomba;
 
 std::string prefixTopic(std::string prefix, char * name)
 {
@@ -69,19 +70,19 @@ std::string prefixTopic(std::string prefix, char * name)
 
 void cmdVelReceived(const geometry_msgs::Twist::ConstPtr& cmd_vel)
 {
-	roomba.drive(cmd_vel->linear.x, cmd_vel->angular.z);
+	roomba->drive(cmd_vel->linear.x, cmd_vel->angular.z);
 }
 
 void ledsReceived(const roomba_500_series::Leds::ConstPtr& leds)
 {
-	roomba.setLeds(leds->warning, leds->dock, leds->spot, leds->dirt_detect, leds->clean_color, leds->clean_intensity);
+	roomba->setLeds(leds->warning, leds->dock, leds->spot, leds->dirt_detect, leds->clean_color, leds->clean_intensity);
 }
 
 void digitLedsReceived(const roomba_500_series::DigitLeds::ConstPtr& leds)
 {
 	if(leds->digits.size()!=4) return;
 
-	roomba.setDigitLeds(leds->digits[3], leds->digits[2], leds->digits[1], leds->digits[0]);
+	roomba->setDigitLeds(leds->digits[3], leds->digits[2], leds->digits[1], leds->digits[0]);
 }
 
 void songReceived(const roomba_500_series::Song::ConstPtr& song)
@@ -95,12 +96,12 @@ void songReceived(const roomba_500_series::Song::ConstPtr& song)
 		lengths[i] = song->notes[i].length;
 	}
 
-	roomba.setSong(song->song_number, song->notes.size(), notes, lengths);
+	roomba->setSong(song->song_number, song->notes.size(), notes, lengths);
 }
 
 void playSongReceived(const roomba_500_series::PlaySong::ConstPtr& song)
 {
-	roomba.playSong(song->song_number);
+	roomba->playSong(song->song_number);
 }
 
 
@@ -116,7 +117,11 @@ int main(int argc, char** argv)
 	float last_charge = 0.0;
 	int time_remaining = -1;
 	
-	ros::NodeHandle n;
+	ros::NodeHandle n("~");
+	
+	n.param<std::string>("port", port, "/dev/ttyUSB0");
+	
+	roomba = new irobot::OpenInterface(port.c_str());
 
 	ros::Publisher odom_pub = n.advertise<nav_msgs::Odometry>("/odom", 50);
 	ros::Publisher battery_pub = n.advertise<roomba_500_series::Battery>("/battery", 50);
@@ -136,9 +141,9 @@ int main(int argc, char** argv)
 	ros::Subscriber playsong_sub  = n.subscribe<roomba_500_series::PlaySong>("/play_song", 1, playSongReceived);
 	
 	irobot::OI_Packet_ID sensor_packets[1] = {irobot::OI_PACKET_GROUP_100};
-	roomba.setSensorPackets(sensor_packets, 1, OI_PACKET_GROUP_100_SIZE);
+	roomba->setSensorPackets(sensor_packets, 1, OI_PACKET_GROUP_100_SIZE);
 
-	if( roomba.openSerialPort(true) == 0) ROS_INFO("Connected to Roomba.");
+	if( roomba->openSerialPort(true) == 0) ROS_INFO("Connected to Roomba.");
 	else
 	{
 		ROS_FATAL("Could not connect to Roomba.");
@@ -156,17 +161,17 @@ int main(int argc, char** argv)
 	{
 		current_time = ros::Time::now();
 		
-		last_x = roomba.odometry_x_;
-		last_y = roomba.odometry_y_;
-		last_yaw = roomba.odometry_yaw_;
+		last_x = roomba->odometry_x_;
+		last_y = roomba->odometry_y_;
+		last_yaw = roomba->odometry_yaw_;
 		
-		if( roomba.getSensorPackets(100) == -1) ROS_ERROR("Could not retrieve sensor packets.");
-		else roomba.calculateOdometry();
+		if( roomba->getSensorPackets(100) == -1) ROS_ERROR("Could not retrieve sensor packets.");
+		else roomba->calculateOdometry();
 		
 		dt = (current_time - last_time).toSec();
-		vel_x = (roomba.odometry_x_ - last_x)/dt;
-		vel_y = (roomba.odometry_y_ - last_y)/dt;
-		vel_yaw = (roomba.odometry_yaw_ - last_yaw)/dt;
+		vel_x = (roomba->odometry_x_ - last_x)/dt;
+		vel_y = (roomba->odometry_y_ - last_y)/dt;
+		vel_yaw = (roomba->odometry_yaw_ - last_yaw)/dt;
 		
 		// ******************************************************************************************
 		//first, we'll publish the transforms over tf
@@ -174,10 +179,10 @@ int main(int argc, char** argv)
 		odom_trans.header.stamp = current_time;
 		odom_trans.header.frame_id = "odom";
 		odom_trans.child_frame_id = "base_link";
-		odom_trans.transform.translation.x = roomba.odometry_x_;
-		odom_trans.transform.translation.y = roomba.odometry_y_;
+		odom_trans.transform.translation.x = roomba->odometry_x_;
+		odom_trans.transform.translation.y = roomba->odometry_y_;
 		odom_trans.transform.translation.z = 0.0;
-		odom_trans.transform.rotation = tf::createQuaternionMsgFromYaw(roomba.odometry_yaw_);
+		odom_trans.transform.rotation = tf::createQuaternionMsgFromYaw(roomba->odometry_yaw_);
 		tf_broadcaster.sendTransform(odom_trans);
 		
 		//TODO: Finish brodcasting the tf for all the ir sensors on the Roomba
@@ -198,10 +203,10 @@ int main(int argc, char** argv)
 		odom.header.frame_id = "odom";
 		
 		//set the position
-		odom.pose.pose.position.x = roomba.odometry_x_;
-		odom.pose.pose.position.y = roomba.odometry_y_;
+		odom.pose.pose.position.x = roomba->odometry_x_;
+		odom.pose.pose.position.y = roomba->odometry_y_;
 		odom.pose.pose.position.z = 0.0;
-		odom.pose.pose.orientation = tf::createQuaternionMsgFromYaw(roomba.odometry_yaw_);
+		odom.pose.pose.orientation = tf::createQuaternionMsgFromYaw(roomba->odometry_yaw_);
 		
 		//set the velocity
 		odom.child_frame_id = "base_link";
@@ -216,11 +221,11 @@ int main(int argc, char** argv)
 		//publish battery
 		roomba_500_series::Battery battery;
 		battery.header.stamp = current_time;
-		battery.power_cord = roomba.power_cord_;
-		battery.dock = roomba.dock_;
-		battery.level = 100.0*(roomba.charge_/roomba.capacity_);
-		if(last_charge > roomba.charge_) time_remaining = (int)(battery.level/((last_charge-roomba.charge_)/roomba.capacity_)/dt)/60;
-		last_charge = roomba.charge_;
+		battery.power_cord = roomba->power_cord_;
+		battery.dock = roomba->dock_;
+		battery.level = 100.0*(roomba->charge_/roomba->capacity_);
+		if(last_charge > roomba->charge_) time_remaining = (int)(battery.level/((last_charge-roomba->charge_)/roomba->capacity_)/dt)/60;
+		last_charge = roomba->charge_;
 		battery.time_remaining = time_remaining;
 		battery_pub.publish(battery);
 	
@@ -228,23 +233,23 @@ int main(int argc, char** argv)
 		//publish bumpers
 		roomba_500_series::Bumper bumper;
 		bumper.left.header.stamp = current_time;
-		bumper.left.state = roomba.bumper_[LEFT];
+		bumper.left.state = roomba->bumper_[LEFT];
 		bumper.right.header.stamp = current_time;
-		bumper.right.state = roomba.bumper_[RIGHT];
+		bumper.right.state = roomba->bumper_[RIGHT];
 		bumper_pub.publish(bumper);
 	
 		// ******************************************************************************************	
 		//publish buttons
 		roomba_500_series::Buttons buttons;
 		buttons.header.stamp = current_time;
-		buttons.clean = roomba.buttons_[BUTTON_CLEAN];
-		buttons.spot = roomba.buttons_[BUTTON_SPOT];
-		buttons.dock = roomba.buttons_[BUTTON_DOCK];
-		buttons.day = roomba.buttons_[BUTTON_DAY];
-		buttons.hour = roomba.buttons_[BUTTON_HOUR];
-		buttons.minute = roomba.buttons_[BUTTON_MINUTE];
-		buttons.schedule = roomba.buttons_[BUTTON_SCHEDULE];
-		buttons.clock = roomba.buttons_[BUTTON_CLOCK];
+		buttons.clean = roomba->buttons_[BUTTON_CLEAN];
+		buttons.spot = roomba->buttons_[BUTTON_SPOT];
+		buttons.dock = roomba->buttons_[BUTTON_DOCK];
+		buttons.day = roomba->buttons_[BUTTON_DAY];
+		buttons.hour = roomba->buttons_[BUTTON_HOUR];
+		buttons.minute = roomba->buttons_[BUTTON_MINUTE];
+		buttons.schedule = roomba->buttons_[BUTTON_SCHEDULE];
+		buttons.clock = roomba->buttons_[BUTTON_CLOCK];
 		buttons_pub.publish(buttons);
 
 		// ******************************************************************************************
@@ -253,23 +258,23 @@ int main(int argc, char** argv)
 		cliff.header.stamp = current_time;
 
 		cliff.header.frame_id = "base_cliff_left";
-		cliff.state = roomba.cliff_[LEFT];
-		cliff.signal = roomba.cliff_signal_[LEFT];
+		cliff.state = roomba->cliff_[LEFT];
+		cliff.signal = roomba->cliff_signal_[LEFT];
 		cliff_pub.publish(cliff);
 
 		cliff.header.frame_id = "base_cliff_front_left";
-		cliff.state = roomba.cliff_[FRONT_LEFT];
-		cliff.signal = roomba.cliff_signal_[FRONT_LEFT];
+		cliff.state = roomba->cliff_[FRONT_LEFT];
+		cliff.signal = roomba->cliff_signal_[FRONT_LEFT];
 		cliff_pub.publish(cliff);
 
 		cliff.header.frame_id = "base_cliff_front_right";
-		cliff.state = roomba.cliff_[FRONT_RIGHT];
-		cliff.signal = roomba.cliff_signal_[FRONT_RIGHT];
+		cliff.state = roomba->cliff_[FRONT_RIGHT];
+		cliff.signal = roomba->cliff_signal_[FRONT_RIGHT];
 		cliff_pub.publish(cliff);
 
 		cliff.header.frame_id = "base_cliff_right";
-		cliff.state = roomba.cliff_[RIGHT];
-		cliff.signal = roomba.cliff_signal_[RIGHT];
+		cliff.state = roomba->cliff_[RIGHT];
+		cliff.signal = roomba->cliff_signal_[RIGHT];
 		cliff_pub.publish(cliff);
 
 		// ******************************************************************************************
@@ -278,59 +283,59 @@ int main(int argc, char** argv)
 		irbumper.header.stamp = current_time;
 
 		irbumper.header.frame_id = "base_irbumper_left";
-		irbumper.state = roomba.ir_bumper_[LEFT];
-		irbumper.signal = roomba.ir_bumper_signal_[LEFT];
+		irbumper.state = roomba->ir_bumper_[LEFT];
+		irbumper.signal = roomba->ir_bumper_signal_[LEFT];
 		irbumper_pub.publish(irbumper);
 
 		irbumper.header.frame_id = "base_irbumper_front_left";
-		irbumper.state = roomba.ir_bumper_[FRONT_LEFT];
-		irbumper.signal = roomba.ir_bumper_signal_[FRONT_LEFT];
+		irbumper.state = roomba->ir_bumper_[FRONT_LEFT];
+		irbumper.signal = roomba->ir_bumper_signal_[FRONT_LEFT];
 		irbumper_pub.publish(irbumper);
 
 		irbumper.header.frame_id = "base_irbumper_center_left";
-		irbumper.state = roomba.ir_bumper_[CENTER_LEFT];
-		irbumper.signal = roomba.ir_bumper_signal_[CENTER_LEFT];
+		irbumper.state = roomba->ir_bumper_[CENTER_LEFT];
+		irbumper.signal = roomba->ir_bumper_signal_[CENTER_LEFT];
 		irbumper_pub.publish(irbumper);
 
 		irbumper.header.frame_id = "base_irbumper_center_right";
-		irbumper.state = roomba.ir_bumper_[CENTER_RIGHT];
-		irbumper.signal = roomba.ir_bumper_signal_[CENTER_RIGHT];
+		irbumper.state = roomba->ir_bumper_[CENTER_RIGHT];
+		irbumper.signal = roomba->ir_bumper_signal_[CENTER_RIGHT];
 		irbumper_pub.publish(irbumper);
 
 		irbumper.header.frame_id = "base_irbumper_front_right";
-		irbumper.state = roomba.ir_bumper_[FRONT_RIGHT];
-		irbumper.signal = roomba.ir_bumper_signal_[FRONT_RIGHT];
+		irbumper.state = roomba->ir_bumper_[FRONT_RIGHT];
+		irbumper.signal = roomba->ir_bumper_signal_[FRONT_RIGHT];
 		irbumper_pub.publish(irbumper);
 
 		irbumper.header.frame_id = "base_irbumper_right";
-		irbumper.state = roomba.ir_bumper_[RIGHT];
-		irbumper.signal = roomba.ir_bumper_signal_[RIGHT];
+		irbumper.state = roomba->ir_bumper_[RIGHT];
+		irbumper.signal = roomba->ir_bumper_signal_[RIGHT];
 		irbumper_pub.publish(irbumper);
 
 		// ******************************************************************************************
 		//publish irchar
 		roomba_500_series::IRCharacter irchar;
 		irchar.header.stamp = current_time;
-		irchar.omni = roomba.ir_char_[OMNI];
-		irchar.left = roomba.ir_char_[LEFT];
-		irchar.right = roomba.ir_char_[RIGHT];
+		irchar.omni = roomba->ir_char_[OMNI];
+		irchar.left = roomba->ir_char_[LEFT];
+		irchar.right = roomba->ir_char_[RIGHT];
 		irchar_pub.publish(irchar);
 
 		// ******************************************************************************************
 		//publish wheeldrop
 		roomba_500_series::WheelDrop wheeldrop;
 		wheeldrop.left.header.stamp = current_time;
-		wheeldrop.left.state = roomba.wheel_drop_[LEFT];
+		wheeldrop.left.state = roomba->wheel_drop_[LEFT];
 		wheeldrop.right.header.stamp = current_time;
-		wheeldrop.right.state = roomba.wheel_drop_[RIGHT];
+		wheeldrop.right.state = roomba->wheel_drop_[RIGHT];
 		wheeldrop_pub.publish(wheeldrop);
 		
 		ros::spinOnce();
 		r.sleep();
 	}
 	
-	roomba.powerDown();
-	roomba.closeSerialPort();
+	roomba->powerDown();
+	roomba->closeSerialPort();
 }
 
 // EOF
