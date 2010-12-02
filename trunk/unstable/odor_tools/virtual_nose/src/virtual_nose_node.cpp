@@ -78,7 +78,7 @@ int main(int argc, char **argv)
 	  	{
 	  			lse_sensor_msgs::Nostril nose_msg;
 	  			
-	    		nose_msg.reading = nose_srv.response.nostril.reading*3300.00;
+	    		nose_msg.reading = srv.response.nostril.reading*3300.00;
 	    		nose_msg.header.stamp = ros::Time::now();
 	    		nose_msg.header.frame_id = frame_id;
 				nose_msg.min_reading = 0.0;
