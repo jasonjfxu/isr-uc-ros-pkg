@@ -68,7 +68,7 @@ int main(int argc, char** argv)
 
 	ROS_INFO("Scout for ROS %.2f", NODE_VERSION);
 
-	ros::NodeHandle n;
+	ros::NodeHandle n("~");
 	
 	tf::TransformBroadcaster odom_broadcaster;
 	
@@ -77,8 +77,25 @@ int main(int argc, char** argv)
 	
 	ros::Subscriber cmd_vel_sub = n.subscribe<geometry_msgs::Twist>("/cmd_vel", 1, cmdVelReceived);
 
+	std::string port;
+	n.param<std::string>("port", port, "/dev/ttyUSB0");
+	
+	std::string model;
+	n.param<std::string>("model", model, "Scout2");
+	
+	int robot_model;
+	if(model.compare("N200")==0) robot_model = MODEL_N200;
+	else if(model.compare("N150")==0) robot_model = MODEL_N150;
+	else if(model.compare("Scout")==0) robot_model = MODEL_SCOUT;
+	else if(model.compare("Scout2")==0) robot_model = MODEL_SCOUT2;
+	else
+	{
+		ROS_FATAL("Scout -- Unknown robot model: %s! Options are N200, N150, Scout and Scout2", model.c_str());
+		ROS_BREAK();
+	}
+
 	// Connect to the Scout
-	connect_robot(1, MODEL_SCOUT2, "/dev/ttyUSB0", SCOUT_BAUD_RATE);
+	connect_robot(1, robot_model, port.c_str(), SCOUT_BAUD_RATE);
 	// Reset
 	dp(0,0);
 	da(0,0);
