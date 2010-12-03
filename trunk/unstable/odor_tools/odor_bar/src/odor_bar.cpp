@@ -253,24 +253,24 @@ void configColorBar(ros::NodeHandle *pn, visualization_msgs::Marker *ptrMarker)
 {
 	// Read parameters
 	// Scale
-	pn->param("odorbar/scale/x", ptrMarker->scale.x, 0.15);
-	pn->param("odorbar/scale/y", ptrMarker->scale.x, 0.15);
-	pn->param("odorbar/scale/z", ptrMarker->scale.x, 0.15);
+	pn->param("scale/x", ptrMarker->scale.x, 0.15);
+	pn->param("scale/y", ptrMarker->scale.x, 0.15);
+	pn->param("scale/z", ptrMarker->scale.x, 0.15);
 
 	// HSV S and V components
-	pn->param("odorbar/hsv_S", hsvS, 1.0);
-	pn->param("odorbar/hsv_V", hsvV, 1.0);
+	pn->param("hsv_s", hsvS, 1.0);
+	pn->param("hsv_v", hsvV, 1.0);
 
 	// HSV H interval
-	pn->param("odorbar/Hue_max", hueMax, 200);
-	pn->param("odorbar/Hue_min", hueMin, 0);
+	pn->param("hue_max", hueMax, 200);
+	pn->param("hue_min", hueMin, 0);
 }
 
 
 int main( int argc, char** argv )
 {
 	ros::init(argc, argv, "odor_bar");
-	ros::NodeHandle n;
+	ros::NodeHandle n("~");
 	ROS_INFO("odor_bar for ROS %.2f", NODE_VERSION);
 
 	ros::Subscriber nose_sub = n.subscribe("nose", 2, noseCallback);
