@@ -143,17 +143,17 @@ PlumeSim::PlumeSim() : n("~")
 		source = new PSMeadering();
 		PSMeadering * meandering = dynamic_cast<PSMeadering*>(source);		
 		
-		n.getParam("releasepoint/x", meandering->startPoint.px);
-		n.getParam("releasepoint/y", meandering->startPoint.py);
-		n.getParam("releasepoint/z", meandering->startPoint.pz);
-		n.getParam("arena/start/x", meandering->arenaRect.startPoint.px);
-		n.getParam("arena/start/y", meandering->arenaRect.startPoint.py);
-		n.getParam("arena/end/x", meandering->arenaRect.endPoint.px);
-		n.getParam("arena/end/y", meandering->arenaRect.endPoint.py);
-		n.getParam("number_of_points", meandering->numOfPlumePoints);
-		n.getParam("release_rate", meandering->releaseRate);
-		n.getParam("dispersion_coeficient", meandering->dispersionCoeficient);
-		n.getParam("radius", meandering->radius);
+		n.param("releasepoint/x", meandering->startPoint.px, 0.0);
+		n.param("releasepoint/y", meandering->startPoint.py, 0.0);
+		n.param("releasepoint/z", meandering->startPoint.pz, 0.0);
+		n.param("arena/start/x", meandering->arenaRect.startPoint.px, 0.0);
+		n.param("arena/start/y", meandering->arenaRect.startPoint.py, 0.0);
+		n.param("arena/end/x", meandering->arenaRect.endPoint.px, 0.0);
+		n.param("arena/end/y", meandering->arenaRect.endPoint.py, 0.0);
+		n.param("number_of_points", meandering->numOfPlumePoints, 100);
+		n.param("release_rate", meandering->releaseRate, 10);
+		n.param("dispersion_coeficient", meandering->dispersionCoeficient, 0.06);
+		n.param("radius", meandering->radius, 0.1);
 	}
 	else if(type.compare("gaussian") == 0)
 	{
