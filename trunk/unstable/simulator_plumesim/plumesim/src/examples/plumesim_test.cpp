@@ -56,7 +56,7 @@ int main(int argc, char **argv)
 
   	ros::NodeHandle n;
 	ros::Subscriber odom_sub = n.subscribe("odom", 1, odomCallback);
-  	ros::ServiceClient client = n.serviceClient<plumesim::ReadPlumeSim>("read_plumesim");
+  	ros::ServiceClient client = n.serviceClient<plumesim::ReadPlumeSim>("plumesim/read_plumesim");
 
 	ros::Rate r(1);
   	while(ros::ok())
