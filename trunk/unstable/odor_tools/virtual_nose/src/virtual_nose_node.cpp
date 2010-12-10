@@ -54,17 +54,23 @@ void odomCallback(const nav_msgs::OdometryConstPtr& msg)
 int main(int argc, char **argv)
 {
   	ros::init(argc, argv, "virtual_nose_node");
+  	
+  	ROS_INFO("VirtualNose for ROS v0.2");
 
-  	ros::NodeHandle n("~");
+  	ros::NodeHandle n;
+  	ros::NodeHandle pn("~");
   	
   	std::string frame_id;
-	n.param<std::string>("frame_id", frame_id, "base_nose");
+	pn.param<std::string>("frame_id", frame_id, "base_link");
+	
+	std::string plumesim_name;
+	pn.param<std::string>("plumesim_name", plumesim_name, "plumesim/read_plumesim");
   	
 	ros::Subscriber odom_sub = n.subscribe("odom", 10, odomCallback);
 	
 	ros::Publisher nose_pub = n.advertise<lse_sensor_msgs::Nostril>("/nose", 10);
 	
-  	ros::ServiceClient client = n.serviceClient<plumesim::ReadPlumeSim>("read_plumesim");
+  	ros::ServiceClient client = n.serviceClient<plumesim::ReadPlumeSim>(plumesim_name.c_str());
 
 	ros::Rate r(10);
   	while(ros::ok())
