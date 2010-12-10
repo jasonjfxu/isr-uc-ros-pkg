@@ -151,7 +151,7 @@ PlumeSim::PlumeSim() : n("~")
 		n.param("arena/end/x", meandering->arenaRect.endPoint.px, 0.0);
 		n.param("arena/end/y", meandering->arenaRect.endPoint.py, 0.0);
 		n.param("number_of_points", meandering->numOfPlumePoints, 100);
-		n.param("release_rate", meandering->releaseRate, 10);
+		n.param("release_rate", meandering->releaseRate, 10.0);
 		n.param("dispersion_coeficient", meandering->dispersionCoeficient, 0.06);
 		n.param("radius", meandering->radius, 0.1);
 	}
