@@ -56,7 +56,8 @@ int main(int argc, char** argv)
 {
 	ros::init(argc, argv, "general_node");
 	
-	ros::NodeHandle n("~");
+	ros::NodeHandle n;
+	ros::NodeHandle pn("~");
 	
 	std::vector<lse_sensor_msgs::Range> range_msgs;
 	std::vector<lse_sensor_msgs::Nostril> nose_msgs;
@@ -70,17 +71,17 @@ int main(int argc, char** argv)
 	
 	// Read of type c-string/char buffer
 	std::string port;
-	n.param<std::string>("port", port, "/dev/ttyUSB1");
+	pn.param<std::string>("port", port, "/dev/ttyUSB1");
 	std::string sonar_frame_id;
-	n.param<std::string>("sonar_frame_id", sonar_frame_id, "/base_sonar");
+	pn.param<std::string>("sonar_frame_id", sonar_frame_id, "/base_sonar");
 	std::string nose_frame_id;
-	n.param<std::string>("nose_frame_id", nose_frame_id, "/base_nose");
+	pn.param<std::string>("nose_frame_id", nose_frame_id, "/base_nose");
 	std::string tpa_frame_id;
-	n.param<std::string>("tpa_frame_id", tpa_frame_id, "/base_tpa");
+	pn.param<std::string>("tpa_frame_id", tpa_frame_id, "/base_tpa");
 	std::string anemometer_frame_id;
-	n.param<std::string>("anemometer_frame_id", anemometer_frame_id, "/base_anemometer");
+	pn.param<std::string>("anemometer_frame_id", anemometer_frame_id, "/base_anemometer");
 	bool scan_sensors;
-	n.param("scan_sensors", scan_sensors, true);
+	pn.param("scan_sensors", scan_sensors, true);
 
 	Ardusim ardusim(port);
 	
