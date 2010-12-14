@@ -48,6 +48,7 @@ int main(int argc, char** argv)
 	ros::init(argc, argv, "thermistor_node");
 	
 	ros::NodeHandle n;
+	ros::NodeHandle pn("~");
 	
 	std::vector<lse_sensor_msgs::Thermistor> raw_msgs;
 	
@@ -55,9 +56,9 @@ int main(int argc, char** argv)
 	
 	// Read of type c-string/char buffer
 	std::string port;
-	n.param<std::string>("port", port, "/dev/ttyUSB0");
+	pn.param<std::string>("port", port, "/dev/ttyUSB0");
 	std::string frame_id;
-	n.param<std::string>("frame_id", frame_id, "/base_thermistor");
+	pn.param<std::string>("frame_id", frame_id, "/base_thermistor");
 
 	Ardusim ardusim(port);
 	

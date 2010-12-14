@@ -47,7 +47,8 @@ int main(int argc, char** argv)
 {
 	ros::init(argc, argv, "nose_node");
 	
-	ros::NodeHandle n("~");
+	ros::NodeHandle n;
+	ros::NodeHandle pn("~");
 	
 	std::vector<lse_sensor_msgs::Nostril> nose_msgs;
 	
@@ -55,9 +56,9 @@ int main(int argc, char** argv)
 	
 	// Read of type c-string/char buffer
 	std::string port;
-	n.param<std::string>("port", port, "/dev/ttyUSB1");
+	pn.param<std::string>("port", port, "/dev/ttyUSB1");
 	std::string frame_id;
-	n.param<std::string>("frame_id", frame_id, "/base_nose");
+	pn.param<std::string>("frame_id", frame_id, "/base_nose");
 
 	Ardusim ardusim(port);
 	
