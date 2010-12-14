@@ -73,9 +73,9 @@ int main(int argc, char** argv)
 	double vel_x, vel_y, vel_yaw;
 	double dt;
 
-	ros::NodeHandle n("~");
+	ros::NodeHandle n;
 	
-	n.param<std::string>("port", port, "/dev/ttyUSB0");
+	n.param<std::string>("roomba/port", port, "/dev/ttyUSB0");
 	
 	roomba = new irobot::OpenInterface(port.c_str());
 	
