@@ -86,7 +86,7 @@ void newDataCallback(std::string * data)
 int main(int argc, char** argv)
 {
 	ros::init(argc, argv, "windsonic_node");
-	ros::NodeHandle n();
+	ros::NodeHandle n;
 	ros::NodeHandle pn("~");
 	
 	wind_pub = n.advertise<lse_sensor_msgs::Anemometer>("/wind", 10);
