@@ -42,15 +42,16 @@
 int main(int argc, char** argv)
 {
 	ros::init(argc, argv, "mti_node");
-	ros::NodeHandle n("~");
+	ros::NodeHandle n;
+	ros::NodeHandle pn("~");
 	
 	// Params
 	std::string portname;
 	int baudrate;
 	std::string frame_id;
-	n.param<std::string>("port", portname, "/dev/ttyUSB0");
-	n.param("baudrate", baudrate, 115200);
-	n.param<std::string>("frame_id", frame_id, "/base_imu");
+	pn.param<std::string>("port", portname, "/dev/ttyUSB0");
+	pn.param("baudrate", baudrate, 115200);
+	pn.param<std::string>("frame_id", frame_id, "/base_imu");
 	
 	Xsens::MTi * mti = new Xsens::MTi();
 	
