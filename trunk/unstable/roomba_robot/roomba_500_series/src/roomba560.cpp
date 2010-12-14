@@ -117,9 +117,9 @@ int main(int argc, char** argv)
 	float last_charge = 0.0;
 	int time_remaining = -1;
 	
-	ros::NodeHandle n("~");
+	ros::NodeHandle n;
 	
-	n.param<std::string>("port", port, "/dev/ttyUSB0");
+	n.param<std::string>("roomba/port", port, "/dev/ttyUSB0");
 	
 	roomba = new irobot::OpenInterface(port.c_str());
 
