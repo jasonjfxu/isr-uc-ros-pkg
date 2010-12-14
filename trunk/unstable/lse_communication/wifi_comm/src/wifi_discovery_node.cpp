@@ -160,7 +160,7 @@ void getNeighboursInfo(wifi_comm::WiFiNeighboursList * neighbours)
 int main( int argc, char** argv )
 {
 	ros::init(argc, argv, "wifi_discovery");
-	ros::NodeHandle n("~");
+	ros::NodeHandle n;
 	
 	wifi_comm::WiFiNeighboursList neighbours;
 
@@ -169,7 +169,7 @@ int main( int argc, char** argv )
 	ROS_INFO("Wifi Discovery Node for ROS %.2f", NODE_VERSION);
 
 	int freq;
-	n.param("frequency", freq, 1);
+	n.param("wifi_discovery_node/frequency", freq, 1);
 	ros::Rate r(freq);
 	// main loop
 	while(ros::ok())
