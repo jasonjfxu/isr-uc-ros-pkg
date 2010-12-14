@@ -86,15 +86,16 @@ void newDataCallback(std::string * data)
 int main(int argc, char** argv)
 {
 	ros::init(argc, argv, "windsonic_node");
-	ros::NodeHandle n("~");
+	ros::NodeHandle n();
+	ros::NodeHandle pn("~");
 	
 	wind_pub = n.advertise<lse_sensor_msgs::Anemometer>("/wind", 10);
 	
 	std::string port;
 	int baudrate;
-	n.param<std::string>("port", port, "/dev/ttyUSB0");
-	n.param("baudrate", baudrate, 38400);
-	n.param<std::string>("frame_id", frame_id, "/base_anemometer");
+	pn.param<std::string>("port", port, "/dev/ttyUSB0");
+	pn.param("baudrate", baudrate, 38400);
+	pn.param<std::string>("frame_id", frame_id, "/base_anemometer");
 
 	ROS_INFO("%s", frame_id.c_str());
 	
