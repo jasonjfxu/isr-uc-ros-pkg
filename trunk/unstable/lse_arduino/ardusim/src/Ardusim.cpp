@@ -440,21 +440,115 @@ namespace ardusim
 			lse_sensor_msgs::Thermistor raw;
 			raw.header.stamp = now_;
 			
+			int ch[4];
 			for(int j=0 ; j<4 ; j++)
 			{
-				raw.reading = getValue(data)/8.0;
+				ch[j] = getValue(data);
+				raw.reading = ch[j];
 				thermistor_msgs_.push_back(raw);
 			}
 		
 			// And now_ the anemometer msg
 			lse_sensor_msgs::Anemometer anemometer;
 			anemometer.header.stamp = now_;
-		
-			// TODO: Finish this!!!	
-			anemometer.wind_speed = 0.0;
-			anemometer.wind_direction = 0.0;
+			
+			std::vector<TopDistances> candidates;
+			
+			float top_distance_sums[2] = {-1, -1};
+			int ind[2];
+			
+			for(int k=0 ; k<calib_data_.size() ; k++)
+			{
+				float ch0 = ch[0]-calib_data_[k].ch0;
+				float ch1 = ch[1]-calib_data_[k].ch1;
+				float ch2 = ch[2]-calib_data_[k].ch2;
+				float ch3 = ch[3]-calib_data_[k].ch3;
+				float distance = ch0*ch0 + ch1*ch1 + ch2*ch2 + ch3*ch3;
+				
+				int candidate_ind = -1;
+				for(int c=0 ; c<candidates.size() ; c++)
+				{
+					if(candidates[c].velocity == calib_data_[k].velocity)
+					{
+						candidate_ind = c;
+						break;
+					}
+				}
+				if(candidate_ind >= 0)
+				{
+					TopDistances new_candidate;
+					new_candidate.velocity = calib_data_[k].velocity;
+					new_candidate.index[0] = k;
+					new_candidate.distance[0] = distance;
+					new_candidate.index[1] = -1;
+					new_candidate.distance[1] = 0.0;
+					candidates.push_back(new_candidate);
+				}
+				else
+				{
+					if(distance < candidates[candidate_ind].distance[0])
+					{
+						candidates[candidate_ind].distance[1] = candidates[candidate_ind].distance[0];
+						candidates[candidate_ind].index[1] = candidates[candidate_ind].index[0];
+						candidates[candidate_ind].distance[0] = distance;
+						candidates[candidate_ind].index[0] = k;
+					}
+					else if(distance < candidates[candidate_ind].distance[1] || candidates[candidate_ind].distance[1] == -1)
+					{
+						candidates[candidate_ind].distance[1] = distance;
+						candidates[candidate_ind].index[1] = k;
+					}
+					
+					float distance_sum = candidates[candidate_ind].distance[0]+candidates[candidate_ind].distance[1];
+					
+					if(distance_sum < top_distance_sums[0] || top_distance_sums[0] == -1)
+					{
+						top_distance_sums[1] = top_distance_sums[0];
+						ind[1] = ind[0];
+						top_distance_sums[0] = distance_sum;
+						ind[0] = candidate_ind;
+					}
+					else if(distance_sum < top_distance_sums[1] || top_distance_sums[1] == -1)
+					{
+						top_distance_sums[1] = distance_sum;
+						ind[1] = candidate_ind;
+					}
+				}
+
+			}
+			
+			float mean_weight = (top_distance_sums[0] + top_distance_sums[1]) / 4.0;
+			candidates[ind[0]].weight[0] = candidates[ind[0]].distance[0]==0 ? mean_weight/0.01 : mean_weight/candidates[ind[0]].distance[0];
+			candidates[ind[0]].weight[1] = candidates[ind[0]].distance[1]==0 ? mean_weight/0.01 : mean_weight/candidates[ind[0]].distance[1];
+			candidates[ind[1]].weight[0] = candidates[ind[1]].distance[0]==0 ? mean_weight/0.01 : mean_weight/candidates[ind[1]].distance[0];
+			candidates[ind[1]].weight[1] = candidates[ind[1]].distance[1]==0 ? mean_weight/0.01 : mean_weight/candidates[ind[1]].distance[1];
+			
+			float sum = candidates[(int)*ind].weight[0] + candidates[(int)*ind].weight[1] + candidates[(int)*ind+1].weight[0] +candidates[(int)*ind+1].weight[1];
+			candidates[ind[0]].weight[0] /= sum;
+			candidates[ind[0]].weight[1] /= sum;
+			candidates[ind[1]].weight[0] /= sum;
+			candidates[ind[1]].weight[1] /= sum;
+			
+			anemometer.wind_direction = calib_data_[candidates[ind[0]].index[0]].angle*candidates[ind[0]].weight[0] + calib_data_[candidates[ind[0]].index[1]].angle*candidates[ind[0]].weight[1] + calib_data_[candidates[ind[1]].index[0]].angle*candidates[ind[1]].weight[0] + calib_data_[candidates[ind[1]].index[1]].angle*candidates[ind[1]].weight[1];
+			anemometer.wind_speed = calib_data_[candidates[ind[0]].index[0]].velocity*candidates[ind[0]].weight[0] + calib_data_[candidates[ind[0]].index[1]].velocity*candidates[ind[0]].weight[1] + calib_data_[candidates[ind[1]].index[0]].velocity*candidates[ind[1]].weight[0] + calib_data_[candidates[ind[1]].index[1]].velocity*candidates[ind[1]].weight[1];
 		
 			anemometer_msgs_.push_back(anemometer);
+		}
+	}
+	
+	int Ardusim::loadAnemometerCalibFile(std::string * file_path)
+	{
+		FILE * calib_file;
+		
+		calib_file = fopen(file_path->c_str(), "r");
+		
+		while(!feof(calib_file))
+		{
+			AnemometerCalibData new_calib_data;
+			
+			fscanf(calib_file, "%f,%d,%d,%d,%d,%f\n", &new_calib_data.angle, &new_calib_data.ch0, &new_calib_data.ch1, &new_calib_data.ch2, &new_calib_data.ch3, &new_calib_data.velocity);
+			
+			calib_data_.push_back(new_calib_data);
 		}
 	}
 

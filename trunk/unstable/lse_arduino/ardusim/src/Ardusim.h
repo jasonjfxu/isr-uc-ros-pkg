@@ -157,6 +157,18 @@ class Ardusim
 		*  \return True if succeeded, false if not.
 		*/
 		bool getSensorData(int timeout);
+	
+		//! Get value
+		/*!
+		 *  Load the calibration data for the anemometer from a file.
+		 *
+		 *  \param file_path  	File path.
+		 *
+		 *  \sa parseAnemometer()
+		 *
+		 *  \return An int value.
+		 */
+		int loadAnemometerCalibFile(std::string * file_path);
 		
 		// Getters
 		bool getRange(std::vector<lse_sensor_msgs::Range> * range);
@@ -254,6 +266,24 @@ class Ardusim
 		std::vector<lse_sensor_msgs::Anemometer> anemometer_msgs_;
 		//! Vector of thermistor messages
 		std::vector<lse_sensor_msgs::Thermistor> thermistor_msgs_;
+	
+		struct AnemometerCalibData
+		{
+			float angle;
+			float velocity;
+			int ch0, ch1, ch2, ch3;
+		};
+	
+		std::vector<AnemometerCalibData> calib_data_;
+		
+		struct TopDistances
+		{
+			float velocity;
+			
+			int index[2];
+			float distance[2];
+			float weight[2];
+		};
 };
 
 } // namespace
