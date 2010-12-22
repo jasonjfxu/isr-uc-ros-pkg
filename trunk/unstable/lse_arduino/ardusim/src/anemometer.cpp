@@ -67,7 +67,11 @@ int main(int argc, char** argv)
 	int requests[] = {ARDUSIM_ANEMOMETER};
 	ardusim.setRequests(requests, 1);
 	
-	ardusim.loadAnemometerCalibFile(&file_path);
+	if(!ardusim.loadAnemometerCalibFile(&file_path))
+	{
+		ROS_FATAL("Ardusim -- Could not load the anemometer calibration file!");
+		ROS_BREAK();
+	}
 
 	ros::Rate r(10);
   	while(ros::ok())
