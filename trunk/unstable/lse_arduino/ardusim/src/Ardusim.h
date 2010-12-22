@@ -166,9 +166,9 @@ class Ardusim
 		 *
 		 *  \sa parseAnemometer()
 		 *
-		 *  \return An int value.
+		 *  \return Wether the file was loaded or not.
 		 */
-		int loadAnemometerCalibFile(std::string * file_path);
+		bool loadAnemometerCalibFile(std::string * file_path);
 		
 		// Getters
 		bool getRange(std::vector<lse_sensor_msgs::Range> * range);
