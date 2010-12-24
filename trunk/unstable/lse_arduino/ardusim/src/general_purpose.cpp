@@ -71,7 +71,7 @@ int main(int argc, char** argv)
 	
 	// Read of type c-string/char buffer
 	std::string port;
-	pn.param<std::string>("port", port, "/dev/ttyUSB1");
+	pn.param<std::string>("port", port, "/dev/ttyUSB0");
 	std::string sonar_frame_id;
 	pn.param<std::string>("sonar_frame_id", sonar_frame_id, "/base_sonar");
 	std::string nose_frame_id;
@@ -80,6 +80,8 @@ int main(int argc, char** argv)
 	pn.param<std::string>("tpa_frame_id", tpa_frame_id, "/base_tpa");
 	std::string anemometer_frame_id;
 	pn.param<std::string>("anemometer_frame_id", anemometer_frame_id, "/base_anemometer");
+	std::string file_path;
+	pn.param<std::string>("calibration_file_path", file_path, "anemometer.csv");
 	bool scan_sensors;
 	pn.param("scan_sensors", scan_sensors, true);
 
@@ -137,6 +139,12 @@ int main(int argc, char** argv)
 		}
 		else if(*it==ARDUSIM_ANEMOMETER)
 		{
+			if(!ardusim.loadAnemometerCalibFile(&file_path))
+			{
+				ROS_FATAL("Ardusim GPnode - Could not load the anemometer calibration file!");
+				ROS_BREAK();
+			}
+		
 			anemometer_pub = n.advertise<lse_sensor_msgs::Anemometer>("wind", 1);
 			ROS_INFO("Ardusim GPnode - Advertising lse_sensor_msgs::Anemometer on topic /anemometer");
 		}
