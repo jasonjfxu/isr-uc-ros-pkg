@@ -476,7 +476,8 @@ namespace ardusim
 							break;
 						}
 					}
-					if(candidate_ind >= 0)
+					
+					if(candidate_ind < 0)
 					{
 						TopDistances new_candidate;
 						new_candidate.velocity = calib_data_[k].velocity;
@@ -495,7 +496,7 @@ namespace ardusim
 							candidates[candidate_ind].distance[0] = distance;
 							candidates[candidate_ind].index[0] = k;
 						}
-						else if(distance < candidates[candidate_ind].distance[1] || candidates[candidate_ind].distance[1] == -1)
+						else if(distance < candidates[candidate_ind].distance[1] || candidates[candidate_ind].index[1] == -1)
 						{
 							candidates[candidate_ind].distance[1] = distance;
 							candidates[candidate_ind].index[1] = k;
@@ -552,6 +553,8 @@ namespace ardusim
 			AnemometerCalibData new_calib_data;
 			
 			fscanf(calib_file, "%f,%d,%d,%d,%d,%f\n", &new_calib_data.angle, &new_calib_data.ch0, &new_calib_data.ch1, &new_calib_data.ch2, &new_calib_data.ch3, &new_calib_data.velocity);
+			
+			//ROS_INFO("%f,%d,%d,%d,%d,%f", new_calib_data.angle, new_calib_data.ch0, new_calib_data.ch1, new_calib_data.ch2, new_calib_data.ch3, new_calib_data.velocity);
 			
 			calib_data_.push_back(new_calib_data);
 		}

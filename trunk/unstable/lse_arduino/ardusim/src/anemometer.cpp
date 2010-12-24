@@ -60,7 +60,7 @@ int main(int argc, char** argv)
 	std::string frame_id;
 	pn.param<std::string>("frame_id", frame_id, "/base_anemometer");
 	std::string file_path;
-	pn.param<std::string>("calib_file_path", file_path, "anemometer.csv");
+	pn.param<std::string>("calibration_file_path", file_path, "anemometer.csv");
 
 	Ardusim ardusim(port);
 	
