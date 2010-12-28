@@ -16,3 +16,5 @@ float32 reading
 
 float32 min_reading
 float32 max_reading
+
+float32 clean_air
