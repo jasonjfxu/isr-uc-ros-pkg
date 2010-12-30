@@ -39,7 +39,7 @@
 #include <math.h>
 #include <string.h>
 
-#include "Ardusim.h"
+#include "ardusim/Ardusim.h"
 
 using namespace ardusim;
 
