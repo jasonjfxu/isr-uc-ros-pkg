@@ -29,6 +29,8 @@ set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
 #rosbuild_add_executable(example examples/example.cpp)
 #target_link_libraries(example ${PROJECT_NAME})
 
+rosbuild_add_library(ardusim src/Ardusim.cpp)
+
 rosbuild_add_executable(gp_node src/general_purpose.cpp src/Ardusim.cpp)
 target_link_libraries(gp_node cereal_port)
 
