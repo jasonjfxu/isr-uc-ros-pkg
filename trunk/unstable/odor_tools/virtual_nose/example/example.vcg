@@ -1,0 +1,85 @@
+Background\ ColorR=0
+Background\ ColorG=0
+Background\ ColorB=0
+Fixed\ Frame=/map
+Target\ Frame=<Fixed Frame>
+Axes.Enabled=1
+Axes.Length=0.4
+Axes.Radius=0.05
+Axes.Reference\ Frame=/base_link
+Grid.Alpha=0.5
+Grid.Cell\ Size=1
+Grid.ColorR=0.5
+Grid.ColorG=0.5
+Grid.ColorB=0.5
+Grid.Enabled=1
+Grid.Line\ Style=0
+Grid.Line\ Width=0.03
+Grid.Normal\ Cell\ Count=0
+Grid.OffsetX=0
+Grid.OffsetY=0
+Grid.OffsetZ=0
+Grid.Plane=0
+Grid.Plane\ Cell\ Count=10
+Grid.Reference\ Frame=<Fixed Frame>
+Inflated.Alpha=1
+Inflated.ColorR=0.0666667
+Inflated.ColorG=0
+Inflated.ColorB=1
+Inflated.Enabled=1
+Inflated.Topic=/move_base/local_costmap/inflated_obstacles
+Map.Alpha=0.7
+Map.Draw\ Behind=0
+Map.Enabled=1
+Map.Topic=/map
+Obstacles.Alpha=1
+Obstacles.ColorR=0.1
+Obstacles.ColorG=1
+Obstacles.ColorB=0
+Obstacles.Enabled=1
+Obstacles.Topic=/move_base/local_costmap/obstacles
+Path.Alpha=1
+Path.ColorR=1
+Path.ColorG=0
+Path.ColorB=0.0235294
+Path.Enabled=1
+Path.Topic=/move_base/NavfnROS/plan
+Roomba.Alpha=1
+Roomba.ColorR=1
+Roomba.ColorG=0
+Roomba.ColorB=0.0117647
+Roomba.Enabled=1
+Roomba.Topic=/move_base/local_costmap/robot_footprint
+Tool\ 2D\ Nav\ GoalTopic=move_base_simple/goal
+Tool\ 2D\ Pose\ EstimateTopic=initialpose
+Camera\ Type=rviz::OrbitViewController
+Camera\ Config=0.685591 0.190377 7.24049 -1.04798 0.480007 -1.81672
+Property\ Grid\ State=selection=;expanded=;scrollpos=0,0;splitterpos=133,266;ispageselected=1
+[Display0]
+Name=Map
+Package=rviz
+ClassName=rviz::MapDisplay
+[Display1]
+Name=Roomba
+Package=rviz
+ClassName=rviz::PolygonDisplay
+[Display2]
+Name=Axes
+Package=rviz
+ClassName=rviz::AxesDisplay
+[Display3]
+Name=Obstacles
+Package=rviz
+ClassName=rviz::GridCellsDisplay
+[Display4]
+Name=Inflated
+Package=rviz
+ClassName=rviz::GridCellsDisplay
+[Display5]
+Name=Path
+Package=rviz
+ClassName=rviz::PathDisplay
+[Display6]
+Name=Grid
+Package=rviz
+ClassName=rviz::GridDisplay
