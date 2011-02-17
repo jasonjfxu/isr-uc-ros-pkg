@@ -1,0 +1,6 @@
+<launch>
+    	<rosparam file="$(find plumesim)/settings/gaussian_settings.yaml" command="load" />
+		<node pkg="plumesim" type="plumesim" name="plumesim" />
+		
+		<node pkg="virtual_nose" type="virtual_nose_node" name="virtual_nose_node" />
+</launch>
