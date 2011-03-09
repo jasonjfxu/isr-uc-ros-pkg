@@ -400,7 +400,7 @@ namespace ardusim
 			lse_sensor_msgs::Nostril nose;
 			nose.header.stamp = now_;
 		
-			nose.reading = (float)getValue(data);
+			nose.raw_data = getValue(data);
 		
 			nose_msgs_.push_back(nose);
 		}
