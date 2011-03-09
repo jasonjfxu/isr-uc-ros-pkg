@@ -45,3 +45,7 @@ target_link_libraries(thermistor_node cereal_port)
 
 rosbuild_add_executable(anemometer_node src/anemometer.cpp src/Ardusim.cpp)
 target_link_libraries(anemometer_node cereal_port)
+
+rosbuild_add_executable(nose_calibration_node src/nose_calibration.cpp)
+target_link_libraries(nose_calibration_node cereal_port)
+
