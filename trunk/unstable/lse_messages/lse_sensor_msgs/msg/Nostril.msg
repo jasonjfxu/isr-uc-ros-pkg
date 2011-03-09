@@ -12,9 +12,11 @@ uint8 NATURAL_GAS_METHANE=4
 
 uint8[] gas_type    	# the types of gases detected by the sensor
 
-float32 reading
+float32 reading			# ppm
 
-float32 min_reading
-float32 max_reading
+float32 min_reading		# ppm
+float32 max_reading		# ppm
 
-float32 clean_air
+float32 clean_air		# ppm
+
+uint16 raw_data			# mV
