@@ -63,6 +63,14 @@ int main(int argc, char** argv)
 	pn.param("clean_air_2620", clean_air_2620, 0.0);
 	double clean_air_2600;
 	pn.param("clean_air_2600", clean_air_2600, 0.0);
+	double a_2620;
+	pn.param("a_2620", a_2620, 1.0);
+	double b_2620;
+	pn.param("b_2620", b_2620, 1.0);
+	double a_2600;
+	pn.param("a_2600", a_2600, 1.0);
+	double b_2600;
+	pn.param("b_2600", b_2600, 1.0);
 
 	Ardusim ardusim(port);
 	
@@ -79,10 +87,12 @@ int main(int argc, char** argv)
 				nose_msgs[0].sensor_model = "Figaro 2620";
 				nose_msgs[0].gas_type.push_back(lse_sensor_msgs::Nostril::ORGANIC_SOLVENTS);
 				nose_msgs[0].clean_air = clean_air_2620;
+				nose_msgs[0].reading = exp((nose_msgs[0].raw_data+a_2620)/b_2620);
 			
 				nose_msgs[1].sensor_model = "Figaro 2600";
 				nose_msgs[1].gas_type.push_back(lse_sensor_msgs::Nostril::AIR_CONTAMINANTS);
 				nose_msgs[1].clean_air = clean_air_2600;
+				nose_msgs[1].reading = exp((nose_msgs[1].raw_data+a_2600)/b_2600);
 			
 				for(int i=0 ; i<nose_msgs.size() ; i++)
 				{
