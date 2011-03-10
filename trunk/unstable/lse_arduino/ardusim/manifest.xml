@@ -12,6 +12,7 @@
     <cpp cflags="-I${prefix}/include" lflags="-L${prefix}/lib -Wl,-rpath,${prefix}/lib -lardusim"/>
   </export>
   <depend package="roscpp"/>
+  <depend package="std_msgs"/>
   <depend package="cereal_port"/>
   <depend package="lse_sensor_msgs"/>
 
