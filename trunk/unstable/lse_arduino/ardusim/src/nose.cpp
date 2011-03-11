@@ -59,10 +59,22 @@ int main(int argc, char** argv)
 	pn.param<std::string>("port", port, "/dev/ttyUSB1");
 	std::string frame_id;
 	pn.param<std::string>("frame_id", frame_id, "/base_nose");
+	
 	double clean_air_2620;
 	pn.param("clean_air_2620", clean_air_2620, 0.0);
 	double clean_air_2600;
 	pn.param("clean_air_2600", clean_air_2600, 0.0);
+	
+	double min_2620;
+	pn.param("min_2620", min_2620, 0.0);
+	double max_2620;
+	pn.param("max_2620", max_2620, 0.0);
+	
+	double min_2600;
+	pn.param("min_2600", min_2600, 1000.0);
+	double max_2600;
+	pn.param("max_2600", max_2600, 1000.0);
+	
 	double a_2620;
 	pn.param("a_2620", a_2620, 1.0);
 	double b_2620;
@@ -88,17 +100,19 @@ int main(int argc, char** argv)
 				nose_msgs[0].gas_type.push_back(lse_sensor_msgs::Nostril::ORGANIC_SOLVENTS);
 				nose_msgs[0].clean_air = clean_air_2620;
 				nose_msgs[0].reading = exp((nose_msgs[0].raw_data+a_2620)/b_2620);
+				nose_msgs[0].min_reading = min_2620;
+				nose_msgs[0].max_reading = max_2620;
 			
 				nose_msgs[1].sensor_model = "Figaro 2600";
 				nose_msgs[1].gas_type.push_back(lse_sensor_msgs::Nostril::AIR_CONTAMINANTS);
 				nose_msgs[1].clean_air = clean_air_2600;
 				nose_msgs[1].reading = exp((nose_msgs[1].raw_data+a_2600)/b_2600);
+				nose_msgs[1].min_reading = min_2600;
+				nose_msgs[1].max_reading = max_2600;
 			
 				for(int i=0 ; i<nose_msgs.size() ; i++)
 				{
 					nose_msgs[i].header.frame_id = frame_id;
-					nose_msgs[i].min_reading = 0.0;
-					nose_msgs[i].max_reading = 3300.0;
 					nose_pub.publish(nose_msgs.at(i));
 				}
 			}
