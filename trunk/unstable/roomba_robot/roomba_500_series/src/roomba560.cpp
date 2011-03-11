@@ -118,8 +118,14 @@ int main(int argc, char** argv)
 	int time_remaining = -1;
 	
 	ros::NodeHandle n;
+	ros::NodeHandle pn("~");
 	
-	n.param<std::string>("roomba/port", port, "/dev/ttyUSB0");
+	pn.param<std::string>("port", port, "/dev/ttyUSB0");
+	
+	std::string base_frame_id;
+	std::string odom_frame_id;
+	pn.param<std::string>("base_frame_id", base_frame_id, "base_link");
+	pn.param<std::string>("odom_frame_id", odom_frame_id, "odom");
 	
 	roomba = new irobot::OpenInterface(port.c_str());
 
@@ -177,8 +183,8 @@ int main(int argc, char** argv)
 		//first, we'll publish the transforms over tf
 		geometry_msgs::TransformStamped odom_trans;
 		odom_trans.header.stamp = current_time;
-		odom_trans.header.frame_id = "odom";
-		odom_trans.child_frame_id = "base_link";
+		odom_trans.header.frame_id = odom_frame_id;
+		odom_trans.child_frame_id = base_frame_id;
 		odom_trans.transform.translation.x = roomba->odometry_x_;
 		odom_trans.transform.translation.y = roomba->odometry_y_;
 		odom_trans.transform.translation.z = 0.0;
@@ -200,7 +206,7 @@ int main(int argc, char** argv)
 		//next, we'll publish the odometry message over ROS
 		nav_msgs::Odometry odom;
 		odom.header.stamp = current_time;
-		odom.header.frame_id = "odom";
+		odom.header.frame_id = odom_frame_id;
 		
 		//set the position
 		odom.pose.pose.position.x = roomba->odometry_x_;
@@ -209,7 +215,7 @@ int main(int argc, char** argv)
 		odom.pose.pose.orientation = tf::createQuaternionMsgFromYaw(roomba->odometry_yaw_);
 		
 		//set the velocity
-		odom.child_frame_id = "base_link";
+		odom.child_frame_id = base_frame_id;
 		odom.twist.twist.linear.x = vel_x;
 		odom.twist.twist.linear.y = vel_y;
 		odom.twist.twist.angular.z = vel_yaw;
