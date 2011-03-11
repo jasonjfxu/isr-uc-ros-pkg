@@ -41,6 +41,14 @@ int main(int argc, char** argv)
 {
   	ros::init(argc, argv, "roomba_tf_setup");
   	ros::NodeHandle n;
+  	ros::NodeHandle pn("~");
+  	
+  	std::string base_frame_id;
+	std::string laser_frame_id;
+	std::string nose_frame_id;
+	pn.param<std::string>("base_frame_id", base_frame_id, "base_link");
+	pn.param<std::string>("laser_frame_id", laser_frame_id, "base_laser");
+	pn.param<std::string>("nose_frame_id", nose_frame_id, "base_nose");
 
   	ros::Rate r(50);
 
@@ -49,10 +57,10 @@ int main(int argc, char** argv)
   	while(n.ok())
 	{
     		broadcaster.sendTransform(tf::StampedTransform(tf::Transform(tf::Quaternion(0, 0, 0, 1), tf::Vector3(0.065, 0.000, 0.240)),
-        	ros::Time::now(),"base_link", "base_laser"));
+        	ros::Time::now(), base_frame_id.c_str(), laser_frame_id.c_str()));
         	
         	broadcaster.sendTransform(tf::StampedTransform(tf::Transform(tf::Quaternion(0, 0, 0, 1), tf::Vector3(0.120, 0.000, 0.160)),
-        	ros::Time::now(),"base_link", "base_nose"));
+        	ros::Time::now(), base_frame_id.c_str(), nose_frame_id.c_str()));
 		
     		r.sleep();
   	}
