@@ -99,14 +99,14 @@ int main(int argc, char** argv)
 				nose_msgs[0].sensor_model = "Figaro 2620";
 				nose_msgs[0].gas_type.push_back(lse_sensor_msgs::Nostril::ORGANIC_SOLVENTS);
 				nose_msgs[0].clean_air = clean_air_2620;
-				nose_msgs[0].reading = exp((nose_msgs[0].raw_data+a_2620)/b_2620);
+				nose_msgs[0].reading = exp((nose_msgs[0].raw_data-b_2620)/a_2620);
 				nose_msgs[0].min_reading = min_2620;
 				nose_msgs[0].max_reading = max_2620;
 			
 				nose_msgs[1].sensor_model = "Figaro 2600";
 				nose_msgs[1].gas_type.push_back(lse_sensor_msgs::Nostril::AIR_CONTAMINANTS);
 				nose_msgs[1].clean_air = clean_air_2600;
-				nose_msgs[1].reading = exp((nose_msgs[1].raw_data+a_2600)/b_2600);
+				nose_msgs[1].reading = exp((nose_msgs[1].raw_data-b_2600)/a_2600);
 				nose_msgs[1].min_reading = min_2600;
 				nose_msgs[1].max_reading = max_2600;
 			
