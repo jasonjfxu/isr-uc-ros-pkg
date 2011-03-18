@@ -72,6 +72,8 @@ char * wifi_comm::WiFiComm::concatTopicAndIp(char * final_topic, char * topic, c
 
 std::string * wifi_comm::WiFiComm::openForeignRelay(char * ip, char * topic, bool public_publish, bool append_my_ip)
 {
+	ROS_ERROR("Using wifi_comm::WiFiComm::openForeignRelay(char * ip, char * topic, bool public_publish, bool append_my_ip) is deprecated. Please change to wifi_comm::WiFiComm::openForeignRelay(char * ip, char * local_topic, char * foreign_topic).");
+
 	ForeignRelay newRelay;
 
 	int pid = fork();
@@ -101,6 +103,36 @@ std::string * wifi_comm::WiFiComm::openForeignRelay(char * ip, char * topic, boo
 		newRelay.ip = ip;
 		foreign_relays_.push_back(newRelay);
 		ROS_INFO("Successfully opened foreign_relay to %s on the topic %s with pid %d", ip, topic, pid);
+		return &newRelay.ip;
+	}
+	return NULL;
+}
+
+std::string * wifi_comm::WiFiComm::openForeignRelay(char * ip, char * local_topic, char * foreign_topic)
+{
+	ForeignRelay newRelay;
+
+	int pid = fork();
+	if(pid==0)	// Child
+	{
+		char ros_master_uri[STR_SIZE];
+		sprintf(ros_master_uri, "http://%s:11311", ip);
+		execlp("rosrun", "rosrun", "foreign_relay", "foreign_relay", "adv", ros_master_uri, foreign_topic, local_topic, (char*)0);
+		
+		ROS_WARN("Reached the end of foreign_relay to %s on the topic %s with pid %d", ip, foreign_topic, getpid());
+		exit(0);
+	}
+	else if(pid<0)	// Error
+	{
+		ROS_ERROR("Failed to open foreign_relay to %s on the topic %s", ip, foreign_topic);
+		return NULL;
+	}
+	else		// Parent
+	{
+		newRelay.pid = pid;
+		newRelay.ip = ip;
+		foreign_relays_.push_back(newRelay);
+		ROS_INFO("Successfully opened foreign_relay to %s on the topic %s with pid %d", ip, foreign_topic, pid);
 		return &newRelay.ip;
 	}
 	return NULL;
