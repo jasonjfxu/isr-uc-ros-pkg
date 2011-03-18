@@ -109,6 +109,18 @@ namespace wifi_comm
 		*  \return Foreign roscore ip adress.
 		*/
 		std::string * openForeignRelay(char * ip, char * topic, bool public_publish=true, bool append_my_ip=true);
+		
+		//! Open foreign relay
+		/*!
+		*  This function opens a foreign relay to publish a local topic on a foreign roscore at the given ip adress.
+		*
+		*  \param ip  			 C-string containing the ip adress.
+		*  \param topic  		 C-string containing the local topic name.
+		*  \param topic  		 C-string containing the foreign topic name.
+		* 
+		*  \return Foreign roscore ip adress.
+		*/
+		std::string * openForeignRelay(char * ip, char * local_topic, char * foreign_topic);
 
 		//! List of neighbour robots
 		wifi_comm::WiFiNeighboursList neighbours_list_;
