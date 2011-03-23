@@ -56,7 +56,11 @@ wifi_comm::WiFiComm::WiFiComm(boost::function<void(char * ip)> f) : n_()
 
 wifi_comm::WiFiComm::~WiFiComm()
 {
-	// Clean up
+	ROS_INFO("Killing all active foreign relays before exiting...");
+	for(int i=0 ; i<foreign_relays_.size() ; i++)
+	{
+		closeForeignRelay((char*)foreign_relays_[i].ip.c_str());
+	}
 }
 
 char * wifi_comm::WiFiComm::concatTopicAndIp(char * final_topic, char * topic, const char * ip)
