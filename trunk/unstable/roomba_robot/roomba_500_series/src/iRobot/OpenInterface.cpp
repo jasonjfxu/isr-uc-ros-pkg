@@ -161,7 +161,7 @@ int irobot::OpenInterface::powerDown()
 // Set the speeds
 int irobot::OpenInterface::drive(double linear_speed, double angular_speed)
 {
-	int left_speed_mm_s = (int)((linear_speed-ROOMBA_AXLE_LENGTH*angular_speed/2)*1e3);	// Left wheel velocity in mm/s
+	int left_speed_mm_s = (int)((linear_speed-ROOMBA_AXLE_LENGTH*angular_speed/2)*1e3);		// Left wheel velocity in mm/s
 	int right_speed_mm_s = (int)((linear_speed+ROOMBA_AXLE_LENGTH*angular_speed/2)*1e3);	// Right wheel velocity in mm/s
 	
 	return this->driveDirect(left_speed_mm_s, right_speed_mm_s);
