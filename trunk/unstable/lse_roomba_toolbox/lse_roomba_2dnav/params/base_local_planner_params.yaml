@@ -1,9 +1,12 @@
 controller_frequency: 5.0
-TrajectoryPlannerROS:
+planner_patience: 1.0
+controller_patience: 5.0
+clearing_rotation_allowed: false
+base_local_planner/TrajectoryPlannerROS:
   max_vel_x: 0.10
   min_vel_x: 0.05
   max_rotational_vel: 1.5
-  min_in_place_rotational_vel: 0.5
+  min_in_place_rotational_vel: 0.1
   acc_lim_th: 0.75
   acc_lim_x: 0.50
   acc_lim_y: 0.50
@@ -13,7 +16,7 @@ TrajectoryPlannerROS:
   xy_goal_tolerance: 0.1
   goal_distance_bias: 0.8
   path_distance_bias: 0.6
-  sim_time: 1.5
+  sim_time: 3.0
   heading_lookahead: 0.325
   oscillation_reset_dist: 0.05
 
