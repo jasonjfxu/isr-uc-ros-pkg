@@ -70,7 +70,7 @@ int main(int argc, char **argv)
 	
 	ros::Publisher nose_pub = n.advertise<lse_sensor_msgs::Nostril>("/nose", 10);
 	
-  	ros::ServiceClient client = n.serviceClient<plumesim::ReadPlumeSim>(plumesim_name.c_str());
+  	ros::ServiceClient client = n.serviceClient<plumesim::ReadPlumeSim>(plumesim_name.c_str());	
 
 	ros::Rate r(10);
   	while(ros::ok())
