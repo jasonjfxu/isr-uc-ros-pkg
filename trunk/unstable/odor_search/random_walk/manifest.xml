@@ -1,7 +1,7 @@
 <package>
   <description brief="random_walk">
 
-     random_walk
+     ROS implementation of a random walk algorithm based on the navigation stack.
 
   </description>
   <author>Gonçalo Cabrita</author>

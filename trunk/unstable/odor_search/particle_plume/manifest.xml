@@ -1,7 +1,7 @@
 <package>
   <description brief="particle_plume">
 
-     particle_plume
+     Particle plume is a odor mapping algorithm based on the PCL allowing for a 3D representation of a chemical plume by means of a 3D point cloud.
 
   </description>
   <author>Gonçalo Cabrita and Pedro Sousa</author>
