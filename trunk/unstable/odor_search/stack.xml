@@ -1,6 +1,10 @@
 <stack>
-  <description brief="odor_search">odor_search</description>
-  <author>Maintained by Gonçalo Cabrita</author>
+  <description brief="odor_search">
+  
+  	This stack contains various odor search algorithms, inclusing odor oriented exploration and odor source localization algorithms.
+  
+  </description>
+  <author>MaGonçalo Cabrita</author>
   <license>BSD</license>  
   <review status="unreviewed" notes=""/>
   <url>http://ros.org/wiki/odor_search</url>
