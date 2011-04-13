@@ -1,0 +1,23 @@
+<package>
+  <description brief="random_walk">
+
+     random_walk
+
+  </description>
+  <author>Gonçalo Cabrita</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/random_walk</url>
+  <depend package="roscpp"/>
+  <depend package="geometry_msgs"/>
+  <depend package="sensor_msgs"/>
+  <depend package="nav_msgs"/>
+  <depend package="actionlib"/>
+  <depend package="actionlib_msgs"/>
+  <depend package="move_base_msgs"/>
+  <depend package="tf"/>
+  <depend package="angles"/>
+
+</package>
+
+

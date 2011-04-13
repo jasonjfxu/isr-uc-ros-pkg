@@ -1,0 +1,11 @@
+<stack>
+  <description brief="odor_search">odor_search</description>
+  <author>Maintained by Gonçalo Cabrita</author>
+  <license>BSD</license>  
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/odor_search</url>
+  <depend stack="ros" />
+  <depend stack="common_msgs" />
+  <depend stack="lse_messages" />
+
+</stack>
