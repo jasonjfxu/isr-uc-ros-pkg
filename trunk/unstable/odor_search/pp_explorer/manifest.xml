@@ -1,0 +1,28 @@
+<package>
+  <description brief="pp_explorer">
+
+     Particle plume exploration algorithm.
+
+  </description>
+  <author>Gonçalo Cabrita and Pedro Sousa</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/pp_explorer</url>
+  <depend package="roscpp"/>
+  <depend package="lse_sensor_msgs"/>
+  <depend package="geometry_msgs"/>
+  <depend package="sensor_msgs"/>
+  <depend package="std_msgs"/>
+  <depend package="nav_msgs"/>
+  <depend package="actionlib"/>
+  <depend package="actionlib_msgs"/>
+  <depend package="move_base_msgs"/>
+  <depend package="pcl_ros"/>
+  <depend package="tf"/>
+  <depend package="visualization_msgs"/>
+  <depend package="angles"/>
+  <depend package="wifi_comm"/>
+
+</package>
+
+

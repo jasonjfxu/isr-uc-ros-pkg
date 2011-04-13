@@ -1,0 +1,22 @@
+<package>
+  <description brief="particle_plume">
+
+     particle_plume
+
+  </description>
+  <author>Gonçalo Cabrita and Pedro Sousa</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/particle_plume</url>
+  <depend package="roscpp"/>
+  <depend package="tf"/>
+  <depend package="lse_sensor_msgs"/>
+  <depend package="sensor_msgs"/>
+  <depend package="geometry_msgs"/>
+  <depend package="pcl_ros"/>
+  <depend package="nav_msgs"/>
+  <depend package="message_filters"/>
+
+</package>
+
+
