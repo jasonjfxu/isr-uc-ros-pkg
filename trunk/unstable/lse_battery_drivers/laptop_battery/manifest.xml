@@ -1,0 +1,15 @@
+<package>
+  <description brief="laptop_battery">
+
+     laptop_battery
+
+  </description>
+  <author>Gonçalo Cabrita</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/laptop_battery</url>
+  <depend package="roscpp"/>
+
+</package>
+
+

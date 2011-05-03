@@ -1,0 +1,9 @@
+<stack>
+  <description brief="lse_battery_drivers">lse_battery_drivers</description>
+  <author>Maintained by Gonçalo Cabrita</author>
+  <license>BSD</license>  
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/lse_battery_drivers</url>
+  <depend stack="ros" />
+
+</stack>
