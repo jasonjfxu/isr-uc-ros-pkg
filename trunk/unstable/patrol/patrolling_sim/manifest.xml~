@@ -1,0 +1,17 @@
+<package>
+  <description brief="patrolling_sim">
+
+     Multi-Robot Patrolling Simulation Package. It is composed of 5 running algorithms
+
+  </description>
+  <author>David Portugal</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/patrolling_sim</url>
+  <depend package="move_base_msgs"/>
+  <depend package="nav_msgs"/>
+  <depend package="actionlib"/>
+  <depend package="roscpp"/>
+  <depend package="tf"/>
+
+</package>
