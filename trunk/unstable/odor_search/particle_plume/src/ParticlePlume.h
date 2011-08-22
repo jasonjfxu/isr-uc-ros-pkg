@@ -109,6 +109,9 @@ namespace particle_plume
 		//! Data structure that holds the visited cells.
 		nav_msgs::GridCells cells_;
 		
+		//! Data structure to hold the birth time of the visited cells.
+		std::vector<ros::Time> cells_birth_;
+		
 		//! Flag for wether the cells_ data structure was changed or not
 		bool cells_changed_;
 	
