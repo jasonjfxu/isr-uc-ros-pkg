@@ -135,11 +135,16 @@ void particle_plume::ParticlePlume::noseCallback(const boost::shared_ptr<const l
 	}
 	
 	std::vector<geometry_msgs::Point>::iterator cell;
-	for(cell = cells_.cells.begin() ; cell != cells_.cells.end() ; cell++)
+	for(int i=0 ; i<cells_.cells.size() ; i++)
 	{
+		cell = cells_.cells.begin()+i;
 		for(cell_candidate = cell_candidates.begin() ; cell_candidate != cell_candidates.end() ; cell_candidate++)
 		{
-			if(cell_candidate->point.x == cell->x && cell_candidate->point.y == cell->y) cell_candidate->push = false;
+			if(cell_candidate->point.x == cell->x && cell_candidate->point.y == cell->y)
+			{
+				cell_candidate->push = false;
+				cells_birth_[i] = ros::Time::now();
+			}
 		}
 	}
 	
@@ -148,6 +153,7 @@ void particle_plume::ParticlePlume::noseCallback(const boost::shared_ptr<const l
 		if(cell_candidate->push == true)
 		{
 			cells_.cells.push_back(cell_candidate->point);
+			cells_birth_.push_back(ros::Time::now());
 			cells_changed_ = true;
 		}
 	}
@@ -218,7 +224,7 @@ void particle_plume::ParticlePlume::publishPlume()
 				// Decrease the particle intensity if needed
 				if(particle_life_time_ > 0 && particle.intensity > 0.0)
 				{
-					particle.intensity -= 100.0/publish_frequency_/(particle_life_time_*60);
+					particle.intensity -= 100.0/publish_frequency_/(particle_life_time_*60.0);
 					if(particle.intensity < 0.0) particle.intensity = 0.0;
 				}
 				
@@ -236,7 +242,7 @@ void particle_plume::ParticlePlume::publishPlume()
 						break;
 					}
 				}
-				if(push==true) new_plume.points.push_back(particle);
+				if(push==true && particle.intensity > 0.0) new_plume.points.push_back(particle);
 			}
 			
 			// Clear the readings buffer
@@ -252,16 +258,42 @@ void particle_plume::ParticlePlume::publishPlume()
 		// If we dont have new readings and we have a particle life time defined
 		else if(particle_life_time_ > 0)
 		{
+			pcl::PointCloud<Particle> new_plume;
 			for(int i=0 ; i<plume_.width ; i++)
 			{
-				float * intensity_ptr = &plume_.points[i].intensity;
+				Particle particle;
+				particle.x = plume_.points[i].x;
+				particle.y = plume_.points[i].y;
+				particle.z = plume_.points[i].z;
+				particle.intensity = plume_.points[i].intensity;
 				
-				if(*intensity_ptr > 0.0)
+				if(particle.intensity > 0.0)
 				{
-					*intensity_ptr -= 100.0/publish_frequency_/(particle_life_time_*60);
-					if(*intensity_ptr < 0.0) *intensity_ptr = 0.0;
-					publish_plume = true;
+					particle.intensity -= 100.0/publish_frequency_/(particle_life_time_*60.0);
+					if(particle.intensity < 0.0) particle.intensity = 0.0;
 				}
+				
+				if(particle.intensity > 0.0) new_plume.points.push_back(particle);
+			}
+			// Store the new plume and publish it...
+			plume_ = new_plume;
+			plume_.width = plume_.points.size();
+			plume_.height = 1;
+		}
+		
+		//TODO: Delete old cells!
+		if(particle_life_time_ > 0)
+		{
+			std::vector<int> cells_to_delete;
+			for(int i=0 ; i<cells_birth_.size() ; i++)
+			{
+				if((ros::Time::now() - cells_birth_[i]).toSec() > ros::Duration(particle_life_time_*60.0).toSec()) cells_to_delete.push_back(i);
+			}
+		
+			for(int i=cells_to_delete.size()-1 ; i>=0 ; i--)
+			{
+				cells_.cells.erase(cells_.cells.begin()+cells_to_delete[i]);
+				cells_birth_.erase(cells_birth_.begin()+cells_to_delete[i]);
 			}
 		}
 		
