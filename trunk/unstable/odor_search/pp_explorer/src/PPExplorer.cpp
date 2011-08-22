@@ -204,10 +204,10 @@ void particle_plume::PPExplorer::odomCallback(const boost::shared_ptr<const nav_
 		return;
 	}
 	
-	pp_explorer::PoseStampedIdentified my_pose;
+	/*pp_explorer::PoseStampedIdentified my_pose;
 	my_pose.sender = unique_id_;
 	my_pose.pose = robot_pose_;
-	poses_pub_.publish(my_pose);
+	poses_pub_.publish(my_pose);*/
 	
 	got_odom_ = true;
 }
