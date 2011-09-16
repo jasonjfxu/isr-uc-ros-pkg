@@ -35,6 +35,8 @@ rosbuild_add_executable(Heuristic_Conscientious_Reactive src/Heuristic_Conscient
 rosbuild_add_executable(Conscientious_Cognitive src/Conscientious_Cognitive.cpp)
 rosbuild_add_executable(Cyclic src/Cyclic.cpp)
 rosbuild_add_executable(MSP src/MSP.cpp)
+rosbuild_add_executable(GBS src/GBS.cpp)
+rosbuild_add_executable(SEBS src/SEBS.cpp)
 
 ############ RESULTS & MONITOR NODE: ##############
 rosbuild_add_executable(monitor src/monitor.cpp)
