@@ -205,6 +205,182 @@ uint heuristic_conscientious_reactive (uint current_vertex, vertex *vertex_web, 
   
 }
 
+uint greedy_bayesian_strategy (uint current_vertex, vertex *vertex_web, double *instantaneous_idleness, double G1, double G2, double edge_min){
+
+  //number of neighbors of current vertex (number of existing possibilites)
+  uint num_neighs = vertex_web[current_vertex].num_neigh;
+  uint next_vertex;
+  
+  if (num_neighs > 1){
+    
+    double posterior_probability [num_neighs];
+    uint neighbors [num_neighs];
+    uint possibilities[num_neighs];
+     
+    uint i, hits=0;
+    double max_pp= -1;
+    double gain, exp_param, edge_weight;
+    double log_result = log (1.0/G1);
+    
+    for (i=0; i<num_neighs; i++){
+      neighbors[i] = vertex_web[current_vertex].id_neigh[i];		//neighbors table
+     
+      edge_weight = (double) vertex_web[current_vertex].cost[i];
+      if (edge_weight<edge_min) {edge_weight = edge_min;}	
+      
+      //printf("Edge cost = %d\n",vertex_web[current_vertex].cost[i]);    
+      gain = (instantaneous_idleness [ neighbors[i] ] / edge_weight);		//corresponding gain
+      //printf("Gain = Inst Idleness / Edge Cost = %f / %f = %f\n", instantaneous_idleness [neighbors[i]],(double)vertex_web[current_vertex].cost[i],gain);
+      
+      if (gain < G2){
+      
+	//printf("Log_result = ln(1/G1) = 1.0 / %f = %f\n", G1, log_result);
+	
+	exp_param = (log_result/G2)*gain;
+	//printf("exp_param = exp(log_param/G2 * gain) = ( %f / %f ) * %f = %f\n", log_param, (double)G2, gain, exp_param);
+	
+	posterior_probability[i] = G1 * exp (exp_param);	//P(move)=0.5 anula com P(gain) = 0.5 [factor de escala]
+	//printf("posterior_probability = G1 * exp_param = %f  * %f = %f\n", G1, exp_param,  posterior_probability[i]);      
+	
+      }else{
+	posterior_probability[i] = 1.0;
+      }
+      
+      printf("Vertex [%d]; PP = %f\n", vertex_web[current_vertex].id_neigh[i], posterior_probability[i]);
+      
+      //choose the one with maximum posterior_probability:
+      if (posterior_probability[i] > max_pp){
+	max_pp = posterior_probability[i];		//maximum idleness
+
+	hits=0;
+	possibilities[hits] = neighbors[i];
+	
+      }else if (posterior_probability[i] == max_pp){
+	hits ++;
+	possibilities[hits] = neighbors[i];
+      }
+    }      
+      
+    if(hits>0){	//more than one possibility (choose at random)
+      srand ( time(NULL) );
+      i = rand() % (hits+1) + 0; 	//0, ... ,hits
+	
+      //printf("rand integer = %d\n", i);
+      next_vertex = possibilities [i];		// random vertex with higher idleness
+      	
+      }else{
+	next_vertex = possibilities[hits];	//vertex with higher idleness
+      }
+    
+  }else{
+    next_vertex = vertex_web[current_vertex].id_neigh[0]; //only one possibility
+  }
+  
+  return next_vertex;
+
+}
+
+int count_intention (uint vertex, int *tab_intention, int nr_robots){
+ 
+  int count = 0;
+  
+  for (int i = 0; i<nr_robots; i++){   
+    if(tab_intention[i]==vertex){
+      count++;      
+    }    
+  }
+  return count;  
+}
+
+uint state_exchange_bayesian_strategy (uint current_vertex, vertex *vertex_web, double *instantaneous_idleness, int *tab_intention, int nr_robots, double G1, double G2, double edge_min){
+
+  //number of neighbors of current vertex (number of existing possibilites)
+  uint num_neighs = vertex_web[current_vertex].num_neigh;
+  uint next_vertex;
+  
+  if (num_neighs > 1){
+    
+    double posterior_probability [num_neighs];
+    uint neighbors [num_neighs];
+    uint possibilities[num_neighs];
+     
+    uint i, hits=0;
+    double max_pp= -1;
+    double gain, exp_param, edge_weight;
+    double log_result = log (1.0/G1);
+    
+    for (i=0; i<num_neighs; i++){
+      neighbors[i] = vertex_web[current_vertex].id_neigh[i];		//neighbors table
+     
+      edge_weight = (double) vertex_web[current_vertex].cost[i];
+      if (edge_weight<edge_min) {edge_weight = edge_min;}
+      
+      //printf("Edge cost = %d\n",vertex_web[current_vertex].cost[i]);    
+      gain = (instantaneous_idleness [ neighbors[i] ] / edge_weight);		//corresponding gain
+      //printf("Gain = Inst Idleness / Edge Cost = %f / %f = %f\n", instantaneous_idleness [neighbors[i]],(double)vertex_web[current_vertex].cost[i],gain);
+      
+      if (gain < G2){
+      
+	//printf("Log_result = ln(1/G1) = 1.0 / %f = %f\n", G1, log_result);
+	
+	exp_param = (log_result/G2)*gain;
+	//printf("exp_param = exp(log_param/G2 * gain) = ( %f / %f ) * %f = %f\n", log_param, (double)G2, gain, exp_param);
+	
+	posterior_probability[i] = G1 * exp (exp_param);	//P(move)=0.5 anula com P(gain) = 0.5 [factor de escala]
+	//printf("posterior_probability = G1 * exp_param = %f  * %f = %f\n", G1, exp_param,  posterior_probability[i]);      
+	
+      }else{
+	posterior_probability[i] = 1.0;
+      }
+      
+      //NESTE PONTO TEMOS A PP considerando so o GANHO, agora vamos considerar tb o ESTADO ("intenções") do sistema:
+      
+      //contar ocorrencias do vertice na tab_intention:
+      int count = count_intention (neighbors[i], tab_intention, nr_robots);
+      
+      if (count>0){	//There is a robot who intends to go to this vertex! -> Update State
+	
+	//printf("COUNT = %d\n",count);
+	printf("Vertex [%d]; PP (without state exchange) = %f\n", vertex_web[current_vertex].id_neigh[i], posterior_probability[i]);
+	double P_gain_state = ( pow(2,nr_robots-count) ) / ( pow(2,nr_robots) - 1.0);	
+	posterior_probability[i] *= P_gain_state;
+	//printf("Vertex [%d]; PP (depois) = %f\n", vertex_web[current_vertex].id_neigh[i], posterior_probability[i]);
+	
+      }
+
+      printf("Vertex [%d]; PP = %f\n", vertex_web[current_vertex].id_neigh[i], posterior_probability[i]);
+      
+      //choose the one with maximum posterior_probability:
+      if (posterior_probability[i] > max_pp){
+	max_pp = posterior_probability[i];		//maximum idleness
+
+	hits=0;
+	possibilities[hits] = neighbors[i];
+	
+      }else if (posterior_probability[i] == max_pp){
+	hits ++;
+	possibilities[hits] = neighbors[i];
+      }
+    }      
+      
+    if(hits>0){	//more than one possibility (choose at random)
+      srand ( time(NULL) );
+      i = rand() % (hits+1) + 0; 	//0, ... ,hits
+	
+      //printf("rand integer = %d\n", i);
+      next_vertex = possibilities [i];		// random vertex with higher idleness
+      	
+      }else{
+	next_vertex = possibilities[hits];	//vertex with higher idleness
+      }
+    
+  }else{
+    next_vertex = vertex_web[current_vertex].id_neigh[0]; //only one possibility
+  }
+  
+  return next_vertex;
+
+}
 
 void dijkstra( uint source, uint destination, int *shortest_path, uint &elem_s_path, vertex *vertex_web, uint dimension){
   
@@ -2415,7 +2591,7 @@ void get_MSP_route (uint *route, uint dimension, char* msp_file) {
    }else{
       ROS_INFO("MSP Route File Opened. Getting MSP Route.\n");
       
-      uint i,j;
+      uint i;
       float temp;
       
       //Start Reading the File from the second line On:
