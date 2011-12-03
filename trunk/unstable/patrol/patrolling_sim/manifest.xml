@@ -1,17 +1,5 @@
 <package>
-  <description brief="patrolling_sim">
-
-     Multi-Robot Patrolling Stage/ROS Simulation Package.
-     Composed of 7 running algorithms:
-     - Heuristic Pathfinder Conscientious Cognitive (HPCC / c_cognitive)
-     - Conscientious Reactive (CR / c_reactive)
-     - Heuristic Conscientious Reactive (HCR / hc_reactive)
-     - Cyclic Algorithm for Generic Graphs (CGG / cyclic)
-     - Generalized Multilevel Subgraph Patrolling Algorithm (MSP / msp)
-     - Greedy Bayesian Strategy (GBS / gbs)
-     - State Exchange Bayesian Strategy (SEBS / sebs)
-     
-  </description>
+  <description brief="patrolling_sim"> Multi-Robot Patrolling Stage/ROS Simulation Package.</description>
   <author>David Portugal</author>
   <license>BSD</license>
   <review status="unreviewed" notes=""/>
