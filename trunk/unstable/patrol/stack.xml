@@ -1,5 +1,5 @@
 <stack>
-  <description brief="patrol">patrol</description>
+  <description brief="patrol">Multi-Robot Patrol-Related Stack from the ISR Coimbra.</description>
   <author>Maintained by David Portugal</author>
   <license>BSD</license>  
   <review status="unreviewed" notes=""/>
