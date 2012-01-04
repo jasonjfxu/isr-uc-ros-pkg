@@ -27,19 +27,24 @@ struct AuctioneerServiceRequest_ {
   typedef AuctioneerServiceRequest_<ContainerAllocator> Type;
 
   AuctioneerServiceRequest_()
-  : seller_node()
+  : sending_node()
+  , nodes_collected()
   , auction_data()
   {
   }
 
   AuctioneerServiceRequest_(const ContainerAllocator& _alloc)
-  : seller_node(_alloc)
+  : sending_node(_alloc)
+  , nodes_collected(_alloc)
   , auction_data(_alloc)
   {
   }
 
-  typedef std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other >  _seller_node_type;
-  std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other >  seller_node;
+  typedef std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other >  _sending_node_type;
+  std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other >  sending_node;
+
+  typedef std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other >  _nodes_collected_type;
+  std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other >  nodes_collected;
 
   typedef  ::auction_msgs::Auction_<ContainerAllocator>  _auction_data_type;
    ::auction_msgs::Auction_<ContainerAllocator>  auction_data;
@@ -53,14 +58,14 @@ public:
   ROS_DEPRECATED const std::string __getDataType() const { return __s_getDataType_(); }
 
 private:
-  static const char* __s_getMD5Sum_() { return "bf26ca924da79f5dc5a27399b86ffcb8"; }
+  static const char* __s_getMD5Sum_() { return "c7bf0ccec44590484a6687d32dad126a"; }
 public:
   ROS_DEPRECATED static const std::string __s_getMD5Sum() { return __s_getMD5Sum_(); }
 
   ROS_DEPRECATED const std::string __getMD5Sum() const { return __s_getMD5Sum_(); }
 
 private:
-  static const char* __s_getServerMD5Sum_() { return "dd49c058f2c13c485fb938ba1ba60499"; }
+  static const char* __s_getServerMD5Sum_() { return "c2995a3b557484c55996e3115ca3226e"; }
 public:
   ROS_DEPRECATED static const std::string __s_getServerMD5Sum() { return __s_getServerMD5Sum_(); }
 
@@ -70,7 +75,8 @@ private:
   static const char* __s_getMessageDefinition_() { return "\n\
 \n\
 \n\
-string seller_node\n\
+string sending_node\n\
+string nodes_collected\n\
 auction_msgs/Auction auction_data\n\
 \n\
 \n\
@@ -118,7 +124,8 @@ public:
   ROS_DEPRECATED virtual uint8_t *serialize(uint8_t *write_ptr, uint32_t seq) const
   {
     ros::serialization::OStream stream(write_ptr, 1000000000);
-    ros::serialization::serialize(stream, seller_node);
+    ros::serialization::serialize(stream, sending_node);
+    ros::serialization::serialize(stream, nodes_collected);
     ros::serialization::serialize(stream, auction_data);
     return stream.getData();
   }
@@ -126,7 +133,8 @@ public:
   ROS_DEPRECATED virtual uint8_t *deserialize(uint8_t *read_ptr)
   {
     ros::serialization::IStream stream(read_ptr, 1000000000);
-    ros::serialization::deserialize(stream, seller_node);
+    ros::serialization::deserialize(stream, sending_node);
+    ros::serialization::deserialize(stream, nodes_collected);
     ros::serialization::deserialize(stream, auction_data);
     return stream.getData();
   }
@@ -134,7 +142,8 @@ public:
   ROS_DEPRECATED virtual uint32_t serializationLength() const
   {
     uint32_t size = 0;
-    size += ros::serialization::serializationLength(seller_node);
+    size += ros::serialization::serializationLength(sending_node);
+    size += ros::serialization::serializationLength(nodes_collected);
     size += ros::serialization::serializationLength(auction_data);
     return size;
   }
@@ -192,7 +201,7 @@ public:
   ROS_DEPRECATED const std::string __getMD5Sum() const { return __s_getMD5Sum_(); }
 
 private:
-  static const char* __s_getServerMD5Sum_() { return "dd49c058f2c13c485fb938ba1ba60499"; }
+  static const char* __s_getServerMD5Sum_() { return "c2995a3b557484c55996e3115ca3226e"; }
 public:
   ROS_DEPRECATED static const std::string __s_getServerMD5Sum() { return __s_getServerMD5Sum_(); }
 
@@ -271,12 +280,12 @@ template<class ContainerAllocator>
 struct MD5Sum< ::auction_srvs::AuctioneerServiceRequest_<ContainerAllocator> > {
   static const char* value() 
   {
-    return "bf26ca924da79f5dc5a27399b86ffcb8";
+    return "c7bf0ccec44590484a6687d32dad126a";
   }
 
   static const char* value(const  ::auction_srvs::AuctioneerServiceRequest_<ContainerAllocator> &) { return value(); } 
-  static const uint64_t static_value1 = 0xbf26ca924da79f5dULL;
-  static const uint64_t static_value2 = 0xc5a27399b86ffcb8ULL;
+  static const uint64_t static_value1 = 0xc7bf0ccec4459048ULL;
+  static const uint64_t static_value2 = 0x4a6687d32dad126aULL;
 };
 
 template<class ContainerAllocator>
@@ -296,7 +305,8 @@ struct Definition< ::auction_srvs::AuctioneerServiceRequest_<ContainerAllocator>
     return "\n\
 \n\
 \n\
-string seller_node\n\
+string sending_node\n\
+string nodes_collected\n\
 auction_msgs/Auction auction_data\n\
 \n\
 \n\
@@ -402,7 +412,8 @@ template<class ContainerAllocator> struct Serializer< ::auction_srvs::Auctioneer
 {
   template<typename Stream, typename T> inline static void allInOne(Stream& stream, T m)
   {
-    stream.next(m.seller_node);
+    stream.next(m.sending_node);
+    stream.next(m.nodes_collected);
     stream.next(m.auction_data);
   }
 
@@ -439,7 +450,7 @@ template<>
 struct MD5Sum<auction_srvs::AuctioneerService> {
   static const char* value() 
   {
-    return "dd49c058f2c13c485fb938ba1ba60499";
+    return "c2995a3b557484c55996e3115ca3226e";
   }
 
   static const char* value(const auction_srvs::AuctioneerService&) { return value(); } 
@@ -459,7 +470,7 @@ template<class ContainerAllocator>
 struct MD5Sum<auction_srvs::AuctioneerServiceRequest_<ContainerAllocator> > {
   static const char* value() 
   {
-    return "dd49c058f2c13c485fb938ba1ba60499";
+    return "c2995a3b557484c55996e3115ca3226e";
   }
 
   static const char* value(const auction_srvs::AuctioneerServiceRequest_<ContainerAllocator> &) { return value(); } 
@@ -479,7 +490,7 @@ template<class ContainerAllocator>
 struct MD5Sum<auction_srvs::AuctioneerServiceResponse_<ContainerAllocator> > {
   static const char* value() 
   {
-    return "dd49c058f2c13c485fb938ba1ba60499";
+    return "c2995a3b557484c55996e3115ca3226e";
   }
 
   static const char* value(const auction_srvs::AuctioneerServiceResponse_<ContainerAllocator> &) { return value(); } 

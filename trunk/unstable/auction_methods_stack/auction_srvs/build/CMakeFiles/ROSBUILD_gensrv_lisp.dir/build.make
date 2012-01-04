@@ -45,15 +45,18 @@ CMakeFiles/ROSBUILD_gensrv_lisp: ../srv_gen/lisp/_package_BuyerService.lisp
 CMakeFiles/ROSBUILD_gensrv_lisp: ../srv_gen/lisp/AuctioneerService.lisp
 CMakeFiles/ROSBUILD_gensrv_lisp: ../srv_gen/lisp/_package.lisp
 CMakeFiles/ROSBUILD_gensrv_lisp: ../srv_gen/lisp/_package_AuctioneerService.lisp
-CMakeFiles/ROSBUILD_gensrv_lisp: ../srv_gen/lisp/AuctioneerBidService.lisp
-CMakeFiles/ROSBUILD_gensrv_lisp: ../srv_gen/lisp/_package.lisp
-CMakeFiles/ROSBUILD_gensrv_lisp: ../srv_gen/lisp/_package_AuctioneerBidService.lisp
 CMakeFiles/ROSBUILD_gensrv_lisp: ../srv_gen/lisp/AuctionService.lisp
 CMakeFiles/ROSBUILD_gensrv_lisp: ../srv_gen/lisp/_package.lisp
 CMakeFiles/ROSBUILD_gensrv_lisp: ../srv_gen/lisp/_package_AuctionService.lisp
 CMakeFiles/ROSBUILD_gensrv_lisp: ../srv_gen/lisp/BuyerForwardBidService.lisp
 CMakeFiles/ROSBUILD_gensrv_lisp: ../srv_gen/lisp/_package.lisp
 CMakeFiles/ROSBUILD_gensrv_lisp: ../srv_gen/lisp/_package_BuyerForwardBidService.lisp
+CMakeFiles/ROSBUILD_gensrv_lisp: ../srv_gen/lisp/AuctioneerBidReceptionService.lisp
+CMakeFiles/ROSBUILD_gensrv_lisp: ../srv_gen/lisp/_package.lisp
+CMakeFiles/ROSBUILD_gensrv_lisp: ../srv_gen/lisp/_package_AuctioneerBidReceptionService.lisp
+CMakeFiles/ROSBUILD_gensrv_lisp: ../srv_gen/lisp/AuctionConfigService.lisp
+CMakeFiles/ROSBUILD_gensrv_lisp: ../srv_gen/lisp/_package.lisp
+CMakeFiles/ROSBUILD_gensrv_lisp: ../srv_gen/lisp/_package_AuctionConfigService.lisp
 
 ../srv_gen/lisp/BuyerService.lisp: ../srv/BuyerService.srv
 ../srv_gen/lisp/BuyerService.lisp: /opt/ros/electric/stacks/ros_comm/clients/roslisp/scripts/genmsg_lisp.py
@@ -153,54 +156,6 @@ CMakeFiles/ROSBUILD_gensrv_lisp: ../srv_gen/lisp/_package_BuyerForwardBidService
 
 ../srv_gen/lisp/_package_AuctioneerService.lisp: ../srv_gen/lisp/AuctioneerService.lisp
 
-../srv_gen/lisp/AuctioneerBidService.lisp: ../srv/AuctioneerBidService.srv
-../srv_gen/lisp/AuctioneerBidService.lisp: /opt/ros/electric/stacks/ros_comm/clients/roslisp/scripts/genmsg_lisp.py
-../srv_gen/lisp/AuctioneerBidService.lisp: /opt/ros/electric/ros/core/roslib/scripts/gendeps
-../srv_gen/lisp/AuctioneerBidService.lisp: /home/joaoquintas/ros_workspace/SRC/auction_methods_stack/auction_msgs/msg/Bid.msg
-../srv_gen/lisp/AuctioneerBidService.lisp: /opt/ros/electric/stacks/ros_comm/messages/std_msgs/msg/Header.msg
-../srv_gen/lisp/AuctioneerBidService.lisp: ../manifest.xml
-../srv_gen/lisp/AuctioneerBidService.lisp: /opt/ros/electric/ros/tools/rospack/manifest.xml
-../srv_gen/lisp/AuctioneerBidService.lisp: /opt/ros/electric/ros/core/roslib/manifest.xml
-../srv_gen/lisp/AuctioneerBidService.lisp: /opt/ros/electric/stacks/ros_comm/messages/std_msgs/manifest.xml
-../srv_gen/lisp/AuctioneerBidService.lisp: /opt/ros/electric/stacks/ros_comm/messages/rosgraph_msgs/manifest.xml
-../srv_gen/lisp/AuctioneerBidService.lisp: /opt/ros/electric/ros/core/rosbuild/manifest.xml
-../srv_gen/lisp/AuctioneerBidService.lisp: /opt/ros/electric/ros/core/roslang/manifest.xml
-../srv_gen/lisp/AuctioneerBidService.lisp: /opt/ros/electric/stacks/ros_comm/clients/rospy/manifest.xml
-../srv_gen/lisp/AuctioneerBidService.lisp: /opt/ros/electric/stacks/ros_comm/utilities/cpp_common/manifest.xml
-../srv_gen/lisp/AuctioneerBidService.lisp: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp_traits/manifest.xml
-../srv_gen/lisp/AuctioneerBidService.lisp: /opt/ros/electric/stacks/ros_comm/utilities/rostime/manifest.xml
-../srv_gen/lisp/AuctioneerBidService.lisp: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp_serialization/manifest.xml
-../srv_gen/lisp/AuctioneerBidService.lisp: /opt/ros/electric/stacks/ros_comm/utilities/xmlrpcpp/manifest.xml
-../srv_gen/lisp/AuctioneerBidService.lisp: /opt/ros/electric/stacks/ros_comm/tools/rosconsole/manifest.xml
-../srv_gen/lisp/AuctioneerBidService.lisp: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp/manifest.xml
-../srv_gen/lisp/AuctioneerBidService.lisp: /opt/ros/electric/ros/tools/rosclean/manifest.xml
-../srv_gen/lisp/AuctioneerBidService.lisp: /opt/ros/electric/stacks/ros_comm/tools/rosgraph/manifest.xml
-../srv_gen/lisp/AuctioneerBidService.lisp: /opt/ros/electric/stacks/ros_comm/tools/rosparam/manifest.xml
-../srv_gen/lisp/AuctioneerBidService.lisp: /opt/ros/electric/stacks/ros_comm/tools/rosmaster/manifest.xml
-../srv_gen/lisp/AuctioneerBidService.lisp: /opt/ros/electric/stacks/ros_comm/tools/rosout/manifest.xml
-../srv_gen/lisp/AuctioneerBidService.lisp: /opt/ros/electric/stacks/ros_comm/tools/roslaunch/manifest.xml
-../srv_gen/lisp/AuctioneerBidService.lisp: /opt/ros/electric/ros/tools/rosunit/manifest.xml
-../srv_gen/lisp/AuctioneerBidService.lisp: /opt/ros/electric/stacks/ros_comm/tools/rostest/manifest.xml
-../srv_gen/lisp/AuctioneerBidService.lisp: /opt/ros/electric/stacks/ros_comm/tools/topic_tools/manifest.xml
-../srv_gen/lisp/AuctioneerBidService.lisp: /opt/ros/electric/stacks/ros_comm/tools/rosbag/manifest.xml
-../srv_gen/lisp/AuctioneerBidService.lisp: /opt/ros/electric/stacks/ros_comm/tools/rosbagmigration/manifest.xml
-../srv_gen/lisp/AuctioneerBidService.lisp: /opt/ros/electric/stacks/common_msgs/geometry_msgs/manifest.xml
-../srv_gen/lisp/AuctioneerBidService.lisp: /home/joaoquintas/ros_workspace/SRC/auction_methods_stack/auction_msgs/manifest.xml
-../srv_gen/lisp/AuctioneerBidService.lisp: /opt/ros/electric/stacks/ros_comm/messages/std_msgs/msg_gen/generated
-../srv_gen/lisp/AuctioneerBidService.lisp: /opt/ros/electric/stacks/ros_comm/messages/rosgraph_msgs/msg_gen/generated
-../srv_gen/lisp/AuctioneerBidService.lisp: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp/msg_gen/generated
-../srv_gen/lisp/AuctioneerBidService.lisp: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp/srv_gen/generated
-../srv_gen/lisp/AuctioneerBidService.lisp: /opt/ros/electric/stacks/ros_comm/tools/topic_tools/srv_gen/generated
-../srv_gen/lisp/AuctioneerBidService.lisp: /opt/ros/electric/stacks/common_msgs/geometry_msgs/msg_gen/generated
-../srv_gen/lisp/AuctioneerBidService.lisp: /home/joaoquintas/ros_workspace/SRC/auction_methods_stack/auction_msgs/msg_gen/generated
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/joaoquintas/ros_workspace/SRC/auction_methods_stack/auction_srvs/build/CMakeFiles $(CMAKE_PROGRESS_3)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating ../srv_gen/lisp/AuctioneerBidService.lisp, ../srv_gen/lisp/_package.lisp, ../srv_gen/lisp/_package_AuctioneerBidService.lisp"
-	/opt/ros/electric/stacks/ros_comm/clients/roslisp/scripts/genmsg_lisp.py /home/joaoquintas/ros_workspace/SRC/auction_methods_stack/auction_srvs/srv/AuctioneerBidService.srv
-
-../srv_gen/lisp/_package.lisp: ../srv_gen/lisp/AuctioneerBidService.lisp
-
-../srv_gen/lisp/_package_AuctioneerBidService.lisp: ../srv_gen/lisp/AuctioneerBidService.lisp
-
 ../srv_gen/lisp/AuctionService.lisp: ../srv/AuctionService.srv
 ../srv_gen/lisp/AuctionService.lisp: /opt/ros/electric/stacks/ros_comm/clients/roslisp/scripts/genmsg_lisp.py
 ../srv_gen/lisp/AuctionService.lisp: /opt/ros/electric/ros/core/roslib/scripts/gendeps
@@ -243,7 +198,7 @@ CMakeFiles/ROSBUILD_gensrv_lisp: ../srv_gen/lisp/_package_BuyerForwardBidService
 ../srv_gen/lisp/AuctionService.lisp: /opt/ros/electric/stacks/ros_comm/tools/topic_tools/srv_gen/generated
 ../srv_gen/lisp/AuctionService.lisp: /opt/ros/electric/stacks/common_msgs/geometry_msgs/msg_gen/generated
 ../srv_gen/lisp/AuctionService.lisp: /home/joaoquintas/ros_workspace/SRC/auction_methods_stack/auction_msgs/msg_gen/generated
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/joaoquintas/ros_workspace/SRC/auction_methods_stack/auction_srvs/build/CMakeFiles $(CMAKE_PROGRESS_4)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/joaoquintas/ros_workspace/SRC/auction_methods_stack/auction_srvs/build/CMakeFiles $(CMAKE_PROGRESS_3)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating ../srv_gen/lisp/AuctionService.lisp, ../srv_gen/lisp/_package.lisp, ../srv_gen/lisp/_package_AuctionService.lisp"
 	/opt/ros/electric/stacks/ros_comm/clients/roslisp/scripts/genmsg_lisp.py /home/joaoquintas/ros_workspace/SRC/auction_methods_stack/auction_srvs/srv/AuctionService.srv
 
@@ -291,13 +246,107 @@ CMakeFiles/ROSBUILD_gensrv_lisp: ../srv_gen/lisp/_package_BuyerForwardBidService
 ../srv_gen/lisp/BuyerForwardBidService.lisp: /opt/ros/electric/stacks/ros_comm/tools/topic_tools/srv_gen/generated
 ../srv_gen/lisp/BuyerForwardBidService.lisp: /opt/ros/electric/stacks/common_msgs/geometry_msgs/msg_gen/generated
 ../srv_gen/lisp/BuyerForwardBidService.lisp: /home/joaoquintas/ros_workspace/SRC/auction_methods_stack/auction_msgs/msg_gen/generated
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/joaoquintas/ros_workspace/SRC/auction_methods_stack/auction_srvs/build/CMakeFiles $(CMAKE_PROGRESS_5)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/joaoquintas/ros_workspace/SRC/auction_methods_stack/auction_srvs/build/CMakeFiles $(CMAKE_PROGRESS_4)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating ../srv_gen/lisp/BuyerForwardBidService.lisp, ../srv_gen/lisp/_package.lisp, ../srv_gen/lisp/_package_BuyerForwardBidService.lisp"
 	/opt/ros/electric/stacks/ros_comm/clients/roslisp/scripts/genmsg_lisp.py /home/joaoquintas/ros_workspace/SRC/auction_methods_stack/auction_srvs/srv/BuyerForwardBidService.srv
 
 ../srv_gen/lisp/_package.lisp: ../srv_gen/lisp/BuyerForwardBidService.lisp
 
 ../srv_gen/lisp/_package_BuyerForwardBidService.lisp: ../srv_gen/lisp/BuyerForwardBidService.lisp
+
+../srv_gen/lisp/AuctioneerBidReceptionService.lisp: ../srv/AuctioneerBidReceptionService.srv
+../srv_gen/lisp/AuctioneerBidReceptionService.lisp: /opt/ros/electric/stacks/ros_comm/clients/roslisp/scripts/genmsg_lisp.py
+../srv_gen/lisp/AuctioneerBidReceptionService.lisp: /opt/ros/electric/ros/core/roslib/scripts/gendeps
+../srv_gen/lisp/AuctioneerBidReceptionService.lisp: /home/joaoquintas/ros_workspace/SRC/auction_methods_stack/auction_msgs/msg/Bid.msg
+../srv_gen/lisp/AuctioneerBidReceptionService.lisp: /opt/ros/electric/stacks/ros_comm/messages/std_msgs/msg/Header.msg
+../srv_gen/lisp/AuctioneerBidReceptionService.lisp: ../manifest.xml
+../srv_gen/lisp/AuctioneerBidReceptionService.lisp: /opt/ros/electric/ros/tools/rospack/manifest.xml
+../srv_gen/lisp/AuctioneerBidReceptionService.lisp: /opt/ros/electric/ros/core/roslib/manifest.xml
+../srv_gen/lisp/AuctioneerBidReceptionService.lisp: /opt/ros/electric/stacks/ros_comm/messages/std_msgs/manifest.xml
+../srv_gen/lisp/AuctioneerBidReceptionService.lisp: /opt/ros/electric/stacks/ros_comm/messages/rosgraph_msgs/manifest.xml
+../srv_gen/lisp/AuctioneerBidReceptionService.lisp: /opt/ros/electric/ros/core/rosbuild/manifest.xml
+../srv_gen/lisp/AuctioneerBidReceptionService.lisp: /opt/ros/electric/ros/core/roslang/manifest.xml
+../srv_gen/lisp/AuctioneerBidReceptionService.lisp: /opt/ros/electric/stacks/ros_comm/clients/rospy/manifest.xml
+../srv_gen/lisp/AuctioneerBidReceptionService.lisp: /opt/ros/electric/stacks/ros_comm/utilities/cpp_common/manifest.xml
+../srv_gen/lisp/AuctioneerBidReceptionService.lisp: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp_traits/manifest.xml
+../srv_gen/lisp/AuctioneerBidReceptionService.lisp: /opt/ros/electric/stacks/ros_comm/utilities/rostime/manifest.xml
+../srv_gen/lisp/AuctioneerBidReceptionService.lisp: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp_serialization/manifest.xml
+../srv_gen/lisp/AuctioneerBidReceptionService.lisp: /opt/ros/electric/stacks/ros_comm/utilities/xmlrpcpp/manifest.xml
+../srv_gen/lisp/AuctioneerBidReceptionService.lisp: /opt/ros/electric/stacks/ros_comm/tools/rosconsole/manifest.xml
+../srv_gen/lisp/AuctioneerBidReceptionService.lisp: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp/manifest.xml
+../srv_gen/lisp/AuctioneerBidReceptionService.lisp: /opt/ros/electric/ros/tools/rosclean/manifest.xml
+../srv_gen/lisp/AuctioneerBidReceptionService.lisp: /opt/ros/electric/stacks/ros_comm/tools/rosgraph/manifest.xml
+../srv_gen/lisp/AuctioneerBidReceptionService.lisp: /opt/ros/electric/stacks/ros_comm/tools/rosparam/manifest.xml
+../srv_gen/lisp/AuctioneerBidReceptionService.lisp: /opt/ros/electric/stacks/ros_comm/tools/rosmaster/manifest.xml
+../srv_gen/lisp/AuctioneerBidReceptionService.lisp: /opt/ros/electric/stacks/ros_comm/tools/rosout/manifest.xml
+../srv_gen/lisp/AuctioneerBidReceptionService.lisp: /opt/ros/electric/stacks/ros_comm/tools/roslaunch/manifest.xml
+../srv_gen/lisp/AuctioneerBidReceptionService.lisp: /opt/ros/electric/ros/tools/rosunit/manifest.xml
+../srv_gen/lisp/AuctioneerBidReceptionService.lisp: /opt/ros/electric/stacks/ros_comm/tools/rostest/manifest.xml
+../srv_gen/lisp/AuctioneerBidReceptionService.lisp: /opt/ros/electric/stacks/ros_comm/tools/topic_tools/manifest.xml
+../srv_gen/lisp/AuctioneerBidReceptionService.lisp: /opt/ros/electric/stacks/ros_comm/tools/rosbag/manifest.xml
+../srv_gen/lisp/AuctioneerBidReceptionService.lisp: /opt/ros/electric/stacks/ros_comm/tools/rosbagmigration/manifest.xml
+../srv_gen/lisp/AuctioneerBidReceptionService.lisp: /opt/ros/electric/stacks/common_msgs/geometry_msgs/manifest.xml
+../srv_gen/lisp/AuctioneerBidReceptionService.lisp: /home/joaoquintas/ros_workspace/SRC/auction_methods_stack/auction_msgs/manifest.xml
+../srv_gen/lisp/AuctioneerBidReceptionService.lisp: /opt/ros/electric/stacks/ros_comm/messages/std_msgs/msg_gen/generated
+../srv_gen/lisp/AuctioneerBidReceptionService.lisp: /opt/ros/electric/stacks/ros_comm/messages/rosgraph_msgs/msg_gen/generated
+../srv_gen/lisp/AuctioneerBidReceptionService.lisp: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp/msg_gen/generated
+../srv_gen/lisp/AuctioneerBidReceptionService.lisp: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp/srv_gen/generated
+../srv_gen/lisp/AuctioneerBidReceptionService.lisp: /opt/ros/electric/stacks/ros_comm/tools/topic_tools/srv_gen/generated
+../srv_gen/lisp/AuctioneerBidReceptionService.lisp: /opt/ros/electric/stacks/common_msgs/geometry_msgs/msg_gen/generated
+../srv_gen/lisp/AuctioneerBidReceptionService.lisp: /home/joaoquintas/ros_workspace/SRC/auction_methods_stack/auction_msgs/msg_gen/generated
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/joaoquintas/ros_workspace/SRC/auction_methods_stack/auction_srvs/build/CMakeFiles $(CMAKE_PROGRESS_5)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating ../srv_gen/lisp/AuctioneerBidReceptionService.lisp, ../srv_gen/lisp/_package.lisp, ../srv_gen/lisp/_package_AuctioneerBidReceptionService.lisp"
+	/opt/ros/electric/stacks/ros_comm/clients/roslisp/scripts/genmsg_lisp.py /home/joaoquintas/ros_workspace/SRC/auction_methods_stack/auction_srvs/srv/AuctioneerBidReceptionService.srv
+
+../srv_gen/lisp/_package.lisp: ../srv_gen/lisp/AuctioneerBidReceptionService.lisp
+
+../srv_gen/lisp/_package_AuctioneerBidReceptionService.lisp: ../srv_gen/lisp/AuctioneerBidReceptionService.lisp
+
+../srv_gen/lisp/AuctionConfigService.lisp: ../srv/AuctionConfigService.srv
+../srv_gen/lisp/AuctionConfigService.lisp: /opt/ros/electric/stacks/ros_comm/clients/roslisp/scripts/genmsg_lisp.py
+../srv_gen/lisp/AuctionConfigService.lisp: /opt/ros/electric/ros/core/roslib/scripts/gendeps
+../srv_gen/lisp/AuctionConfigService.lisp: ../manifest.xml
+../srv_gen/lisp/AuctionConfigService.lisp: /opt/ros/electric/ros/tools/rospack/manifest.xml
+../srv_gen/lisp/AuctionConfigService.lisp: /opt/ros/electric/ros/core/roslib/manifest.xml
+../srv_gen/lisp/AuctionConfigService.lisp: /opt/ros/electric/stacks/ros_comm/messages/std_msgs/manifest.xml
+../srv_gen/lisp/AuctionConfigService.lisp: /opt/ros/electric/stacks/ros_comm/messages/rosgraph_msgs/manifest.xml
+../srv_gen/lisp/AuctionConfigService.lisp: /opt/ros/electric/ros/core/rosbuild/manifest.xml
+../srv_gen/lisp/AuctionConfigService.lisp: /opt/ros/electric/ros/core/roslang/manifest.xml
+../srv_gen/lisp/AuctionConfigService.lisp: /opt/ros/electric/stacks/ros_comm/clients/rospy/manifest.xml
+../srv_gen/lisp/AuctionConfigService.lisp: /opt/ros/electric/stacks/ros_comm/utilities/cpp_common/manifest.xml
+../srv_gen/lisp/AuctionConfigService.lisp: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp_traits/manifest.xml
+../srv_gen/lisp/AuctionConfigService.lisp: /opt/ros/electric/stacks/ros_comm/utilities/rostime/manifest.xml
+../srv_gen/lisp/AuctionConfigService.lisp: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp_serialization/manifest.xml
+../srv_gen/lisp/AuctionConfigService.lisp: /opt/ros/electric/stacks/ros_comm/utilities/xmlrpcpp/manifest.xml
+../srv_gen/lisp/AuctionConfigService.lisp: /opt/ros/electric/stacks/ros_comm/tools/rosconsole/manifest.xml
+../srv_gen/lisp/AuctionConfigService.lisp: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp/manifest.xml
+../srv_gen/lisp/AuctionConfigService.lisp: /opt/ros/electric/ros/tools/rosclean/manifest.xml
+../srv_gen/lisp/AuctionConfigService.lisp: /opt/ros/electric/stacks/ros_comm/tools/rosgraph/manifest.xml
+../srv_gen/lisp/AuctionConfigService.lisp: /opt/ros/electric/stacks/ros_comm/tools/rosparam/manifest.xml
+../srv_gen/lisp/AuctionConfigService.lisp: /opt/ros/electric/stacks/ros_comm/tools/rosmaster/manifest.xml
+../srv_gen/lisp/AuctionConfigService.lisp: /opt/ros/electric/stacks/ros_comm/tools/rosout/manifest.xml
+../srv_gen/lisp/AuctionConfigService.lisp: /opt/ros/electric/stacks/ros_comm/tools/roslaunch/manifest.xml
+../srv_gen/lisp/AuctionConfigService.lisp: /opt/ros/electric/ros/tools/rosunit/manifest.xml
+../srv_gen/lisp/AuctionConfigService.lisp: /opt/ros/electric/stacks/ros_comm/tools/rostest/manifest.xml
+../srv_gen/lisp/AuctionConfigService.lisp: /opt/ros/electric/stacks/ros_comm/tools/topic_tools/manifest.xml
+../srv_gen/lisp/AuctionConfigService.lisp: /opt/ros/electric/stacks/ros_comm/tools/rosbag/manifest.xml
+../srv_gen/lisp/AuctionConfigService.lisp: /opt/ros/electric/stacks/ros_comm/tools/rosbagmigration/manifest.xml
+../srv_gen/lisp/AuctionConfigService.lisp: /opt/ros/electric/stacks/common_msgs/geometry_msgs/manifest.xml
+../srv_gen/lisp/AuctionConfigService.lisp: /home/joaoquintas/ros_workspace/SRC/auction_methods_stack/auction_msgs/manifest.xml
+../srv_gen/lisp/AuctionConfigService.lisp: /opt/ros/electric/stacks/ros_comm/messages/std_msgs/msg_gen/generated
+../srv_gen/lisp/AuctionConfigService.lisp: /opt/ros/electric/stacks/ros_comm/messages/rosgraph_msgs/msg_gen/generated
+../srv_gen/lisp/AuctionConfigService.lisp: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp/msg_gen/generated
+../srv_gen/lisp/AuctionConfigService.lisp: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp/srv_gen/generated
+../srv_gen/lisp/AuctionConfigService.lisp: /opt/ros/electric/stacks/ros_comm/tools/topic_tools/srv_gen/generated
+../srv_gen/lisp/AuctionConfigService.lisp: /opt/ros/electric/stacks/common_msgs/geometry_msgs/msg_gen/generated
+../srv_gen/lisp/AuctionConfigService.lisp: /home/joaoquintas/ros_workspace/SRC/auction_methods_stack/auction_msgs/msg_gen/generated
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/joaoquintas/ros_workspace/SRC/auction_methods_stack/auction_srvs/build/CMakeFiles $(CMAKE_PROGRESS_6)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating ../srv_gen/lisp/AuctionConfigService.lisp, ../srv_gen/lisp/_package.lisp, ../srv_gen/lisp/_package_AuctionConfigService.lisp"
+	/opt/ros/electric/stacks/ros_comm/clients/roslisp/scripts/genmsg_lisp.py /home/joaoquintas/ros_workspace/SRC/auction_methods_stack/auction_srvs/srv/AuctionConfigService.srv
+
+../srv_gen/lisp/_package.lisp: ../srv_gen/lisp/AuctionConfigService.lisp
+
+../srv_gen/lisp/_package_AuctionConfigService.lisp: ../srv_gen/lisp/AuctionConfigService.lisp
 
 ROSBUILD_gensrv_lisp: CMakeFiles/ROSBUILD_gensrv_lisp
 ROSBUILD_gensrv_lisp: ../srv_gen/lisp/BuyerService.lisp
@@ -306,15 +355,18 @@ ROSBUILD_gensrv_lisp: ../srv_gen/lisp/_package_BuyerService.lisp
 ROSBUILD_gensrv_lisp: ../srv_gen/lisp/AuctioneerService.lisp
 ROSBUILD_gensrv_lisp: ../srv_gen/lisp/_package.lisp
 ROSBUILD_gensrv_lisp: ../srv_gen/lisp/_package_AuctioneerService.lisp
-ROSBUILD_gensrv_lisp: ../srv_gen/lisp/AuctioneerBidService.lisp
-ROSBUILD_gensrv_lisp: ../srv_gen/lisp/_package.lisp
-ROSBUILD_gensrv_lisp: ../srv_gen/lisp/_package_AuctioneerBidService.lisp
 ROSBUILD_gensrv_lisp: ../srv_gen/lisp/AuctionService.lisp
 ROSBUILD_gensrv_lisp: ../srv_gen/lisp/_package.lisp
 ROSBUILD_gensrv_lisp: ../srv_gen/lisp/_package_AuctionService.lisp
 ROSBUILD_gensrv_lisp: ../srv_gen/lisp/BuyerForwardBidService.lisp
 ROSBUILD_gensrv_lisp: ../srv_gen/lisp/_package.lisp
 ROSBUILD_gensrv_lisp: ../srv_gen/lisp/_package_BuyerForwardBidService.lisp
+ROSBUILD_gensrv_lisp: ../srv_gen/lisp/AuctioneerBidReceptionService.lisp
+ROSBUILD_gensrv_lisp: ../srv_gen/lisp/_package.lisp
+ROSBUILD_gensrv_lisp: ../srv_gen/lisp/_package_AuctioneerBidReceptionService.lisp
+ROSBUILD_gensrv_lisp: ../srv_gen/lisp/AuctionConfigService.lisp
+ROSBUILD_gensrv_lisp: ../srv_gen/lisp/_package.lisp
+ROSBUILD_gensrv_lisp: ../srv_gen/lisp/_package_AuctionConfigService.lisp
 ROSBUILD_gensrv_lisp: CMakeFiles/ROSBUILD_gensrv_lisp.dir/build.make
 .PHONY : ROSBUILD_gensrv_lisp
 

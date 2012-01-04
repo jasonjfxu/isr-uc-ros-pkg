@@ -8,7 +8,7 @@ import roslib.rostime
 import std_msgs.msg
 
 class BuyerServiceRequest(roslib.message.Message):
-  _md5sum = "e14baa216cccf2db6c6bd973942a6569"
+  _md5sum = "7cd34bdf13dec94669878da207bcd649"
   _type = "auction_srvs/BuyerServiceRequest"
   _has_header = False #flag to mark the presence of a Header object
   _full_text = """
@@ -16,6 +16,7 @@ class BuyerServiceRequest(roslib.message.Message):
 
 string auctioneer_node
 string sending_node
+string nodes_collected
 auction_msgs/Auction auction_data
 
 
@@ -55,8 +56,8 @@ float64 y
 float64 z
 
 """
-  __slots__ = ['auctioneer_node','sending_node','auction_data']
-  _slot_types = ['string','string','auction_msgs/Auction']
+  __slots__ = ['auctioneer_node','sending_node','nodes_collected','auction_data']
+  _slot_types = ['string','string','string','auction_msgs/Auction']
 
   def __init__(self, *args, **kwds):
     """
@@ -66,7 +67,7 @@ float64 z
     changes.  You cannot mix in-order arguments and keyword arguments.
     
     The available fields are:
-       auctioneer_node,sending_node,auction_data
+       auctioneer_node,sending_node,nodes_collected,auction_data
     
     @param args: complete set of field values, in .msg order
     @param kwds: use keyword arguments corresponding to message field names
@@ -79,11 +80,14 @@ float64 z
         self.auctioneer_node = ''
       if self.sending_node is None:
         self.sending_node = ''
+      if self.nodes_collected is None:
+        self.nodes_collected = ''
       if self.auction_data is None:
         self.auction_data = auction_msgs.msg.Auction()
     else:
       self.auctioneer_node = ''
       self.sending_node = ''
+      self.nodes_collected = ''
       self.auction_data = auction_msgs.msg.Auction()
 
   def _get_types(self):
@@ -103,6 +107,9 @@ float64 z
       length = len(_x)
       buff.write(struct.pack('<I%ss'%length, length, _x))
       _x = self.sending_node
+      length = len(_x)
+      buff.write(struct.pack('<I%ss'%length, length, _x))
+      _x = self.nodes_collected
       length = len(_x)
       buff.write(struct.pack('<I%ss'%length, length, _x))
       _x = self
@@ -149,6 +156,12 @@ float64 z
       start = end
       end += length
       self.sending_node = str[start:end]
+      start = end
+      end += 4
+      (length,) = _struct_I.unpack(str[start:end])
+      start = end
+      end += length
+      self.nodes_collected = str[start:end]
       _x = self
       start = end
       end += 12
@@ -207,6 +220,9 @@ float64 z
       _x = self.sending_node
       length = len(_x)
       buff.write(struct.pack('<I%ss'%length, length, _x))
+      _x = self.nodes_collected
+      length = len(_x)
+      buff.write(struct.pack('<I%ss'%length, length, _x))
       _x = self
       buff.write(_struct_3I.pack(_x.auction_data.header.seq, _x.auction_data.header.stamp.secs, _x.auction_data.header.stamp.nsecs))
       _x = self.auction_data.header.frame_id
@@ -253,6 +269,12 @@ float64 z
       start = end
       end += length
       self.sending_node = str[start:end]
+      start = end
+      end += 4
+      (length,) = _struct_I.unpack(str[start:end])
+      start = end
+      end += length
+      self.nodes_collected = str[start:end]
       _x = self
       start = end
       end += 12
@@ -414,6 +436,6 @@ string response_info
 _struct_I = roslib.message.struct_I
 class BuyerService(roslib.message.ServiceDefinition):
   _type          = 'auction_srvs/BuyerService'
-  _md5sum = '2e6332b25084caeadc25acc7c23c2c08'
+  _md5sum = '827a8d5b8806f1bbb1bc47a119c94d69'
   _request_class  = BuyerServiceRequest
   _response_class = BuyerServiceResponse
