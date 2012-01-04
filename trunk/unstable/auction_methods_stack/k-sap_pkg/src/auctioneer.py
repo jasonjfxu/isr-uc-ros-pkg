@@ -1,139 +1,108 @@
-#! /usr/bin/env python
-
-# The auctioneer role is played by the actor in charge of conducing the auction
-# on a particular overlapping area.
-# It is selected for each overlapping area by the collector/seller responsible
-# for that area.
-
-# Publish: Auction topic.
-# Subscribe: Bid topic.
-
 # configuring PYTHONPATH (By default, this will add the src and lib directory for each of your dependencies to your PYTHONPATH)
-import roslib; roslib.load_manifest('sap_pkg')
+import roslib; roslib.load_manifest('k-sap_pkg')
 
 # import client library
 import rospy
 
-# import message types
+# import messages
 import auction_msgs.msg
 
-# "global" variables (to be referred as global under def fun(something))
-winner_id = 'none'
-winner_cost = 0
+# import services
+import auction_srvs.srv
 
-# defining callback for the bids of an auction
-# function: output information to rospy.loginfo
-def auction_bids_callback(data):
+# import services functions
+import auction_common
+
+# import auxiliar libraries
+import random
+import math
+
+# "global" variables (to be referred as global under def fun(something))
+winner_id = ''
+winner_cost = 999999
+
+
+#####################################################################################
+## Auctioneer Bid Reception Service Callback
+#####################################################################################
+def handle_auctioneer_bid_reception_server_callback(bid_req):
+    
     # define global variables
     global winner_id
-    global winner_cost
+    global winner_cost  
     
-    # output loginfo to rosout
-    rospy.loginfo(rospy.get_name()+" %s offer %d", data.buyer_id, data.cost_distance)
+    # Evaluate bids, Min(cost_distance)    
+    if winner_cost >= bid_req.bid_data.cost_distance:
+        if bid_req.bid_data.buyer_id != '':
+            winner_cost = bid_req.bid_data.cost_distance
+            winner_id = bid_req.bid_data.buyer_id
 
-    # evaluate bids (find the best)
-    if winner_cost < data.cost_distance:
-        winner_cost = data.cost_distance
-        winner_id = data.buyer_id
-    else:
-        pass
-    
-    # verbose for auction status
-    print "(winning at the moment) ", winner_id, "with offer ", winner_cost
+    return {'response_info':'bid_received'}
+## End handle_auctioneer_bid_reception_callback
 
 
-# defining the publication of an auction
-# function: publish in Auction topic with command join_auction, and
-#           the properties of the auction
-def auction_announcement():
-    # reset variables (for new auction)
+
+
+
+#####################################################################################
+## Auctioneer Service Callback
+#####################################################################################
+def handle_auctioneer_server_callback(auction_req):
+
+    # define global variables
     global winner_id
-    global winner_cost
-    winner_id = "none"
-    winner_cost = 0
-
-    # declares that the node is publishing to the auction topic using the 
-    # message type auction_msgs/Auction
-    auctioneer_pub = rospy.Publisher("auction", auction_msgs.msg.Auction)
-
-    # declares that the node is subscribing to the bids topic using the
-    # message type auction_msgs/Bid
-    bid = rospy.Subscriber("bids", auction_msgs.msg.Bid, auction_bids_callback)
-
-    # wait a little bit here for Publisher and Subscribers to "connect"
-    # to the topics
-    rospy.sleep(0.5)
-
-    # creates an auction item to be publish for negotiation
-    auction_item = auction_msgs.msg.Auction()
-
-    # fill the properties for the auction item
-    auction_item.header.frame_id = "0"
-    auction_item.header.stamp = rospy.Time.now()
-    auction_item.command = "join_auction"
-    auction_item.task_type_name = "go_to_location"
-    auction_item.subject = "all"
-    auction_item.metrics = "distance"
-    auction_item.length = rospy.Duration(10) # in seconds
-
-    # fill location where the event ocurred (to be automated)
-    auction_item.task_location.x = 10.0
-    auction_item.task_location.y = 10.0
-    auction_item.task_location.z = 0.0 
-
-    # publish auction on item
-    rospy.loginfo(auction_item)
-    auctioneer_pub.publish(auction_item)
-
-
-    return auction_item
- 
-
-# defining the closing of an auction
-# function: -subscribe Bid topic,
-#           -evaluate for best offer, 
-#           -publish in Auction topic with command close_auction, and
-#            the properties of the auction
-#           -notifies the winner
-def auction_closing(auction_item):
-    # close the Auction
-
-    # declares that the node is publishing to the auction topic using the 
-    # message type auction_msgs/Auction
-    auctioneer_pub = rospy.Publisher("auction", auction_msgs.msg.Auction)    
-
-    # change the command to close_auction
-    auction_item.command = "close_auction"
-    # publish close_auction command
-    rospy.loginfo(auction_item)
-    auctioneer_pub.publish(auction_item)
-
-    # inform winner
-    print "And the winner is ", winner_id," with offer ", winner_cost
-
-   
-#
-# define main part of the node
-#
-if __name__ == '__main__':
-    try:
-        # Initializes a rospy node so that the Auctioneer can
-        # publish and subscribe over ROS.
-        # For now only one auctioneer is allowed
-        rospy.init_node("auctioneer", anonymous=False)
+    global winner_cost    
+       
+    
+    # Obtain nodes list to relay information with k=1
+    neighbour_nodes_relay_list = auction_common.create_neighbour_nodes_list(auction_req)        
+    
+    # Prepare auction information
+    role = "be_buyer"
+    auction_type = 'k-sap'
+    sending_node = rospy.get_name()
         
-#        while not rospy.is_shutdown():
-        # Publish the auction (if an event is detected)
-        auction_item_to_close = auction_announcement()
+    auctioneer_node = rospy.get_name()
+    nodes_collected = rospy.get_param('~neighbour_nodes_list')
+    auction_data = auction_req.auction_data
         
-        # Time out (doesn't affect callback function)
-        rospy.sleep(2.0)
-        
-        # Close the auction
-        auction_closing(auction_item_to_close)
-        
-        # Blocks until ROS node is shutdown
-#           rospy.spin()            
             
-    except rospy.ROSInterruptException:
-        print "program interrupted before completion"
+    # send requests for neighbours
+    for node in neighbour_nodes_relay_list:           
+            
+        # prepare neighbours to be buyers
+        service_path = node+'/auction_config_server'
+            
+        rospy.wait_for_service(service_path)
+        neighbour_node_auction_config_server = rospy.ServiceProxy(service_path,
+                                                                      auction_srvs.srv.AuctionConfigService)
+            
+        try:       
+            neighbour_node_auction_config_server_resp = neighbour_node_auction_config_server(role,auction_type,sending_node)
+                
+        except rospy.ServiceException, e:
+            rospy.loginfo("Service call failed: %s",e)
+                
+                
+        # send the auction information to the buyer node
+        service_path = node+'/buyer_server'   
+                
+        rospy.wait_for_service(service_path)
+        buyer_service = rospy.ServiceProxy(service_path, auction_srvs.srv.BuyerService)
+            
+        try:
+            buyer_server_resp = buyer_service(auctioneer_node,sending_node,nodes_collected,auction_data)
+                
+        except rospy.ServiceException, e:
+            print "Service did not process request: %s"%str(e)
+                    
+                
+    # verbose for auction status (received all the bids)
+    rospy.loginfo("winner was: %s with offer %d",winner_id, winner_cost)
+
+    
+    # may need to sleep, to give time for bidders to put their offers
+
+        
+    return{'response_info': 'valid','winner_id': winner_id,'winner_cost': winner_cost}
+## End handle_auctioneer_server_callback

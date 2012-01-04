@@ -29,6 +29,7 @@ struct BuyerServiceRequest_ {
   BuyerServiceRequest_()
   : auctioneer_node()
   , sending_node()
+  , nodes_collected()
   , auction_data()
   {
   }
@@ -36,6 +37,7 @@ struct BuyerServiceRequest_ {
   BuyerServiceRequest_(const ContainerAllocator& _alloc)
   : auctioneer_node(_alloc)
   , sending_node(_alloc)
+  , nodes_collected(_alloc)
   , auction_data(_alloc)
   {
   }
@@ -45,6 +47,9 @@ struct BuyerServiceRequest_ {
 
   typedef std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other >  _sending_node_type;
   std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other >  sending_node;
+
+  typedef std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other >  _nodes_collected_type;
+  std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other >  nodes_collected;
 
   typedef  ::auction_msgs::Auction_<ContainerAllocator>  _auction_data_type;
    ::auction_msgs::Auction_<ContainerAllocator>  auction_data;
@@ -58,14 +63,14 @@ public:
   ROS_DEPRECATED const std::string __getDataType() const { return __s_getDataType_(); }
 
 private:
-  static const char* __s_getMD5Sum_() { return "e14baa216cccf2db6c6bd973942a6569"; }
+  static const char* __s_getMD5Sum_() { return "7cd34bdf13dec94669878da207bcd649"; }
 public:
   ROS_DEPRECATED static const std::string __s_getMD5Sum() { return __s_getMD5Sum_(); }
 
   ROS_DEPRECATED const std::string __getMD5Sum() const { return __s_getMD5Sum_(); }
 
 private:
-  static const char* __s_getServerMD5Sum_() { return "2e6332b25084caeadc25acc7c23c2c08"; }
+  static const char* __s_getServerMD5Sum_() { return "827a8d5b8806f1bbb1bc47a119c94d69"; }
 public:
   ROS_DEPRECATED static const std::string __s_getServerMD5Sum() { return __s_getServerMD5Sum_(); }
 
@@ -77,6 +82,7 @@ private:
 \n\
 string auctioneer_node\n\
 string sending_node\n\
+string nodes_collected\n\
 auction_msgs/Auction auction_data\n\
 \n\
 \n\
@@ -126,6 +132,7 @@ public:
     ros::serialization::OStream stream(write_ptr, 1000000000);
     ros::serialization::serialize(stream, auctioneer_node);
     ros::serialization::serialize(stream, sending_node);
+    ros::serialization::serialize(stream, nodes_collected);
     ros::serialization::serialize(stream, auction_data);
     return stream.getData();
   }
@@ -135,6 +142,7 @@ public:
     ros::serialization::IStream stream(read_ptr, 1000000000);
     ros::serialization::deserialize(stream, auctioneer_node);
     ros::serialization::deserialize(stream, sending_node);
+    ros::serialization::deserialize(stream, nodes_collected);
     ros::serialization::deserialize(stream, auction_data);
     return stream.getData();
   }
@@ -144,6 +152,7 @@ public:
     uint32_t size = 0;
     size += ros::serialization::serializationLength(auctioneer_node);
     size += ros::serialization::serializationLength(sending_node);
+    size += ros::serialization::serializationLength(nodes_collected);
     size += ros::serialization::serializationLength(auction_data);
     return size;
   }
@@ -191,7 +200,7 @@ public:
   ROS_DEPRECATED const std::string __getMD5Sum() const { return __s_getMD5Sum_(); }
 
 private:
-  static const char* __s_getServerMD5Sum_() { return "2e6332b25084caeadc25acc7c23c2c08"; }
+  static const char* __s_getServerMD5Sum_() { return "827a8d5b8806f1bbb1bc47a119c94d69"; }
 public:
   ROS_DEPRECATED static const std::string __s_getServerMD5Sum() { return __s_getServerMD5Sum_(); }
 
@@ -262,12 +271,12 @@ template<class ContainerAllocator>
 struct MD5Sum< ::auction_srvs::BuyerServiceRequest_<ContainerAllocator> > {
   static const char* value() 
   {
-    return "e14baa216cccf2db6c6bd973942a6569";
+    return "7cd34bdf13dec94669878da207bcd649";
   }
 
   static const char* value(const  ::auction_srvs::BuyerServiceRequest_<ContainerAllocator> &) { return value(); } 
-  static const uint64_t static_value1 = 0xe14baa216cccf2dbULL;
-  static const uint64_t static_value2 = 0x6c6bd973942a6569ULL;
+  static const uint64_t static_value1 = 0x7cd34bdf13dec946ULL;
+  static const uint64_t static_value2 = 0x69878da207bcd649ULL;
 };
 
 template<class ContainerAllocator>
@@ -289,6 +298,7 @@ struct Definition< ::auction_srvs::BuyerServiceRequest_<ContainerAllocator> > {
 \n\
 string auctioneer_node\n\
 string sending_node\n\
+string nodes_collected\n\
 auction_msgs/Auction auction_data\n\
 \n\
 \n\
@@ -394,6 +404,7 @@ template<class ContainerAllocator> struct Serializer< ::auction_srvs::BuyerServi
   {
     stream.next(m.auctioneer_node);
     stream.next(m.sending_node);
+    stream.next(m.nodes_collected);
     stream.next(m.auction_data);
   }
 
@@ -428,7 +439,7 @@ template<>
 struct MD5Sum<auction_srvs::BuyerService> {
   static const char* value() 
   {
-    return "2e6332b25084caeadc25acc7c23c2c08";
+    return "827a8d5b8806f1bbb1bc47a119c94d69";
   }
 
   static const char* value(const auction_srvs::BuyerService&) { return value(); } 
@@ -448,7 +459,7 @@ template<class ContainerAllocator>
 struct MD5Sum<auction_srvs::BuyerServiceRequest_<ContainerAllocator> > {
   static const char* value() 
   {
-    return "2e6332b25084caeadc25acc7c23c2c08";
+    return "827a8d5b8806f1bbb1bc47a119c94d69";
   }
 
   static const char* value(const auction_srvs::BuyerServiceRequest_<ContainerAllocator> &) { return value(); } 
@@ -468,7 +479,7 @@ template<class ContainerAllocator>
 struct MD5Sum<auction_srvs::BuyerServiceResponse_<ContainerAllocator> > {
   static const char* value() 
   {
-    return "2e6332b25084caeadc25acc7c23c2c08";
+    return "827a8d5b8806f1bbb1bc47a119c94d69";
   }
 
   static const char* value(const auction_srvs::BuyerServiceResponse_<ContainerAllocator> &) { return value(); } 

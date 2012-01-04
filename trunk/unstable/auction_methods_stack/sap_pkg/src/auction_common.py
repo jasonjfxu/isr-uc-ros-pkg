@@ -22,44 +22,10 @@ role_assigned = False
 node_role = 'none'
 
 
-###################################################################################################
-## Auction Client for Neighbour Nodes 
-## (to be called in the node to pass data to its neighbours)
-###################################################################################################
-def neighbour_node_auction_client(neighbour_node, auction_req):
-
-    # compose service name (to be changed)
-    service_path = neighbour_node+'/buyer_server'
-
-    # wait for the service in the neighbour node to be available
-    rospy.wait_for_service(service_path)
-
-    try:
-        # create the handle to the service client in the neighbour node
-        neighbour_node_auction_server = rospy.ServiceProxy(service_path,
-                                                           auction_srvs.srv.AuctionService)
-
-        # call the service with the current auction information as input parameter
-        neighbour_node_bid_response = neighbour_node_auction_server(auction_req)
-
-        # log bid information from the neighbour node (debug)
-        rospy.loginfo(neighbour_node_bid_response)
-
-        # return the bid into the parent/calling node
-        return neighbour_node_bid_response.bid_data
-        
-    except rospy.ServiceException, e:
-        rospy.loginfo("Service call failed: %s",e)
-            
-## End neighbour_node_auction_client
-
-
-
-
-####################################################################################################
+#########################################################################################
 ## Create list of neighbour nodes to relay the auction_req
 ## (must return a list)
-####################################################################################################
+#########################################################################################
 def create_neighbour_nodes_list(auction_req):
 
     neighbour_nodes_string = rospy.get_param('~neighbour_nodes_list')

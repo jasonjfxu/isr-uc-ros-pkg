@@ -66,7 +66,7 @@ for N in [10,20,50,100]:
             f.writelines
             for n in range(0,len(S)):
 
-                s = '\t<node pkg="sap_pkg" type="node.py" name="'+S[n]+'" output="screen">\n'
+                s = '\t<node pkg="k-sap_pkg" type="node.py" name="'+S[n]+'" output="screen">\n'
                 f.writelines(s)
             
 

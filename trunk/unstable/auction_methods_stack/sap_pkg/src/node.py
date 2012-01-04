@@ -28,7 +28,7 @@ import auction_msgs.msg
 import auction_srvs.srv
 
 # import services functions
-import auctioneer_sap
+import auctioneer
 import buyer_sap
 
 # import auxiliar libraries
@@ -36,48 +36,89 @@ import random
 import math
 
 # "global" variables (to be referred as global under def fun(something))
-winner_id = 'none'
-winner_cost = 0
-
 role_assigned = False
-node_role = 'none'
 
-         
-#####################################################################################################
-## Auction Service (Server)
-#####################################################################################################
-def auction_server():
 
-    # Auctioneer Service
+############################################################################
+## Create Auctioneer Services
+############################################################################
+def create_auctioneer_services():
+
+    # create Auctioneer Service
     service_path = rospy.get_name()+"/auctioneer_server"
 
-    auctioneer_response = rospy.Service(service_path,
-                                     auction_srvs.srv.AuctionService, #attention here (type of service)
-                                     auctioneer_sap.handle_auction_server_callback)
+    auctioneer_server = rospy.Service(service_path,
+                                          auction_srvs.srv.AuctioneerService,
+                                          auctioneer.handle_auctioneer_server_callback)
 
-    # Buyer Service
+    # create Auctioneer Bid Reception Service
+    service_path = rospy.get_name()+"/auctioneer_bid_reception_server"
+
+    auctioneer_bid_reception_server = rospy.Service(service_path,
+                                                    auction_srvs.srv.AuctioneerBidReceptionService,
+                                                    auctioneer.handle_auctioneer_bid_reception_server_callback)
+
+## End create_auctioneer_services
+
+
+
+############################################################################
+## Create Buyer Services
+############################################################################
+def create_buyer_services():
+
+    # create Buyer Service
     service_path = rospy.get_name()+"/buyer_server"
-    
-    buyer_response = rospy.Service(service_path, 
-                                   auction_srvs.srv.AuctionService, #attention here (type of service)
-                                   buyer_sap.handle_auction_server_callback)    
 
-    # ok, ready to participate
-    rospy.loginfo(rospy.get_name()+" is ready to participate in the auction.")
-    
-    # Prevent node from exit until shutdown
-    rospy.spin()
-## End Auction Service (Server)
-                
+    buyer_server = rospy.Service(service_path,
+                                 auction_srvs.srv.BuyerService,
+                                 buyer_sap.handle_buyer_server_callback)
 
-#####################################################################################################
+## End create_buyer_services
+
+
+
+############################################################################
+## Auction Config Service Callback
+############################################################################
+def handle_auction_config_server_callback(auction_req):
+
+    global role_assigned
+
+    # avoid node to take another role
+    if not role_assigned:
+        role_assigned = True
+        if auction_req.role == 'be_auctioneer':
+            create_auctioneer_services()
+            return {'response_info':'ok'}
+        elif auction_req.role == 'be_buyer':
+            create_buyer_services()
+            return {'response_info':'ok'}
+        else:
+            return {'response_info':'invalid role requested'}
+    else:
+        return {'response_info':'node already have a role'}
+## End handle_auction_config_server_callback            
+
+############################################################################
 ## Main function
-#####################################################################################################
+############################################################################
 if __name__ == "__main__":
         
     # initialize node (we will have several nodes, anonymous=True)
     rospy.init_node('node', anonymous=True)
     
-    # put service server into action
-    auction_server()
+    # create the auction_config_server
+    service_path = rospy.get_name()+"/auction_config_server"
+
+    auction_config_server = rospy.Service(service_path,
+                                          auction_srvs.srv.AuctionConfigService,
+                                          handle_auction_config_server_callback)
+
+    # ok, ready to participate
+    #rospy.loginfo(rospy.get_name()+" is ready to participate in the auction.")
+    
+    # Prevent node from exit until shutdown
+    rospy.spin()
+
 ## End main

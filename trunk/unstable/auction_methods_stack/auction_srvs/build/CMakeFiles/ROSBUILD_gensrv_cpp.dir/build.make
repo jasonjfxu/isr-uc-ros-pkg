@@ -41,9 +41,10 @@ CMAKE_BINARY_DIR = /home/joaoquintas/ros_workspace/SRC/auction_methods_stack/auc
 
 CMakeFiles/ROSBUILD_gensrv_cpp: ../srv_gen/cpp/include/auction_srvs/BuyerService.h
 CMakeFiles/ROSBUILD_gensrv_cpp: ../srv_gen/cpp/include/auction_srvs/AuctioneerService.h
-CMakeFiles/ROSBUILD_gensrv_cpp: ../srv_gen/cpp/include/auction_srvs/AuctioneerBidService.h
 CMakeFiles/ROSBUILD_gensrv_cpp: ../srv_gen/cpp/include/auction_srvs/AuctionService.h
 CMakeFiles/ROSBUILD_gensrv_cpp: ../srv_gen/cpp/include/auction_srvs/BuyerForwardBidService.h
+CMakeFiles/ROSBUILD_gensrv_cpp: ../srv_gen/cpp/include/auction_srvs/AuctioneerBidReceptionService.h
+CMakeFiles/ROSBUILD_gensrv_cpp: ../srv_gen/cpp/include/auction_srvs/AuctionConfigService.h
 
 ../srv_gen/cpp/include/auction_srvs/BuyerService.h: ../srv/BuyerService.srv
 ../srv_gen/cpp/include/auction_srvs/BuyerService.h: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp/scripts/gensrv_cpp.py
@@ -137,51 +138,6 @@ CMakeFiles/ROSBUILD_gensrv_cpp: ../srv_gen/cpp/include/auction_srvs/BuyerForward
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating ../srv_gen/cpp/include/auction_srvs/AuctioneerService.h"
 	/opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp/scripts/gensrv_cpp.py /home/joaoquintas/ros_workspace/SRC/auction_methods_stack/auction_srvs/srv/AuctioneerService.srv
 
-../srv_gen/cpp/include/auction_srvs/AuctioneerBidService.h: ../srv/AuctioneerBidService.srv
-../srv_gen/cpp/include/auction_srvs/AuctioneerBidService.h: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp/scripts/gensrv_cpp.py
-../srv_gen/cpp/include/auction_srvs/AuctioneerBidService.h: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp/scripts/genmsg_cpp.py
-../srv_gen/cpp/include/auction_srvs/AuctioneerBidService.h: /opt/ros/electric/ros/core/roslib/scripts/gendeps
-../srv_gen/cpp/include/auction_srvs/AuctioneerBidService.h: /home/joaoquintas/ros_workspace/SRC/auction_methods_stack/auction_msgs/msg/Bid.msg
-../srv_gen/cpp/include/auction_srvs/AuctioneerBidService.h: /opt/ros/electric/stacks/ros_comm/messages/std_msgs/msg/Header.msg
-../srv_gen/cpp/include/auction_srvs/AuctioneerBidService.h: ../manifest.xml
-../srv_gen/cpp/include/auction_srvs/AuctioneerBidService.h: /opt/ros/electric/ros/tools/rospack/manifest.xml
-../srv_gen/cpp/include/auction_srvs/AuctioneerBidService.h: /opt/ros/electric/ros/core/roslib/manifest.xml
-../srv_gen/cpp/include/auction_srvs/AuctioneerBidService.h: /opt/ros/electric/stacks/ros_comm/messages/std_msgs/manifest.xml
-../srv_gen/cpp/include/auction_srvs/AuctioneerBidService.h: /opt/ros/electric/stacks/ros_comm/messages/rosgraph_msgs/manifest.xml
-../srv_gen/cpp/include/auction_srvs/AuctioneerBidService.h: /opt/ros/electric/ros/core/rosbuild/manifest.xml
-../srv_gen/cpp/include/auction_srvs/AuctioneerBidService.h: /opt/ros/electric/ros/core/roslang/manifest.xml
-../srv_gen/cpp/include/auction_srvs/AuctioneerBidService.h: /opt/ros/electric/stacks/ros_comm/clients/rospy/manifest.xml
-../srv_gen/cpp/include/auction_srvs/AuctioneerBidService.h: /opt/ros/electric/stacks/ros_comm/utilities/cpp_common/manifest.xml
-../srv_gen/cpp/include/auction_srvs/AuctioneerBidService.h: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp_traits/manifest.xml
-../srv_gen/cpp/include/auction_srvs/AuctioneerBidService.h: /opt/ros/electric/stacks/ros_comm/utilities/rostime/manifest.xml
-../srv_gen/cpp/include/auction_srvs/AuctioneerBidService.h: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp_serialization/manifest.xml
-../srv_gen/cpp/include/auction_srvs/AuctioneerBidService.h: /opt/ros/electric/stacks/ros_comm/utilities/xmlrpcpp/manifest.xml
-../srv_gen/cpp/include/auction_srvs/AuctioneerBidService.h: /opt/ros/electric/stacks/ros_comm/tools/rosconsole/manifest.xml
-../srv_gen/cpp/include/auction_srvs/AuctioneerBidService.h: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp/manifest.xml
-../srv_gen/cpp/include/auction_srvs/AuctioneerBidService.h: /opt/ros/electric/ros/tools/rosclean/manifest.xml
-../srv_gen/cpp/include/auction_srvs/AuctioneerBidService.h: /opt/ros/electric/stacks/ros_comm/tools/rosgraph/manifest.xml
-../srv_gen/cpp/include/auction_srvs/AuctioneerBidService.h: /opt/ros/electric/stacks/ros_comm/tools/rosparam/manifest.xml
-../srv_gen/cpp/include/auction_srvs/AuctioneerBidService.h: /opt/ros/electric/stacks/ros_comm/tools/rosmaster/manifest.xml
-../srv_gen/cpp/include/auction_srvs/AuctioneerBidService.h: /opt/ros/electric/stacks/ros_comm/tools/rosout/manifest.xml
-../srv_gen/cpp/include/auction_srvs/AuctioneerBidService.h: /opt/ros/electric/stacks/ros_comm/tools/roslaunch/manifest.xml
-../srv_gen/cpp/include/auction_srvs/AuctioneerBidService.h: /opt/ros/electric/ros/tools/rosunit/manifest.xml
-../srv_gen/cpp/include/auction_srvs/AuctioneerBidService.h: /opt/ros/electric/stacks/ros_comm/tools/rostest/manifest.xml
-../srv_gen/cpp/include/auction_srvs/AuctioneerBidService.h: /opt/ros/electric/stacks/ros_comm/tools/topic_tools/manifest.xml
-../srv_gen/cpp/include/auction_srvs/AuctioneerBidService.h: /opt/ros/electric/stacks/ros_comm/tools/rosbag/manifest.xml
-../srv_gen/cpp/include/auction_srvs/AuctioneerBidService.h: /opt/ros/electric/stacks/ros_comm/tools/rosbagmigration/manifest.xml
-../srv_gen/cpp/include/auction_srvs/AuctioneerBidService.h: /opt/ros/electric/stacks/common_msgs/geometry_msgs/manifest.xml
-../srv_gen/cpp/include/auction_srvs/AuctioneerBidService.h: /home/joaoquintas/ros_workspace/SRC/auction_methods_stack/auction_msgs/manifest.xml
-../srv_gen/cpp/include/auction_srvs/AuctioneerBidService.h: /opt/ros/electric/stacks/ros_comm/messages/std_msgs/msg_gen/generated
-../srv_gen/cpp/include/auction_srvs/AuctioneerBidService.h: /opt/ros/electric/stacks/ros_comm/messages/rosgraph_msgs/msg_gen/generated
-../srv_gen/cpp/include/auction_srvs/AuctioneerBidService.h: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp/msg_gen/generated
-../srv_gen/cpp/include/auction_srvs/AuctioneerBidService.h: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp/srv_gen/generated
-../srv_gen/cpp/include/auction_srvs/AuctioneerBidService.h: /opt/ros/electric/stacks/ros_comm/tools/topic_tools/srv_gen/generated
-../srv_gen/cpp/include/auction_srvs/AuctioneerBidService.h: /opt/ros/electric/stacks/common_msgs/geometry_msgs/msg_gen/generated
-../srv_gen/cpp/include/auction_srvs/AuctioneerBidService.h: /home/joaoquintas/ros_workspace/SRC/auction_methods_stack/auction_msgs/msg_gen/generated
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/joaoquintas/ros_workspace/SRC/auction_methods_stack/auction_srvs/build/CMakeFiles $(CMAKE_PROGRESS_3)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating ../srv_gen/cpp/include/auction_srvs/AuctioneerBidService.h"
-	/opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp/scripts/gensrv_cpp.py /home/joaoquintas/ros_workspace/SRC/auction_methods_stack/auction_srvs/srv/AuctioneerBidService.srv
-
 ../srv_gen/cpp/include/auction_srvs/AuctionService.h: ../srv/AuctionService.srv
 ../srv_gen/cpp/include/auction_srvs/AuctionService.h: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp/scripts/gensrv_cpp.py
 ../srv_gen/cpp/include/auction_srvs/AuctionService.h: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp/scripts/genmsg_cpp.py
@@ -225,7 +181,7 @@ CMakeFiles/ROSBUILD_gensrv_cpp: ../srv_gen/cpp/include/auction_srvs/BuyerForward
 ../srv_gen/cpp/include/auction_srvs/AuctionService.h: /opt/ros/electric/stacks/ros_comm/tools/topic_tools/srv_gen/generated
 ../srv_gen/cpp/include/auction_srvs/AuctionService.h: /opt/ros/electric/stacks/common_msgs/geometry_msgs/msg_gen/generated
 ../srv_gen/cpp/include/auction_srvs/AuctionService.h: /home/joaoquintas/ros_workspace/SRC/auction_methods_stack/auction_msgs/msg_gen/generated
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/joaoquintas/ros_workspace/SRC/auction_methods_stack/auction_srvs/build/CMakeFiles $(CMAKE_PROGRESS_4)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/joaoquintas/ros_workspace/SRC/auction_methods_stack/auction_srvs/build/CMakeFiles $(CMAKE_PROGRESS_3)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating ../srv_gen/cpp/include/auction_srvs/AuctionService.h"
 	/opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp/scripts/gensrv_cpp.py /home/joaoquintas/ros_workspace/SRC/auction_methods_stack/auction_srvs/srv/AuctionService.srv
 
@@ -270,16 +226,105 @@ CMakeFiles/ROSBUILD_gensrv_cpp: ../srv_gen/cpp/include/auction_srvs/BuyerForward
 ../srv_gen/cpp/include/auction_srvs/BuyerForwardBidService.h: /opt/ros/electric/stacks/ros_comm/tools/topic_tools/srv_gen/generated
 ../srv_gen/cpp/include/auction_srvs/BuyerForwardBidService.h: /opt/ros/electric/stacks/common_msgs/geometry_msgs/msg_gen/generated
 ../srv_gen/cpp/include/auction_srvs/BuyerForwardBidService.h: /home/joaoquintas/ros_workspace/SRC/auction_methods_stack/auction_msgs/msg_gen/generated
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/joaoquintas/ros_workspace/SRC/auction_methods_stack/auction_srvs/build/CMakeFiles $(CMAKE_PROGRESS_5)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/joaoquintas/ros_workspace/SRC/auction_methods_stack/auction_srvs/build/CMakeFiles $(CMAKE_PROGRESS_4)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating ../srv_gen/cpp/include/auction_srvs/BuyerForwardBidService.h"
 	/opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp/scripts/gensrv_cpp.py /home/joaoquintas/ros_workspace/SRC/auction_methods_stack/auction_srvs/srv/BuyerForwardBidService.srv
+
+../srv_gen/cpp/include/auction_srvs/AuctioneerBidReceptionService.h: ../srv/AuctioneerBidReceptionService.srv
+../srv_gen/cpp/include/auction_srvs/AuctioneerBidReceptionService.h: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp/scripts/gensrv_cpp.py
+../srv_gen/cpp/include/auction_srvs/AuctioneerBidReceptionService.h: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp/scripts/genmsg_cpp.py
+../srv_gen/cpp/include/auction_srvs/AuctioneerBidReceptionService.h: /opt/ros/electric/ros/core/roslib/scripts/gendeps
+../srv_gen/cpp/include/auction_srvs/AuctioneerBidReceptionService.h: /home/joaoquintas/ros_workspace/SRC/auction_methods_stack/auction_msgs/msg/Bid.msg
+../srv_gen/cpp/include/auction_srvs/AuctioneerBidReceptionService.h: /opt/ros/electric/stacks/ros_comm/messages/std_msgs/msg/Header.msg
+../srv_gen/cpp/include/auction_srvs/AuctioneerBidReceptionService.h: ../manifest.xml
+../srv_gen/cpp/include/auction_srvs/AuctioneerBidReceptionService.h: /opt/ros/electric/ros/tools/rospack/manifest.xml
+../srv_gen/cpp/include/auction_srvs/AuctioneerBidReceptionService.h: /opt/ros/electric/ros/core/roslib/manifest.xml
+../srv_gen/cpp/include/auction_srvs/AuctioneerBidReceptionService.h: /opt/ros/electric/stacks/ros_comm/messages/std_msgs/manifest.xml
+../srv_gen/cpp/include/auction_srvs/AuctioneerBidReceptionService.h: /opt/ros/electric/stacks/ros_comm/messages/rosgraph_msgs/manifest.xml
+../srv_gen/cpp/include/auction_srvs/AuctioneerBidReceptionService.h: /opt/ros/electric/ros/core/rosbuild/manifest.xml
+../srv_gen/cpp/include/auction_srvs/AuctioneerBidReceptionService.h: /opt/ros/electric/ros/core/roslang/manifest.xml
+../srv_gen/cpp/include/auction_srvs/AuctioneerBidReceptionService.h: /opt/ros/electric/stacks/ros_comm/clients/rospy/manifest.xml
+../srv_gen/cpp/include/auction_srvs/AuctioneerBidReceptionService.h: /opt/ros/electric/stacks/ros_comm/utilities/cpp_common/manifest.xml
+../srv_gen/cpp/include/auction_srvs/AuctioneerBidReceptionService.h: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp_traits/manifest.xml
+../srv_gen/cpp/include/auction_srvs/AuctioneerBidReceptionService.h: /opt/ros/electric/stacks/ros_comm/utilities/rostime/manifest.xml
+../srv_gen/cpp/include/auction_srvs/AuctioneerBidReceptionService.h: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp_serialization/manifest.xml
+../srv_gen/cpp/include/auction_srvs/AuctioneerBidReceptionService.h: /opt/ros/electric/stacks/ros_comm/utilities/xmlrpcpp/manifest.xml
+../srv_gen/cpp/include/auction_srvs/AuctioneerBidReceptionService.h: /opt/ros/electric/stacks/ros_comm/tools/rosconsole/manifest.xml
+../srv_gen/cpp/include/auction_srvs/AuctioneerBidReceptionService.h: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp/manifest.xml
+../srv_gen/cpp/include/auction_srvs/AuctioneerBidReceptionService.h: /opt/ros/electric/ros/tools/rosclean/manifest.xml
+../srv_gen/cpp/include/auction_srvs/AuctioneerBidReceptionService.h: /opt/ros/electric/stacks/ros_comm/tools/rosgraph/manifest.xml
+../srv_gen/cpp/include/auction_srvs/AuctioneerBidReceptionService.h: /opt/ros/electric/stacks/ros_comm/tools/rosparam/manifest.xml
+../srv_gen/cpp/include/auction_srvs/AuctioneerBidReceptionService.h: /opt/ros/electric/stacks/ros_comm/tools/rosmaster/manifest.xml
+../srv_gen/cpp/include/auction_srvs/AuctioneerBidReceptionService.h: /opt/ros/electric/stacks/ros_comm/tools/rosout/manifest.xml
+../srv_gen/cpp/include/auction_srvs/AuctioneerBidReceptionService.h: /opt/ros/electric/stacks/ros_comm/tools/roslaunch/manifest.xml
+../srv_gen/cpp/include/auction_srvs/AuctioneerBidReceptionService.h: /opt/ros/electric/ros/tools/rosunit/manifest.xml
+../srv_gen/cpp/include/auction_srvs/AuctioneerBidReceptionService.h: /opt/ros/electric/stacks/ros_comm/tools/rostest/manifest.xml
+../srv_gen/cpp/include/auction_srvs/AuctioneerBidReceptionService.h: /opt/ros/electric/stacks/ros_comm/tools/topic_tools/manifest.xml
+../srv_gen/cpp/include/auction_srvs/AuctioneerBidReceptionService.h: /opt/ros/electric/stacks/ros_comm/tools/rosbag/manifest.xml
+../srv_gen/cpp/include/auction_srvs/AuctioneerBidReceptionService.h: /opt/ros/electric/stacks/ros_comm/tools/rosbagmigration/manifest.xml
+../srv_gen/cpp/include/auction_srvs/AuctioneerBidReceptionService.h: /opt/ros/electric/stacks/common_msgs/geometry_msgs/manifest.xml
+../srv_gen/cpp/include/auction_srvs/AuctioneerBidReceptionService.h: /home/joaoquintas/ros_workspace/SRC/auction_methods_stack/auction_msgs/manifest.xml
+../srv_gen/cpp/include/auction_srvs/AuctioneerBidReceptionService.h: /opt/ros/electric/stacks/ros_comm/messages/std_msgs/msg_gen/generated
+../srv_gen/cpp/include/auction_srvs/AuctioneerBidReceptionService.h: /opt/ros/electric/stacks/ros_comm/messages/rosgraph_msgs/msg_gen/generated
+../srv_gen/cpp/include/auction_srvs/AuctioneerBidReceptionService.h: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp/msg_gen/generated
+../srv_gen/cpp/include/auction_srvs/AuctioneerBidReceptionService.h: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp/srv_gen/generated
+../srv_gen/cpp/include/auction_srvs/AuctioneerBidReceptionService.h: /opt/ros/electric/stacks/ros_comm/tools/topic_tools/srv_gen/generated
+../srv_gen/cpp/include/auction_srvs/AuctioneerBidReceptionService.h: /opt/ros/electric/stacks/common_msgs/geometry_msgs/msg_gen/generated
+../srv_gen/cpp/include/auction_srvs/AuctioneerBidReceptionService.h: /home/joaoquintas/ros_workspace/SRC/auction_methods_stack/auction_msgs/msg_gen/generated
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/joaoquintas/ros_workspace/SRC/auction_methods_stack/auction_srvs/build/CMakeFiles $(CMAKE_PROGRESS_5)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating ../srv_gen/cpp/include/auction_srvs/AuctioneerBidReceptionService.h"
+	/opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp/scripts/gensrv_cpp.py /home/joaoquintas/ros_workspace/SRC/auction_methods_stack/auction_srvs/srv/AuctioneerBidReceptionService.srv
+
+../srv_gen/cpp/include/auction_srvs/AuctionConfigService.h: ../srv/AuctionConfigService.srv
+../srv_gen/cpp/include/auction_srvs/AuctionConfigService.h: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp/scripts/gensrv_cpp.py
+../srv_gen/cpp/include/auction_srvs/AuctionConfigService.h: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp/scripts/genmsg_cpp.py
+../srv_gen/cpp/include/auction_srvs/AuctionConfigService.h: /opt/ros/electric/ros/core/roslib/scripts/gendeps
+../srv_gen/cpp/include/auction_srvs/AuctionConfigService.h: ../manifest.xml
+../srv_gen/cpp/include/auction_srvs/AuctionConfigService.h: /opt/ros/electric/ros/tools/rospack/manifest.xml
+../srv_gen/cpp/include/auction_srvs/AuctionConfigService.h: /opt/ros/electric/ros/core/roslib/manifest.xml
+../srv_gen/cpp/include/auction_srvs/AuctionConfigService.h: /opt/ros/electric/stacks/ros_comm/messages/std_msgs/manifest.xml
+../srv_gen/cpp/include/auction_srvs/AuctionConfigService.h: /opt/ros/electric/stacks/ros_comm/messages/rosgraph_msgs/manifest.xml
+../srv_gen/cpp/include/auction_srvs/AuctionConfigService.h: /opt/ros/electric/ros/core/rosbuild/manifest.xml
+../srv_gen/cpp/include/auction_srvs/AuctionConfigService.h: /opt/ros/electric/ros/core/roslang/manifest.xml
+../srv_gen/cpp/include/auction_srvs/AuctionConfigService.h: /opt/ros/electric/stacks/ros_comm/clients/rospy/manifest.xml
+../srv_gen/cpp/include/auction_srvs/AuctionConfigService.h: /opt/ros/electric/stacks/ros_comm/utilities/cpp_common/manifest.xml
+../srv_gen/cpp/include/auction_srvs/AuctionConfigService.h: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp_traits/manifest.xml
+../srv_gen/cpp/include/auction_srvs/AuctionConfigService.h: /opt/ros/electric/stacks/ros_comm/utilities/rostime/manifest.xml
+../srv_gen/cpp/include/auction_srvs/AuctionConfigService.h: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp_serialization/manifest.xml
+../srv_gen/cpp/include/auction_srvs/AuctionConfigService.h: /opt/ros/electric/stacks/ros_comm/utilities/xmlrpcpp/manifest.xml
+../srv_gen/cpp/include/auction_srvs/AuctionConfigService.h: /opt/ros/electric/stacks/ros_comm/tools/rosconsole/manifest.xml
+../srv_gen/cpp/include/auction_srvs/AuctionConfigService.h: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp/manifest.xml
+../srv_gen/cpp/include/auction_srvs/AuctionConfigService.h: /opt/ros/electric/ros/tools/rosclean/manifest.xml
+../srv_gen/cpp/include/auction_srvs/AuctionConfigService.h: /opt/ros/electric/stacks/ros_comm/tools/rosgraph/manifest.xml
+../srv_gen/cpp/include/auction_srvs/AuctionConfigService.h: /opt/ros/electric/stacks/ros_comm/tools/rosparam/manifest.xml
+../srv_gen/cpp/include/auction_srvs/AuctionConfigService.h: /opt/ros/electric/stacks/ros_comm/tools/rosmaster/manifest.xml
+../srv_gen/cpp/include/auction_srvs/AuctionConfigService.h: /opt/ros/electric/stacks/ros_comm/tools/rosout/manifest.xml
+../srv_gen/cpp/include/auction_srvs/AuctionConfigService.h: /opt/ros/electric/stacks/ros_comm/tools/roslaunch/manifest.xml
+../srv_gen/cpp/include/auction_srvs/AuctionConfigService.h: /opt/ros/electric/ros/tools/rosunit/manifest.xml
+../srv_gen/cpp/include/auction_srvs/AuctionConfigService.h: /opt/ros/electric/stacks/ros_comm/tools/rostest/manifest.xml
+../srv_gen/cpp/include/auction_srvs/AuctionConfigService.h: /opt/ros/electric/stacks/ros_comm/tools/topic_tools/manifest.xml
+../srv_gen/cpp/include/auction_srvs/AuctionConfigService.h: /opt/ros/electric/stacks/ros_comm/tools/rosbag/manifest.xml
+../srv_gen/cpp/include/auction_srvs/AuctionConfigService.h: /opt/ros/electric/stacks/ros_comm/tools/rosbagmigration/manifest.xml
+../srv_gen/cpp/include/auction_srvs/AuctionConfigService.h: /opt/ros/electric/stacks/common_msgs/geometry_msgs/manifest.xml
+../srv_gen/cpp/include/auction_srvs/AuctionConfigService.h: /home/joaoquintas/ros_workspace/SRC/auction_methods_stack/auction_msgs/manifest.xml
+../srv_gen/cpp/include/auction_srvs/AuctionConfigService.h: /opt/ros/electric/stacks/ros_comm/messages/std_msgs/msg_gen/generated
+../srv_gen/cpp/include/auction_srvs/AuctionConfigService.h: /opt/ros/electric/stacks/ros_comm/messages/rosgraph_msgs/msg_gen/generated
+../srv_gen/cpp/include/auction_srvs/AuctionConfigService.h: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp/msg_gen/generated
+../srv_gen/cpp/include/auction_srvs/AuctionConfigService.h: /opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp/srv_gen/generated
+../srv_gen/cpp/include/auction_srvs/AuctionConfigService.h: /opt/ros/electric/stacks/ros_comm/tools/topic_tools/srv_gen/generated
+../srv_gen/cpp/include/auction_srvs/AuctionConfigService.h: /opt/ros/electric/stacks/common_msgs/geometry_msgs/msg_gen/generated
+../srv_gen/cpp/include/auction_srvs/AuctionConfigService.h: /home/joaoquintas/ros_workspace/SRC/auction_methods_stack/auction_msgs/msg_gen/generated
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/joaoquintas/ros_workspace/SRC/auction_methods_stack/auction_srvs/build/CMakeFiles $(CMAKE_PROGRESS_6)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating ../srv_gen/cpp/include/auction_srvs/AuctionConfigService.h"
+	/opt/ros/electric/stacks/ros_comm/clients/cpp/roscpp/scripts/gensrv_cpp.py /home/joaoquintas/ros_workspace/SRC/auction_methods_stack/auction_srvs/srv/AuctionConfigService.srv
 
 ROSBUILD_gensrv_cpp: CMakeFiles/ROSBUILD_gensrv_cpp
 ROSBUILD_gensrv_cpp: ../srv_gen/cpp/include/auction_srvs/BuyerService.h
 ROSBUILD_gensrv_cpp: ../srv_gen/cpp/include/auction_srvs/AuctioneerService.h
-ROSBUILD_gensrv_cpp: ../srv_gen/cpp/include/auction_srvs/AuctioneerBidService.h
 ROSBUILD_gensrv_cpp: ../srv_gen/cpp/include/auction_srvs/AuctionService.h
 ROSBUILD_gensrv_cpp: ../srv_gen/cpp/include/auction_srvs/BuyerForwardBidService.h
+ROSBUILD_gensrv_cpp: ../srv_gen/cpp/include/auction_srvs/AuctioneerBidReceptionService.h
+ROSBUILD_gensrv_cpp: ../srv_gen/cpp/include/auction_srvs/AuctionConfigService.h
 ROSBUILD_gensrv_cpp: CMakeFiles/ROSBUILD_gensrv_cpp.dir/build.make
 .PHONY : ROSBUILD_gensrv_cpp
 
