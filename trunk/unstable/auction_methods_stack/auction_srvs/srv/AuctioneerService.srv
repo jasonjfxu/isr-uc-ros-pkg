@@ -1,7 +1,8 @@
 #request constants
 
 #request fields
-string seller_node
+string sending_node
+string nodes_collected
 auction_msgs/Auction auction_data
 
 ---

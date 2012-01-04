@@ -3,6 +3,7 @@
 #request fields
 string auctioneer_node
 string sending_node
+string nodes_collected
 auction_msgs/Auction auction_data
 
 ---
