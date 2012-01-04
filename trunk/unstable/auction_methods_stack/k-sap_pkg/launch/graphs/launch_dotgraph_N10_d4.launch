@@ -1,4 +1,8 @@
 <launch>
+	
+	# parameter graph_info = ['N','l','d']
+	<param name="graph_info" value="['10','100','4']"/>
+
 	<node pkg="k-sap_pkg" type="node.py" name="node_1" output="screen">
 		<param name="position" value="['42.3923092418','65.8934558407','0']"/>
 		<param name="neighbour_nodes_list" value="/node_6,/node_5,/node_4,/node_3,/node_2"/>
