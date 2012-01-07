@@ -55,7 +55,8 @@ def handle_auctioneer_server_callback(auction_req):
        
     
     # Obtain nodes list to relay information with k=1
-    neighbour_nodes_relay_list = auction_common.create_neighbour_nodes_list(auction_req)        
+    neighbour_nodes_relay_list = auction_common.create_neighbour_nodes_list(auction_req)
+   
     
     # Prepare auction information
     role = "be_buyer"
@@ -81,7 +82,7 @@ def handle_auctioneer_server_callback(auction_req):
             neighbour_node_auction_config_server_resp = neighbour_node_auction_config_server(role,auction_type,sending_node)
                 
         except rospy.ServiceException, e:
-            rospy.loginfo("Service call failed: %s",e)
+            rospy.logwarn("[%s] Service call failed: %s",rospy.get_name(),e)
                 
                 
         # send the auction information to the buyer node
@@ -94,7 +95,7 @@ def handle_auctioneer_server_callback(auction_req):
             buyer_server_resp = buyer_service(auctioneer_node,sending_node,nodes_collected,auction_data)
                 
         except rospy.ServiceException, e:
-            print "Service did not process request: %s"%str(e)
+            rospy.logwarn("Service did not process request: %s",e)
                     
                 
     # verbose for auction status (received all the bids)

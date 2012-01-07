@@ -40,37 +40,70 @@ if __name__ == "__main__":
     auction_data.subject = 'all'
     auction_data.metrics = 'distance'
     auction_data.length = rospy.Duration(10)
-    auction_data.task_location.x = 0 #random.random()*100 # l = 100
-    auction_data.task_location.y = 0 #random.random()*100 # l = 100
+    auction_data.task_location.x = random.random()*100 # l = 100
+    auction_data.task_location.y = random.random()*100 # l = 100
     auction_data.task_location.z = 0
 
     print auction_data.task_location
 
 
+    # evaluate nearest node to event position
+    event_location = auction_data.task_location
+    stop_search = False
+    i = 1
+    nearest_node = []
+    nearest_node_distance = 99999999
+    while not stop_search:
+        try:
+            node = '/node_'+str(i)
+            node_param = node+'/position'
+            node_position = eval(rospy.get_param(node_param))
+
+            # calculate distance to event
+            x = float(node_position[0])-event_location.x
+            y = float(node_position[1])-event_location.y
+            z = float(node_position[2])-event_location.z
+            distance = float(math.sqrt(x*x+y*y+z*z))
+
+            if distance < nearest_node_distance:
+                nearest_node = node
+                nearest_node_position = node_position
+                nearest_node_distance = distance
+
+            i+=1
+        except:
+            rospy.loginfo("Node evaluation complete. Node %s will be auctioneer",nearest_node)
+            stop_search = True
+
+
     # prepare to call AuctionConfigService in the node that will be the auctioneer
-    service_path = sys.argv[1]+'/auction_config_server'   
+    service_path = nearest_node+'/auction_config_server'
     
     rospy.wait_for_service(service_path)
-    auctioneer_service = rospy.ServiceProxy(service_path, auction_srvs.srv.AuctionConfigService)
+    auction_config_service = rospy.ServiceProxy(service_path, auction_srvs.srv.AuctionConfigService)
 
     try:
-        auction_config_server_resp = auctioneer_service(role,auction_type,sending_node)
-
+        auction_config_server_resp = auction_config_service(role,auction_type,sending_node)
+        rospy.loginfo(auction_config_server_resp)
     except rospy.ServiceException, e:
-        print "Service did not process request: %s"%str(e)
+        rospy.logwarn("Service did not process request: %s",e)
 
 
     # send the auction information to the auctioneer node using the AuctioneerService
-    service_path = sys.argv[1]+'/auctioneer_server'   
+    service_path = nearest_node+'/auctioneer_server'   
     
     rospy.wait_for_service(service_path)
     auctioneer_service = rospy.ServiceProxy(service_path, auction_srvs.srv.AuctioneerService)
+    rospy.loginfo("[message] Seller request")
 
     try:
         auctioneer_server_resp = auctioneer_service(sending_node,nodes_collected,auction_data)
-
+        rospy.loginfo("[message] Auctioneer response")
+        rospy.loginfo(auctioneer_server_resp)
     except rospy.ServiceException, e:
-        print "Service did not process request: %s"%str(e)
+        rospy.logwarn("Service did not process request: %s",e)
 
+
+    rospy.set_param('/auction_closed', True)
                                                      
 ## End main

@@ -26,16 +26,6 @@ winner_cost = 0
 #####################################################################################
 def handle_buyer_server_callback(auction_req):
     
-    # Prepare information
-    role = "be_buyer"
-    auction_type = 'sap'
-    sending_node = rospy.get_name()
-        
-    auctioneer_node = auction_req.auctioneer_node
-    nodes_collected = rospy.get_param('~neighbour_nodes_list')
-    auction_data = auction_req.auction_data
-
-
 
     # Create a bid messsage to put an offer for the item in auction_req!    
     bid = auction_msgs.msg.Bid()
@@ -64,10 +54,11 @@ def handle_buyer_server_callback(auction_req):
     auctioneer_bid_reception_service = rospy.ServiceProxy(service_path, auction_srvs.srv.AuctioneerBidReceptionService)
 
     try:
+        sending_node = rospy.get_name()
         auctioneer_bid_reception_server_resp = auctioneer_bid_reception_service(sending_node,bid)
 
     except rospy.ServiceException, e:
-        print "Service did not process request: %s"%str(e)
+        rospy.logwarn("Service did not process request: %s",e)
 
 
 
@@ -75,7 +66,17 @@ def handle_buyer_server_callback(auction_req):
     neighbour_nodes_relay_list = auction_common.create_neighbour_nodes_list(auction_req)
            
     if neighbour_nodes_relay_list:
+
+        # Prepare information
+        role = "be_buyer"
+        auction_type = 'sap'
+        sending_node = rospy.get_name()
+
+        auctioneer_node = auction_req.auctioneer_node
+        nodes_collected = rospy.get_param('~neighbour_nodes_list')
+        auction_data = auction_req.auction_data
         
+
         for node in neighbour_nodes_relay_list:                  
             
             # prepare neighbours to be buyers
@@ -89,7 +90,7 @@ def handle_buyer_server_callback(auction_req):
                 neighbour_node_auction_config_server_resp = neighbour_node_auction_config_server(role,auction_type,sending_node)
                 
             except rospy.ServiceException, e:
-                rospy.loginfo("Service call failed: %s",e)
+                rospy.logwarn("[%s] Service call failed: %s",rospy.get_name(),e)
                 
                 
             # send the auction information to the buyer node
@@ -102,7 +103,7 @@ def handle_buyer_server_callback(auction_req):
                 buyer_server_resp = buyer_service(auctioneer_node,sending_node,nodes_collected,auction_data)
                 
             except rospy.ServiceException, e:
-                print "Service did not process request: %s"%str(e)    
+                rospy.logwarn("[%s] Service call failed: %s",rospy.get_name(),e)    
     
                 
 
