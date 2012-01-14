@@ -21,8 +21,17 @@ winner_id = 'none'
 winner_cost = 0
 
 
-
+#####################################################################################
+## Buyer Service Callback
+#####################################################################################
 def handle_auction_server_callback(auction_req):
+
+  # update number of messages in parameter server
+    if rospy.has_param('/num_messages'):
+        num_messages = rospy.get_param('/num_messages')
+        num_messages += 2
+        rospy.set_param('/num_messages', num_messages)
+
     
     # Create a bid messsage to put an offer for the item in auction_req!    
     bid_response = auction_msgs.msg.Bid()
@@ -51,8 +60,18 @@ def handle_auction_server_callback(auction_req):
     if neighbour_nodes_relay_list:              
 
         # Prepare auction information
+        if auction_req.auction_data.command == 'join_auction':
+            role = 'be_buyer'
+        else:
+            role = 'none'
         auction_req.sending_node = rospy.get_name()
-        auction_req.nodes_collected = rospy.get_param('~neighbour_nodes_list')
+
+        # updated nodes_collected
+        if rospy.has_param('/nodes_collected'):
+            auction_req.nodes_collected = rospy.get_param('/nodes_collected')+','+rospy.get_name()
+            rospy.set_param('/nodes_collected',auction_req.nodes_collected)
+        else:
+            auction_req.nodes_collected = rospy.get_param('~neighbour_nodes_list')
 
         # call the Auction Service from each neighbour of the node
         for node in neighbour_nodes_relay_list:                  

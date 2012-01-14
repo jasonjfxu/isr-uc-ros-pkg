@@ -18,6 +18,9 @@
 # configuring PYTHONPATH (By default, this will add the src and lib directory for each of your dependencies to your PYTHONPATH)
 import roslib; roslib.load_manifest('k-sap_pkg')
 
+# imports to access Master_API
+import os, xmlrpclib
+
 # import client library
 import rospy
 
@@ -37,12 +40,19 @@ import math
 
 # "global" variables (to be referred as global under def fun(something))
 role_assigned = False
+actual_role = 'none'
+master_server = ''
+buyer_server = ''
+auctioneer_server = ''
+auctioneer_bid_reception_server = ''
 
 
 ############################################################################
-## Create Auctioneer Services
+## Auctioneer Services
 ############################################################################
-def create_auctioneer_services():
+def auctioneer_services():
+
+    global auctioneer_server, auctioneer_bid_reception_server
 
     # create Auctioneer Service
     service_path = rospy.get_name()+"/auctioneer_server"
@@ -63,9 +73,11 @@ def create_auctioneer_services():
 
 
 ############################################################################
-## Create Buyer Services
+## Buyer Services
 ############################################################################
-def create_buyer_services():
+def buyer_services():
+
+    global buyer_server
 
     # create Buyer Service
     service_path = rospy.get_name()+"/buyer_server"
@@ -79,26 +91,114 @@ def create_buyer_services():
 
 
 ############################################################################
+## Cleanup Services
+############################################################################
+def cleanup():
+
+    global master_server, auctioneer_server, auctioneer_bid_reception_server, buyer_server, role_assigned, actual_role
+
+    print "Cleanup time..."
+
+
+    if actual_role == 'auctioneer':
+
+        role_assigned = False
+        actual_role = 'none'
+
+        """
+        print "auctioneer services will now shutdown"
+        auctioneer_server.shutdown()
+        #service_code, service_status, service_uri = master_server.lookupService(rospy.get_name(),str(rospy.get_name())+'/auctioneer_server')
+        #print 'Service: code:'+str(service_code) + ' status:' + service_status + ' uri:' + service_uri
+        #master_server.unregisterService(rospy.get_name(),str(rospy.get_name())+'/auctioneer_server',service_uri)
+        
+        auctioneer_bid_reception_server.shutdown()
+        #service_code, service_status, service_uri = master_server.lookupService(rospy.get_name(),str(rospy.get_name())+'/auctioneer_bid_reception_server')
+        #print 'Service: code:'+str(service_code) + ' status:' + service_status + ' uri:' + service_uri
+        #master_server.unregisterService(rospy.get_name(),str(rospy.get_name())+'/auctioneer_bid_reception_server',service_uri)
+        print "auctioneer services shutdown succeeded"
+        """
+    elif actual_role == 'buyer':
+
+        role_assigned = False
+        actual_role = 'none'
+        """
+        print "buyer services shutdown succeeded"
+        buyer_server.shutdown()
+        #service_code, service_status, service_uri = master_server.lookupService(rospy.get_name(),str(rospy.get_name())+'/buyer_server')
+        #print 'Service: code:'+str(service_code) + ' status:' + service_status + ' uri:' + service_uri
+        #master_server.unregisterService(rospy.get_name(),str(rospy.get_name())+'/buyer_server',service_uri)
+        print "buyer services shutdown succeeded"
+        """
+    else:
+        return "Something wrong happened in cleanup, actual_role invalid to clean..."
+## End cleanup
+
+
+############################################################################
 ## Auction Config Service Callback
 ############################################################################
 def handle_auction_config_server_callback(auction_req):
 
-    global role_assigned
+    global role_assigned, actual_role
+    global master_server, buyer_server
+
+
+    #master_server = xmlrpclib.ServerProxy(os.environ['ROS_MASTER_URI'])
+    #print master_server.getSystemState(rospy.get_name())
+
+
+    # update number of messages in parameter server
+    if rospy.has_param('/num_messages'):
+        num_messages = rospy.get_param('/num_messages')
+        num_messages += 2
+        rospy.set_param('/num_messages', num_messages)
+
+
+
+    #   print '\n\n\n\t\t'
+    #   print auction_req._connection_header
+
+    # instanciate a ServiceManager (to help cleanup registered services)
+    #service_manager = rospy.service.ServiceManager()
+    
+    # Clean up
+    if rospy.has_param('/auction_closed'):
+        if rospy.get_param('/auction_closed') == True:
+            role_assigned = False
+    #if auction_req.role == 'none':
+    #    cleanup()
+    #    rospy.loginfo(rospy.get_name()+' cleanup')
+    #    return {'response_info': rospy.get_name()+' cleanup'}
+
+            
+
+    rospy.loginfo(rospy.get_name()+' '+str(role_assigned))
 
     # avoid node to take another role
     if not role_assigned:
         role_assigned = True
+
         if auction_req.role == 'be_auctioneer':
-            create_auctioneer_services()
-            return {'response_info':'ok'}
+            actual_role = 'auctioneer'
+            auctioneer_services()
+            return {'response_info':'Auctioneer: '+rospy.get_name()+' ready for auction'}
+        
         elif auction_req.role == 'be_buyer':
-            create_buyer_services()
-            return {'response_info':'ok'}
+            actual_role = 'buyer'
+            buyer_services()
+            return {'response_info':'Buyer: '+rospy.get_name()+' ready for auction'}
         else:
             return {'response_info':'invalid role requested'}
+
+
+        #if rospy.has_param('/auction_closed'):
+        #    rospy.set_param('/auction_closed', False)
     else:
         return {'response_info':'node already have a role'}
-## End handle_auction_config_server_callback            
+
+## End handle_auction_config_server_callback 
+           
 
 ############################################################################
 ## Main function

@@ -14,13 +14,6 @@ import auction_srvs.srv
 import random
 import math
 
-# "global" variables (to be referred as global under def fun(something))
-winner_id = 'none'
-winner_cost = 0
-
-role_assigned = False
-node_role = 'none'
-
 
 #########################################################################################
 ## Create list of neighbour nodes to relay the auction_req

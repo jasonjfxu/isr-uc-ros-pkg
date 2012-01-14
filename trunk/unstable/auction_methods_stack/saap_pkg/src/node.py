@@ -18,6 +18,9 @@
 # configuring PYTHONPATH (By default, this will add the src and lib directory for each of your dependencies to your PYTHONPATH)
 import roslib; roslib.load_manifest('saap_pkg')
 
+# imports to access Master_API
+import os, xmlrpclib
+
 # import client library
 import rospy
 
@@ -37,24 +40,51 @@ import math
 
 # "global" variables (to be referred as global under def fun(something))
 role_assigned = False
+actual_role = 'none'
+master_server = ''
+buyer_server = ''
+auctioneer_server = ''
+auctioneer_bid_reception_server = ''
 
 
+############################################################################
+## Auction Config Service Callback
+############################################################################
 def handle_auction_server_callback(auction_req):
 
-    global role_assigned
+    global role_assigned, actual_role
+    global master_server, buyer_server
+
+
+    # update number of messages in parameter server
+    if rospy.has_param('/num_messages'):
+        num_messages = rospy.get_param('/num_messages')
+        num_messages += 2
+        rospy.set_param('/num_messages', num_messages)
+
+    # Clean up
+    if rospy.has_param('/auction_closed'):
+        if rospy.get_param('/auction_closed') == True:
+            role_assigned = False
+
+    rospy.loginfo(rospy.get_name()+' '+str(role_assigned))
 
     # avoid node to take another role
     if not role_assigned:
         role_assigned = True
+
         if auction_req.role == 'be_auctioneer':
             return auctioneer.handle_auction_server_callback(auction_req)
+        
         elif auction_req.role == 'be_buyer':
             return buyer_saap.handle_auction_server_callback(auction_req)
+
         else:
             return {'response_info':'invalid role requested'}
+
     else:
         return {'response_info':'node already have a role'}
-
+## End handle_auction_server_callback
       
 ##################################################################################
 ## Auction Service (Server)

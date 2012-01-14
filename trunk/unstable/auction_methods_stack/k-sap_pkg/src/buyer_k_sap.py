@@ -16,15 +16,19 @@ import auction_common
 import random
 import math
 
-# "global" variables (to be referred as global under def fun(something))
-winner_id = 'none'
-winner_cost = 0
 
 
 #####################################################################################
 ## Buyer Service Callback
 #####################################################################################
 def handle_buyer_server_callback(auction_req):
+
+    # update number of messages in parameter server
+    if rospy.has_param('/num_messages'):
+        num_messages = rospy.get_param('/num_messages')
+        num_messages += 2
+        rospy.set_param('/num_messages', num_messages)
+        
 
     # Graph parameters
     graph_parameters = eval(rospy.get_param("graph_info"))
@@ -34,16 +38,6 @@ def handle_buyer_server_callback(auction_req):
     r = math.sqrt((d*l*l)/(math.pi*(N-1)))
 
     print N, l, d, r
-
-
-    # Prepare information
-    role = "be_buyer"
-    auction_type = 'k-sap'
-    sending_node = rospy.get_name()
-        
-    auctioneer_node = auction_req.auctioneer_node
-    nodes_collected = rospy.get_param('~neighbour_nodes_list')
-    auction_data = auction_req.auction_data
 
 
     # Calculate k (number of hop)
@@ -56,6 +50,7 @@ def handle_buyer_server_callback(auction_req):
     k = int(distance_from_node_to_auctioneer/r)
 
     print distance_from_node_to_auctioneer, k
+
 
     # Create a bid messsage to put an offer for the item in auction_req!    
     bid = auction_msgs.msg.Bid()
@@ -83,6 +78,7 @@ def handle_buyer_server_callback(auction_req):
     auctioneer_bid_reception_service = rospy.ServiceProxy(service_path, auction_srvs.srv.AuctioneerBidReceptionService)
 
     try:
+        sending_node = rospy.get_name()
         auctioneer_bid_reception_server_resp = auctioneer_bid_reception_service(sending_node,bid)
 
     except rospy.ServiceException, e:
@@ -91,13 +87,33 @@ def handle_buyer_server_callback(auction_req):
 
     print int(auction_req.auction_data.subject)
 
-
+    # check if node is in the k-hops required range
     if k < int(auction_req.auction_data.subject):
 
         # Relay information to neighbour nodes!
         neighbour_nodes_relay_list = auction_common.create_neighbour_nodes_list(auction_req)
         
         if neighbour_nodes_relay_list:
+            
+            # Prepare information
+            if auction_req.auction_data.command == 'join_auction':
+                role = "be_buyer"
+            else:
+                role = 'none'
+
+            auction_type = 'k-sap'
+            sending_node = rospy.get_name()
+            
+            auctioneer_node = auction_req.auctioneer_node
+
+            # updated nodes_collected
+            if rospy.has_param('/nodes_collected'):
+                nodes_collected = rospy.get_param('/nodes_collected')+','+rospy.get_name()
+                rospy.set_param('/nodes_collected',nodes_collected)
+            else:
+                nodes_collected = rospy.get_param('~neighbour_nodes_list')
+
+            auction_data = auction_req.auction_data
 
             for node in neighbour_nodes_relay_list:                  
 
@@ -131,3 +147,4 @@ def handle_buyer_server_callback(auction_req):
 
     # return best bid
     return {'response_info': 'valid'+rospy.get_name()}
+## End handle_buyer_server_callback

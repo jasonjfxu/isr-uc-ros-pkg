@@ -1,4 +1,8 @@
 <launch>
+	<master auto="start"/>	
+	<param name="/use_sim_time" value="false"/>
+
+
 	<node pkg="sap_pkg" type="node.py" name="node_1" output="screen">
 		<param name="position" value="['17.0437325725','16.0210031144','0']"/>
 		<param name="neighbour_nodes_list" value="/node_9,/node_8,/node_7,/node_6,/node_5,/node_4,/node_3,/node_2"/>

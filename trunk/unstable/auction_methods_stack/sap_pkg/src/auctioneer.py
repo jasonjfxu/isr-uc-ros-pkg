@@ -52,19 +52,37 @@ def handle_auctioneer_server_callback(auction_req):
     # define global variables
     global winner_id
     global winner_cost    
-       
+
+
+    # update number of messages in parameter server
+    if rospy.has_param('/num_messages'):
+        num_messages = rospy.get_param('/num_messages')
+        num_messages += 2
+        rospy.set_param('/num_messages', num_messages)
+
     
     # Obtain nodes list to relay information with k=1
     neighbour_nodes_relay_list = auction_common.create_neighbour_nodes_list(auction_req)
    
     
     # Prepare auction information
-    role = "be_buyer"
+    if auction_req.auction_data.command == 'join_auction':
+        role = "be_buyer"
+    else:
+        role = 'none'
+
     auction_type = 'sap'
     sending_node = rospy.get_name()
         
     auctioneer_node = rospy.get_name()
-    nodes_collected = rospy.get_param('~neighbour_nodes_list')
+
+    # updated nodes_collected
+    if rospy.has_param('/nodes_collected'):
+        nodes_collected = rospy.get_param('/nodes_collected')+','+rospy.get_name()
+        rospy.set_param('/nodes_collected',nodes_collected)
+    else:
+        nodes_collected = rospy.get_param('~neighbour_nodes_list')
+
     auction_data = auction_req.auction_data
         
             
