@@ -31,12 +31,19 @@ def handle_auction_server_callback(auction_req):
     global winner_id
     global winner_cost    
 
+    # update number of messages in parameter server
+    if rospy.has_param('/num_messages'):
+        num_messages = rospy.get_param('/num_messages')
+        num_messages += 2
+        rospy.set_param('/num_messages', num_messages)
+
+
     # check for auction_req.auction_data.command (if close_auction -> clear role assignment
     if auction_req.auction_data.command == 'close_auction':
-        role_assigned = False
-
+        auction_req.role = 'none'
+        
         # Calculates its own bid offer for the item in auction_req
-        return {'response_info': 'invalid_bid'}
+        #return {'response_info': 'invalid_bid'}
 
     elif auction_req.auction_data.command == 'join_auction':         
         
@@ -45,9 +52,16 @@ def handle_auction_server_callback(auction_req):
         
         # Change sending_node in auction_req to be sent to neighbour nodes
         auction_req.sending_node = rospy.get_name()
-        # Change nodes_collected in auction_req to be sent to neighbour nodes
-        auction_req.nodes_collected = rospy.get_param('~neighbour_nodes_list')          
-        # Change the role in auction_req to be sent to neighbour nodes
+
+
+        # updated nodes_collected
+        if rospy.has_param('/nodes_collected'):
+            auction_req.nodes_collected = rospy.get_param('/nodes_collected')+','+rospy.get_name()
+            rospy.set_param('/nodes_collected',auction_req.nodes_collected)
+        else:
+            auction_req.nodes_collected = rospy.get_param('~neighbour_nodes_list')
+
+
         auction_req.role = "be_buyer"
             
         # Call the Auction Service from each neighbour node

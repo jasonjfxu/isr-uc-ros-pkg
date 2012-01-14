@@ -53,6 +53,14 @@ def handle_auctioneer_server_callback(auction_req):
     global winner_id
     global winner_cost    
     
+
+    # update number of messages in parameter server
+    if rospy.has_param('/num_messages'):
+        num_messages = rospy.get_param('/num_messages')
+        num_messages += 2
+        rospy.set_param('/num_messages', num_messages)
+        
+
     # obtain auctioneer_position
     auctioneer_position = {'auctioneer_position': rospy.get_param('~position')}
     
@@ -60,12 +68,24 @@ def handle_auctioneer_server_callback(auction_req):
     neighbour_nodes_relay_list = auction_common.create_neighbour_nodes_list(auction_req)        
     
     # Prepare auction information
-    role = "be_buyer"
+    if auction_req.auction_data.command == 'join_auction':
+        role = "be_buyer"
+    else:
+        role = 'none'
+
     auction_type = 'k-sap'
     sending_node = rospy.get_name()
         
     auctioneer_node = rospy.get_name()
-    nodes_collected = rospy.get_param('~neighbour_nodes_list')
+
+    # updated nodes_collected
+    if rospy.has_param('/nodes_collected'):
+        nodes_collected = rospy.get_param('/nodes_collected')+','+rospy.get_name()
+        rospy.set_param('/nodes_collected',nodes_collected)
+    else:
+        nodes_collected = rospy.get_param('~neighbour_nodes_list')
+    
+
     auction_data = auction_req.auction_data
         
             
@@ -101,9 +121,6 @@ def handle_auctioneer_server_callback(auction_req):
                 
     # verbose for auction status (received all the bids)
     rospy.loginfo("winner was: %s with offer %d",winner_id, winner_cost)
-
-    
-    # may need to sleep, to give time for bidders to put their offers
 
         
     return{'response_info': 'valid','winner_id': winner_id,'winner_cost': winner_cost}
