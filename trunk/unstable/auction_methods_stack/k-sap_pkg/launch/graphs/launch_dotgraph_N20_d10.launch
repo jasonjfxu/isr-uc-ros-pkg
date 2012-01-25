@@ -1,4 +1,10 @@
 <launch>
+	<master auto="start"/>	
+	<param name="/use_sim_time" value="false"/>
+
+	# parameter graph_info = ['N','l','d']
+	<param name="graph_info" value="['10','100','4']"/>
+
 	<node pkg="k-sap_pkg" type="node.py" name="node_1" output="screen">
 		<param name="position" value="['68.2300090854','49.5986535525','0']"/>
 		<param name="neighbour_nodes_list" value="/node_19,/node_9,/node_8,/node_6,/node_15,/node_18,/node_3,/node_2,/node_11,/node_10,/node_16,/node_12"/>

@@ -1,4 +1,8 @@
 <launch>
+	<master auto="start"/>	
+	<param name="/use_sim_time" value="false"/>
+
+
 	<node pkg="saap_pkg" type="node.py" name="node_1" output="screen">
 		<param name="position" value="['87.1913601186','98.3692893685','0']"/>
 		<param name="neighbour_nodes_list" value="/node_31,/node_4,/node_3,/node_2,/node_10,/node_42,/node_43,/node_21"/>

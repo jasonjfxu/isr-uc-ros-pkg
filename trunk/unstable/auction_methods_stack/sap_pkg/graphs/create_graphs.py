@@ -10,7 +10,8 @@ d0 = 1
 
 # iterate to create 28 scenarios (combining N = 10,20,50,100 with d=4,5,6,7,8,9,10)
 for N in [10,20,50,100]:
-    for d in range(4,11):        
+#    for d in range(4,11):        
+    for d in range(6,7):
 
         S,p,graph = min_dpa.min_dpa(N,d,l,d0)
 
