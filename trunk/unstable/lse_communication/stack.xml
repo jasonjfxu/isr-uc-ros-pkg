@@ -1,7 +1,7 @@
 <stack>
   <description brief="lse_communication">
   
-  	Communication stack holding some useful tools for serial port communication, CerealPort, as well as a package for communication between robots, WifiComm.
+  	Communication stack holding a package for communication between robots, WifiComm, used at the LSE.
   
   </description>
   <author>Gonçalo Cabrita and Pedro Sousa</author>
