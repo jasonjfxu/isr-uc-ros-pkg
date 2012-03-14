@@ -94,10 +94,10 @@ namespace Xsens
 		float compass_y() { return magY; }
 		float compass_z() { return magZ; }
 		float temperature() { return temp; }
-		float quaternion_x() {return q0; }
-		float quaternion_y() { return q1; }
-		float quaternion_z() { return q2; }
-		float quaternion_w() { return q3; }
+		float quaternion_x() {return q1; }
+		float quaternion_y() { return q2; }
+		float quaternion_z() { return q3; }
+		float quaternion_w() { return q0; }
 		float roll() { return eroll; }
 		float pitch() { return epitch; }
 		float yaw() { return eyaw; }
