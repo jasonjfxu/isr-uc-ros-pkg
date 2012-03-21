@@ -1,5 +1,5 @@
 define hokuyo laser(
-  	range_max 2.0
+  	range_max 2.6
   	fov 270.25
   	samples 1081  
   	
