@@ -1,0 +1,21 @@
+<package>
+  <description brief="pole_structure_mapper">
+
+     This package contains two nodes for pole extraction and mapping for aiding 3D climbing robots in navigation and localization.
+
+  </description>
+  <author>Gonçalo Cabrita and Mahmoud Tavakoli</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/pole_structure_mapper</url>
+  <depend package="roscpp"/>
+  <depend package="ar_pose"/>
+  <depend package="pcl"/>
+  <depend package="pcl_ros"/>
+  <depend package="tf"/>
+  <depend package="geometry_msgs"/>
+  <depend package="std_msgs" />
+
+</package>
+
+

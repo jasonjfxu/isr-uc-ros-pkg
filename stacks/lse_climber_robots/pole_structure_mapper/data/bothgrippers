@@ -1,0 +1,14 @@
+#the number of patterns to be recognized
+2
+
+#pattern 1
+U
+data/patt.uppergripper
+175.0
+0.0 0.0
+
+#pattern 2
+L
+data/patt.lowergripper
+175.0
+0.0 0.0

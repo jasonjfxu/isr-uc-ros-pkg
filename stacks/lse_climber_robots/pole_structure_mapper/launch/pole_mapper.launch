@@ -1,0 +1,9 @@
+<launch>
+	<node name="pole_structure_mapper" pkg="pole_structure_mapper" type="pole_structure_mapper_node" respawn="false" output="screen">
+		<param name="diameter_threshold" type="double" value="0.10"/>
+		<param name="axis_threshold" type="double" value="20.0"/>
+		<param name="distance_threshold" type="double" value="0.5"/>
+		<param name="length_threshold" type="double" value="0.60"/>
+	</node>
+
+</launch>
