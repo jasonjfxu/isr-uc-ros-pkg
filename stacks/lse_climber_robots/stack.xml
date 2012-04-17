@@ -1,0 +1,13 @@
+<stack>
+  <description brief="lse_climber_robots">
+	This stacks holds the LSE software related to climbing robots.
+  </description>
+  <author>Maintained by Gonçalo Cabrita and Mahmoud Tavakoli</author>
+  <license>BSD</license>  
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/lse_climber_robots</url>
+  <depend stack="ros" />
+  <depend stack="ccny_vision" />
+  <depend stack="perception_pcl" />
+
+</stack>
