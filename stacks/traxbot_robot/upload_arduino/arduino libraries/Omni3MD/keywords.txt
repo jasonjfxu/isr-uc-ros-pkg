@@ -1,0 +1,49 @@
+#######################################
+# Syntax Coloring Map for Omni3MD
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+Omni3MD	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+i2c_connect KEYWORD2
+calibrate_omni KEYWORD2
+set_i2c_timeout KEYWORD2
+set_i2c_address KEYWORD2
+set_way KEYWORD2
+set_PID KEYWORD2
+set_prescaler KEYWORD2
+set_enc_value KEYWORD2
+
+mov_omni_pid KEYWORD2
+mov_omni_nopid KEYWORD2
+mov_lin3M_pid KEYWORD2
+mov_lin3M_nopid KEYWORD2
+mov_lin1M_pid KEYWORD2
+mov_lin1M_nopid KEYWORD2
+mov_incremental KEYWORD2
+stopMotors KEYWORD2
+
+read_temperature KEYWORD2
+read_battery KEYWORD2
+read_firmware KEYWORD2
+read_control_rate KEYWORD2
+read_enc_lim1  KEYWORD2
+read_enc_lim2  KEYWORD2
+read_enc_lim3  KEYWORD2
+read_enc_max1  KEYWORD2
+read_enc_max2  KEYWORD2
+read_enc_max3  KEYWORD2
+read_enc1 KEYWORD2
+read_enc2 KEYWORD2
+read_enc3 KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+
