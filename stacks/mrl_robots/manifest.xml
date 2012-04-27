@@ -1,0 +1,23 @@
+<package>
+  <description brief="traxbot">
+
+     Driver to control traxbot robot on ROS,  developed in ISR - Coimbra
+ 
+  </description>
+  <author>André Gonçalves Araújo</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/traxbot</url>
+  <depend package="std_msgs"/>
+  <depend package="nav_msgs"/>
+  <depend package="geometry_msgs"/>
+  <depend package="sensor_msgs"/>
+  <depend package="roscpp"/>
+  <depend package="tf"/>
+  <depend package="roslib"/>
+  <depend package="rosserial_arduino" />
+    
+
+</package>
+
+
