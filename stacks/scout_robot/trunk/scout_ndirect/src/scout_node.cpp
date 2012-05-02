@@ -119,9 +119,9 @@ int main(int argc, char** argv)
 
 		//ROS_INFO("Error: %d", State[STATE_ERROR]);
 		
-		float odom_x = State[STATE_CONF_X]*10*INCH_TO_METER;
-		float odom_y = State[STATE_CONF_Y]*10*INCH_TO_METER;
-		float odom_yaw = State[STATE_CONF_STEER]*10*DEGREE_TO_RADIAN;
+        float odom_x = State[STATE_CONF_X]*INCH_TO_METER/10.0;
+        float odom_y = State[STATE_CONF_Y]*INCH_TO_METER/10.0;
+        float odom_yaw = State[STATE_CONF_STEER]*DEGREE_TO_RADIAN/10.0;
 		
 		//since all odometry is 6DOF we'll need a quaternion created from yaw
 		geometry_msgs::Quaternion odom_quat = tf::createQuaternionMsgFromYaw(odom_yaw);
