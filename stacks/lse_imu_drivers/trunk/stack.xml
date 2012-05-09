@@ -1,0 +1,12 @@
+<stack>
+  <description brief="lse_imu_drivers">
+  	This stack contains drivers for IMUs. Currently it only has support for the Xsens MTi.
+  </description>
+  <author>Gonçalo Cabrita</author>
+  <license>BSD</license>  
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/lse_imu_drivers</url>
+  <depend stack="ros" />	<!-- roscpp -->
+  <depend stack="lse_communication" />	<!-- cereal_port -->
+
+</stack>
