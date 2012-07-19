@@ -1,0 +1,11 @@
+<stack>
+  <description brief="robchair_robot">
+  	This is the stack of the RobChair robot, the robotic wheelchair from ISR University of Coimbra.
+  </description>
+  <author>Maintained by Gonçalo Cabrita</author>
+  <license>BSD</license>  
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/robchair_robot</url>
+  <depend stack="ros" />
+
+</stack>
