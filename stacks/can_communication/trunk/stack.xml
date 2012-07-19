@@ -1,0 +1,14 @@
+<stack>
+  <description brief="can_communication">
+	
+	This stack is intended to provide an abstraction layer for a CAN bus in ROS.
+	One of the main features is the can_usb_adapters pkg which holds hardware drivers for multiple CAN USB adapters, allowing you to switch adapters while keeping your ROS CAN code working.
+	
+  </description>
+  <author>Maintained by Gonçalo Cabrita</author>
+  <license>BSD</license>  
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/can_communication</url>
+  <depend stack="ros" />
+
+</stack>
