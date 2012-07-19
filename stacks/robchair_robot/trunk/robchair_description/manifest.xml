@@ -1,0 +1,12 @@
+<package>
+  <description brief=""mox_sensor_speed"robchair_description">
+
+     Description files for the RobChair robot, the smart wheelchair from the ISR UC.
+
+  </description>
+  <author>Gonçalo Cabrita</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/robchair_description</url>
+
+</package>
