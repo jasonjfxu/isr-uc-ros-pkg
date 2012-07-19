@@ -1,0 +1,17 @@
+<package>
+  <description brief="robchair_driver">
+
+     Hardware driver for the RobChair robot, the smart wheelchair from the ISR UC.
+
+  </description>
+  <author>Gonçalo Cabrita</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/robchair_driver</url>
+  <depend package="roscpp"/>
+  <depend package="can_msgs"/>
+  <depend package="tf"/>
+  <depend package="nav_msgs"/>
+  <depend package="geometry_msgs"/>
+
+</package>
