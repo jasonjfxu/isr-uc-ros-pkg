@@ -1,0 +1,19 @@
+<package>
+  <description brief="canopen">
+
+     This package holds a can open library for ROS.
+
+  </description>
+  <author>Gonçalo Cabrita</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/canopen</url>
+  <export>
+    <cpp cflags="-I${prefix}/include" lflags="-L${prefix}/lib -Wl,-rpath,${prefix}/lib -lcanopen"/>
+  </export>
+  <depend package="roscpp"/>
+  <depend package="can_msgs"/>
+
+</package>
+
+
