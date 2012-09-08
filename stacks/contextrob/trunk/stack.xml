@@ -1,0 +1,9 @@
+<stack>
+  <description brief="trunk">trunk</description>
+  <author>Maintained by Joao Quintas</author>
+  <license></license>  
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/trunk</url>
+  <depend stack="ros" />
+
+</stack>
