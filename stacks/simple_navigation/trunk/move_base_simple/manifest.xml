@@ -1,0 +1,16 @@
+<package>
+    <description brief="move_base_simple">move_base_simple</description>
+    <author>Gonçalo Cabrita</author>
+    <license>BSD</license>  
+    <review status="unreviewed" notes=""/>
+    <url>http://ros.org/wiki/move_base_simple</url>
+    <depend package="roscpp"/>
+    <depend package="geometry_msgs"/>
+    <depend package="nav_msgs"/>
+    <depend package="tf"/>
+    <depend package="message_filters"/>
+    <depend package="move_base_msgs"/>
+    <depend package="actionlib"/>
+    <depend package="angles"/>
+    <depend package="visualization_msgs"/>
+</package>
