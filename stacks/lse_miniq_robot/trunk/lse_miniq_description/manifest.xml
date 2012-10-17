@@ -1,0 +1,12 @@
+<package>
+  <description brief="lse_robchair_description">
+
+     Description files for the LSE miniQ robot.
+
+  </description>
+  <author>Gonçalo Cabrita</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/lse_miniq_description</url>
+
+</package>
