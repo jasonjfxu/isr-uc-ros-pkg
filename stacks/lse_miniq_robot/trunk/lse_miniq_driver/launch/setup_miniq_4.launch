@@ -1,0 +1,35 @@
+<launch>
+
+    <node name="setup_miniq" pkg="lse_miniq_driver" type="setup_miniq" output="screen">
+
+		<param name="port" value="/dev/ttyUSB0" />
+		<param name="baudrate" value="57600" />
+
+		<param name="mode" value="0" />
+	
+		<param name="starting_l_kp" value="250" />
+   		<param name="starting_l_ki" value="0" />
+		<param name="starting_l_kd" value="0" />
+
+		<param name="running_l_kp" value="140" />
+   		<param name="running_l_ki" value="25" />
+		<param name="running_l_kd" value="10" />
+
+		<param name="starting_r_kp" value="250" />
+   		<param name="starting_r_ki" value="0" />
+		<param name="starting_r_kd" value="0" />
+
+		<param name="running_r_kp" value="140" />
+   		<param name="running_r_ki" value="25" />
+		<param name="running_r_kd" value="10" />
+
+    	<param name="battery_type" value="0" />
+
+		<param name="odometry_d" type="double" value="0.0" />
+		<param name="odometry_yaw" type="double" value="0.0" />
+
+		<param name="a" type="double" value="0.0" />
+		<param name="b" type="double" value="0.0" />
+    </node>
+
+</launch>
