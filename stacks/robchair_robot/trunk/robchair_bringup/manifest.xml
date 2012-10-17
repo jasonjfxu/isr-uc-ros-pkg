@@ -1,5 +1,5 @@
 <package>
-  <description brief=""mox_sensor_speed"robchair_bringup">
+  <description brief="robchair_bringup">
 
      This package holds all the files required to start the RobChair robot, the smart wheelchair from the ISR UC.
 
