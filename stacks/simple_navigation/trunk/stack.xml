@@ -1,0 +1,9 @@
+<stack>
+  <description brief="simple_navigation">simple_navigation</description>
+  <author>Maintained by Gonçalo Cabrita</author>
+  <license>BSD</license>  
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/simple_navigation</url>
+  <depend stack="ros" />
+
+</stack>
