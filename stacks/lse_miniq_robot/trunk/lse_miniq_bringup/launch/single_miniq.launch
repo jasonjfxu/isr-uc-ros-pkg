@@ -1,0 +1,22 @@
+<launch>
+
+    <!-- Run the miniQ node -->
+    <node name="miniq_node" pkg="lse_miniq_driver" type="single_miniq_node" output="screen"></node>
+
+    <!-- The robot urdf for visualization -->
+    <param name="robot_description" command="$(find xacro)/xacro.py $(find lse_miniq_description)/urdf/miniq.urdf" />
+    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
+
+    <!-- Run simple navigation -->
+    <node name="move_base_simple" pkg="move_base_simple" type="move_base_simple" output="screen">
+		<param name="in_place_angular_velocity" type="double" value="3.0" />
+   		<param name="max_linear_velocity" type="double" value="0.2" />
+		<param name="min_linear_velocity" type="double" value="0.05" />
+		<param name="alpha" type="double" value="0.5" />
+    	<param name="attraction_coefficient" type="double" value="0.8" />
+		<param name="goal_tolerance" type="double" value="0.10" />
+		<param name="angular_threshold" type="double" value="0.4" />
+    </node>
+
+</launch>
