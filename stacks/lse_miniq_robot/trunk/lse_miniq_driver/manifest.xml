@@ -1,0 +1,21 @@
+<package>
+  <description brief="lse_miniq_driver">
+
+     Hardware driver for the LSE miniQ robot.
+
+  </description>
+  <author>Gonçalo Cabrita</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/lse_miniq_driver</url>
+  <depend package="roscpp"/>
+  <depend package="rospy"/>
+  <depend package="tf"/>
+  <depend package="nav_msgs"/>
+  <depend package="geometry_msgs"/>
+  <depend package="cereal_port"/>
+  <depend package="lse_sensor_msgs"/>
+  <depend package="dynamic_reconfigure"/>
+  <depend package="miniq_msgs"/>
+
+</package>
