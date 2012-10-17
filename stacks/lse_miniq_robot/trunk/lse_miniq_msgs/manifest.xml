@@ -1,0 +1,15 @@
+<package>
+  <description brief="lse_miniq_msgs">
+
+     This package contains messages used by the LSE miniQ stack.
+
+  </description>
+  <author>Gonçalo Cabrita</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/lse_miniq_msgs</url>
+  <depend package="roscpp"/>
+
+</package>
+
+
