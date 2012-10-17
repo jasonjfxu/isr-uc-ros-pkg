@@ -65,7 +65,7 @@ void canopen::CANopenMotorDriver::receivedCANframe(const can_msgs::CANFrame::Con
     ROS_INFO("Got a CANFrame!!!");
     
     // If this message is not intended for this axis return
-    if(msg->cob_id & ID_MASK != id_) return;
+    if(msg->id & ID_MASK != id_) return;
 }
 
 
@@ -118,7 +118,7 @@ void canopen::CANopenMotorDriver::startNode()
     
     can_msgs::CANFrame frame;
     frame.stamp = ros::Time::now();
-    frame.cob_id = COB_NMT_SERVICE;
+    frame.id = COB_NMT_SERVICE;
     frame.data.resize(2);
     frame.data[0] = 0x01;
     frame.data[1] = id_;
@@ -131,7 +131,7 @@ void canopen::CANopenMotorDriver::readyToSwitchOn()
     
     can_msgs::CANFrame frame;
     frame.stamp = ros::Time::now();
-    frame.cob_id = COB_R_PDO1+id_;
+    frame.id = COB_R_PDO1+id_;
     frame.data.resize(2);
     frame.data[0] = 0x06;
     frame.data[1] = 0x00;
@@ -144,7 +144,7 @@ void canopen::CANopenMotorDriver::switchOn()
     
     can_msgs::CANFrame frame;
     frame.stamp = ros::Time::now();
-    frame.cob_id = COB_R_PDO1+id_;
+    frame.id = COB_R_PDO1+id_;
     frame.data.resize(2);
     frame.data[0] = 0x07;
     frame.data[1] = 0x00;
@@ -157,7 +157,7 @@ void canopen::CANopenMotorDriver::enableOperation()
     
     can_msgs::CANFrame frame;
     frame.stamp = ros::Time::now();
-    frame.cob_id = COB_R_PDO1+id_;
+    frame.id = COB_R_PDO1+id_;
     frame.data.resize(2);
     frame.data[0] = 0x0F;
     frame.data[1] = 0x00;
@@ -170,7 +170,7 @@ void canopen::CANopenMotorDriver::run()
     
     can_msgs::CANFrame frame;
     frame.stamp = ros::Time::now();
-    frame.cob_id = COB_R_PDO1+id_;
+    frame.id = COB_R_PDO1+id_;
     frame.data.resize(2);
     frame.data[0] = 0x1F;
     frame.data[1] = 0x00;
@@ -191,7 +191,7 @@ void canopen::CANopenMotorDriver::setupHomingMode(canopen::HomingMethod method, 
     
     // Homing speed during search for switch
     frame.stamp = ros::Time::now();
-    frame.cob_id = COB_R_SDO+id_;
+    frame.id = COB_R_SDO+id_;
     frame.data.resize(8);
     frame.data[0] = WRITE_REQUEST_4BYTE;
     frame.data[1] = 0x99;
@@ -209,7 +209,7 @@ void canopen::CANopenMotorDriver::setupHomingMode(canopen::HomingMethod method, 
     
     // Homing speed during search for index
     frame.stamp = ros::Time::now();
-    frame.cob_id = COB_R_SDO+id_;
+    frame.id = COB_R_SDO+id_;
     frame.data.resize(8);
     frame.data[0] = WRITE_REQUEST_4BYTE;
     frame.data[1] = 0x99;
@@ -227,7 +227,7 @@ void canopen::CANopenMotorDriver::setupHomingMode(canopen::HomingMethod method, 
     
     // Homing acceleration
     frame.stamp = ros::Time::now();
-    frame.cob_id = COB_R_SDO+id_;
+    frame.id = COB_R_SDO+id_;
     frame.data.resize(8);
     frame.data[0] = WRITE_REQUEST_4BYTE;
     frame.data[1] = 0x9A;
@@ -241,7 +241,7 @@ void canopen::CANopenMotorDriver::setupHomingMode(canopen::HomingMethod method, 
     
     // Homing method
     frame.stamp = ros::Time::now();
-    frame.cob_id = COB_R_SDO+id_;
+    frame.id = COB_R_SDO+id_;
     frame.data.resize(8);
     frame.data[0] = WRITE_REQUEST_1BYTE;
     frame.data[1] = 0x98;
@@ -255,7 +255,7 @@ void canopen::CANopenMotorDriver::setupHomingMode(canopen::HomingMethod method, 
     
     // Mode of operation - homing mode
     frame.stamp = ros::Time::now();
-    frame.cob_id = COB_R_SDO+id_;
+    frame.id = COB_R_SDO+id_;
     frame.data.resize(8);
     frame.data[0] = WRITE_REQUEST_1BYTE;
     frame.data[1] = 0x60;
@@ -280,7 +280,7 @@ void canopen::CANopenMotorDriver::setupPositionTrapezoidalProfileMode(double tar
     
     // Mode of operation - position mode
     frame.stamp = ros::Time::now();
-    frame.cob_id = COB_R_SDO+id_;
+    frame.id = COB_R_SDO+id_;
     frame.data.resize(8);
     frame.data[0] = WRITE_REQUEST_1BYTE;
     frame.data[1] = 0x60;
@@ -294,7 +294,7 @@ void canopen::CANopenMotorDriver::setupPositionTrapezoidalProfileMode(double tar
     
     // Motion profile type -  trapezoidal
     frame.stamp = ros::Time::now();
-    frame.cob_id = COB_R_SDO+id_;
+    frame.id = COB_R_SDO+id_;
     frame.data.resize(8);
     frame.data[0] = WRITE_REQUEST_2BYTE;
     frame.data[1] = 0x86;
@@ -310,7 +310,7 @@ void canopen::CANopenMotorDriver::setupPositionTrapezoidalProfileMode(double tar
     
     // Target speed
     frame.stamp = ros::Time::now();
-    frame.cob_id = COB_R_SDO+id_;
+    frame.id = COB_R_SDO+id_;
     frame.data.resize(8);
     frame.data[0] = WRITE_REQUEST_4BYTE;
     frame.data[1] = 0x81;
@@ -326,7 +326,7 @@ void canopen::CANopenMotorDriver::setupPositionTrapezoidalProfileMode(double tar
     
     // Profile acceleration
     frame.stamp = ros::Time::now();
-    frame.cob_id = COB_R_SDO+id_;
+    frame.id = COB_R_SDO+id_;
     frame.data.resize(8);
     frame.data[0] = WRITE_REQUEST_4BYTE;
     frame.data[1] = 0x83;
@@ -342,7 +342,7 @@ void canopen::CANopenMotorDriver::setupPositionTrapezoidalProfileMode(double tar
     
     // Target position
     frame.stamp = ros::Time::now();
-    frame.cob_id = COB_R_SDO+id_;
+    frame.id = COB_R_SDO+id_;
     frame.data.resize(8);
     frame.data[0] = WRITE_REQUEST_4BYTE;
     frame.data[1] = 0x7A;
@@ -363,7 +363,7 @@ void canopen::CANopenMotorDriver::setQuickStopDeceleration(double deceleration)
     
     // Quick deceleration
     frame.stamp = ros::Time::now();
-    frame.cob_id = COB_R_SDO+id_;
+    frame.id = COB_R_SDO+id_;
     frame.data.resize(8);
     frame.data[0] = WRITE_REQUEST_4BYTE;
     frame.data[1] = 0x85;
@@ -386,7 +386,7 @@ void canopen::CANopenMotorDriver::setupVelocityProfileMode(double target_speed, 
     
     // Mode of operation - velocity mode
     frame.stamp = ros::Time::now();
-    frame.cob_id = COB_R_SDO+id_;
+    frame.id = COB_R_SDO+id_;
     frame.data.resize(8);
     frame.data[0] = WRITE_REQUEST_1BYTE;
     frame.data[1] = 0x60;
@@ -402,7 +402,7 @@ void canopen::CANopenMotorDriver::setupVelocityProfileMode(double target_speed, 
     
     // Target speed
     frame.stamp = ros::Time::now();
-    frame.cob_id = COB_R_SDO+id_;
+    frame.id = COB_R_SDO+id_;
     frame.data.resize(8);
     frame.data[0] = WRITE_REQUEST_4BYTE;
     frame.data[1] = 0xFF;
@@ -418,7 +418,7 @@ void canopen::CANopenMotorDriver::setupVelocityProfileMode(double target_speed, 
     
     // Profile acceleration
     frame.stamp = ros::Time::now();
-    frame.cob_id = COB_R_SDO+id_;
+    frame.id = COB_R_SDO+id_;
     frame.data.resize(8);
     frame.data[0] = WRITE_REQUEST_4BYTE;
     frame.data[1] = 0x83;
