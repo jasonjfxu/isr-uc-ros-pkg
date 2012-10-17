@@ -1,0 +1,11 @@
+<stack>
+  <description brief="lse_miniq_robot">
+  	This is the stack of the DFRobot miniQ robot hacked by the guys at the Embedded Systems Lab, ISR University of Coimbra for mobile robot olfaction.
+  </description>
+  <author>Maintained by Gonçalo Cabrita</author>
+  <license>BSD</license>  
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/lse_miniq_robot</url>
+  <depend stack="ros" />
+
+</stack>
