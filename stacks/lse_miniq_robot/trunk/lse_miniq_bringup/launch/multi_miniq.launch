@@ -1,0 +1,39 @@
+<launch>
+
+    <!-- Define a list of miniQ ids -->
+    <rosparam param="list_of_ids">[1, 2]</rosparam>
+
+    <!-- Run the miniQ node -->
+    <node name="miniq_node" pkg="lse_miniq_driver" type="multi_miniq_node" output="screen"></node>
+	
+    <group ns="robot_1">
+	    <param name="tf_prefix" value="robot_1" />	
+
+	    <!-- The robot urdf for visualization -->
+	    <param name="robot_description" command="$(find xacro)/xacro.py $(find lse_miniq_description)/urdf/miniq.urdf" />
+	    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+	    <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
+
+	    <!-- Run simple navigation for robot 1 -->
+	    <node name="move_base_simple" pkg="move_base_simple" type="multi_move_base_simple" output="screen">
+			<param name="my_id" type="int" value="1" />
+			<rosparam file="$(find lse_miniq_bringup)/settings/navigation.yaml" command="load" />
+	    </node>
+    </group>
+
+    <group ns="robot_2">
+ 	    <param name="tf_prefix" value="robot_2" />
+
+	    <!-- The robot urdf for visualization -->
+	    <param name="robot_description" command="$(find xacro)/xacro.py $(find lse_miniq_description)/urdf/miniq.urdf" />
+	    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+	    <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
+
+	    <!-- Run simple navigation for robot 2 -->
+	    <node name="move_base_simple" pkg="move_base_simple" type="multi_move_base_simple" output="screen">
+			<param name="my_id" type="int" value="2" />
+			<rosparam file="$(find lse_miniq_bringup)/settings/navigation.yaml" command="load" />
+	    </node>
+    </group>
+
+</launch>

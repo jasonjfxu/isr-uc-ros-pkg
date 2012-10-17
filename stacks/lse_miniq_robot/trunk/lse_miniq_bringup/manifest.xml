@@ -1,0 +1,12 @@
+<package>
+  <description brief="lse_miniq_bringup">
+
+     This package holds all the files required to start the LSE miniQ robot in single and multi-robot mode.
+
+  </description>
+  <author>Gonçalo Cabrita</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/lse_miniq_bringup</url>
+
+</package>
