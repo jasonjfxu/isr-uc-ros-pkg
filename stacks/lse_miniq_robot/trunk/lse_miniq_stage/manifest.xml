@@ -1,0 +1,14 @@
+<package>
+  <description brief="lse_miniq_stage">
+
+     This package contains ROS launch files and Stage world files for starting miniQ robots in simulation.
+
+  </description>
+  <author>Gonçalo Cabrita</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/lse_miniq_stage</url>
+
+</package>
+
+
