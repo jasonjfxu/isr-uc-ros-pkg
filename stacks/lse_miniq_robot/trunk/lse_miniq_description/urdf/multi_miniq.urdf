@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<robot name="miniq" params="id">
+    
+    <link name="/robot_${id}/base_link">
+        <visual>
+            <geometry>
+                <cylinder length="0.002" radius="0.061"/>
+            </geometry>
+            <material name="white">
+                <color rgba="1 1 1 1"/>
+            </material>
+        </visual>
+    </link>
+
+    <joint name="left_wheel_joint" type="fixed">
+        <parent link="/robot_${id}/base_link"/>
+        <child link="/robot_${id}/left_wheel"/>
+        <origin xyz="0 0.042 0" rpy="1.57079633 0 0"/>
+    </joint>
+
+    <link name="/robot_${id}/left_wheel">
+        <visual>
+            <geometry>
+                <cylinder length="0.02" radius="0.021"/>
+            </geometry>
+            <material name="black">
+                <color rgba="0 0 0 1"/>
+            </material>
+        </visual>
+    </link>
+
+    <joint name="right_wheel_joint" type="fixed">
+        <parent link="/robot_${id}/base_link"/>
+        <child link="/robot_${id}/right_wheel"/>
+        <origin xyz="0 -0.042 0" rpy="-1.57079633 0 0"/>
+    </joint>
+
+    <link name="/robot_${id}/right_wheel">
+        <visual>
+            <geometry>
+                <cylinder length="0.02" radius="0.021"/>
+            </geometry>
+            <material name="black">
+                <color rgba="0 0 0 1"/>
+            </material>
+        </visual>
+    </link>
+    
+</robot>
