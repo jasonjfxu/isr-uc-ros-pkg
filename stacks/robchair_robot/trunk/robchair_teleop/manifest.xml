@@ -1,5 +1,5 @@
 <package>
-  <description brief=""mox_sensor_speed"robchair_teleop">
+  <description brief="robchair_teleop">
 
      Teleoperation stack for the RobChair robot, the smart wheelchair from the ISR UC.
 
