@@ -61,7 +61,7 @@ bool run_robot;
 bool wheel_velocity_reference_updated;
 double wheel_velocity_reference;
 
-void callback(miniq_driver::miniQConfig &config, uint32_t level)
+void callback(lse_miniq_driver::miniQConfig &config, uint32_t level)
 {
 	if(run_robot != config.run_robot && !config.run_robot) turn_robot_off = true;
 	else turn_robot_off = false;
@@ -119,8 +119,8 @@ int main(int argc, char **argv)
   int baudrate;
   pn.param("baudrate", baudrate, 57600);
 	
-  ros::Publisher left_pub = n.advertise<miniq_msgs::WheelVelocity>("/left_wheel_velocity", 20);
-  ros::Publisher right_pub = n.advertise<miniq_msgs::WheelVelocity>("/right_wheel_velocity", 20);
+  ros::Publisher left_pub = n.advertise<lse_miniq_msgs::WheelVelocity>("/left_wheel_velocity", 20);
+  ros::Publisher right_pub = n.advertise<lse_miniq_msgs::WheelVelocity>("/right_wheel_velocity", 20);
     
   if(!miniQ::openPort((char*)port.c_str(), baudrate))
   {
@@ -137,8 +137,8 @@ int main(int argc, char **argv)
 	ROS_BREAK();
   }
 
-  dynamic_reconfigure::Server<miniq_driver::miniQConfig> server;
-  dynamic_reconfigure::Server<miniq_driver::miniQConfig>::CallbackType f;
+  dynamic_reconfigure::Server<lse_miniq_driver::miniQConfig> server;
+  dynamic_reconfigure::Server<lse_miniq_driver::miniQConfig>::CallbackType f;
 
   f = boost::bind(&callback, _1, _2);
   server.setCallback(f);
@@ -151,12 +151,12 @@ int main(int argc, char **argv)
 	if(!robot.updateWheelVelocities()) ROS_ERROR("miniQ PID Server -- Failed to update the miniQ wheel velocities!!!");
 	else
 	{
-		miniq_msgs::WheelVelocity right_msg;
+		lse_miniq_msgs::WheelVelocity right_msg;
 		right_msg.reference = wheel_velocity_reference;
 		right_msg.measured = robot.getRightWheelVelocity();
 		right_pub.publish(right_msg);
 
-		miniq_msgs::WheelVelocity left_msg;
+		lse_miniq_msgs::WheelVelocity left_msg;
 		left_msg.reference = wheel_velocity_reference;
 		left_msg.measured = robot.getLeftWheelVelocity();
 		left_pub.publish(left_msg);
