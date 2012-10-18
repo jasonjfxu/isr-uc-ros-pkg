@@ -38,7 +38,7 @@
 #include <ros/ros.h>
 
 #include <dynamic_reconfigure/server.h>
-#include <miniq_driver/miniQConfig.h>
+#include <lse_miniq_driver/miniQConfig.h>
 
 #include <lse_miniq_msgs/WheelVelocity.h>
 #include "miniQ.h"
