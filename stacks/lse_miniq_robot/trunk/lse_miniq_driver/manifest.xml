@@ -16,6 +16,6 @@
   <depend package="cereal_port"/>
   <depend package="lse_sensor_msgs"/>
   <depend package="dynamic_reconfigure"/>
-  <depend package="miniq_msgs"/>
+  <depend package="lse_miniq_msgs"/>
 
 </package>
