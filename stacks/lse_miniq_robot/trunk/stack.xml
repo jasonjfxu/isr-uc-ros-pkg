@@ -8,6 +8,7 @@
   <url>http://ros.org/wiki/lse_miniq_robot</url>
   <depend stack="ros" />
   <depend stack="simple_navigation" />
+  <depend stack="lse_messages" />
   <depend stack="lse_resources" />
 
 </stack>
