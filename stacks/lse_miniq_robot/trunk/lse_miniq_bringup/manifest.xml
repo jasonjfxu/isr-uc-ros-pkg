@@ -9,6 +9,7 @@
   <review status="unreviewed" notes=""/>
   <url>http://ros.org/wiki/lse_miniq_bringup</url>
   <depend stack="lse_miniq_driver" />
+  <depend stack="lse_miniq_description" />
   <depend stack="move_base_simple" />
   <depend stack="isr_maps" />
 
