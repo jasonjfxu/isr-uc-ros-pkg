@@ -8,5 +8,7 @@
   <license>BSD</license>
   <review status="unreviewed" notes=""/>
   <url>http://ros.org/wiki/lse_miniq_description</url>
+  <depend stack="joint_state_publisher" />
+  <depend stack="robot_state_publisher" />
 
 </package>
