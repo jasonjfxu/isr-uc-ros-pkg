@@ -28,8 +28,8 @@
 		<param name="odometry_d" type="double" value="0.0" />
 		<param name="odometry_yaw" type="double" value="0.0" />
 
-		<param name="a" type="double" value="0.0" />
-		<param name="b" type="double" value="0.0" />
+		<param name="gas_a" type="double" value="0.0" />
+		<param name="gas_b" type="double" value="0.0" />
     </node>
 
 </launch>
