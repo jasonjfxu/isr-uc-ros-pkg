@@ -199,6 +199,7 @@ int main(int argc, char **argv)
 	{
 		wheel_velocity_reference_updated = false;
 		robot.setVelocities(wheel_velocity_reference, 0.0);
+        robot.updateVelocities();
 	}
 	
 	ros::spinOnce();

@@ -139,6 +139,15 @@ public:
     
     /*!
 	 *
+	 * \fn bool updateVelocities()
+	 * \brief This function pushes the velocities in memory to the robot.
+     * \return True if update was successful, false otherwise.
+	 *
+	 */
+    bool updateVelocities();
+    
+    /*!
+	 *
 	 * \fn double getPositionX()
 	 * \brief Getter for the robot x position.
      * \return The robot x position.
