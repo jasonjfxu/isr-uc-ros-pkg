@@ -137,6 +137,21 @@ bool miniQ::update()
     return true;
 }
 
+bool miniQ::updateVelocities()
+{
+    int linear_velocity_int = (int)(linear_velocity_*1000);
+    int angular_velocity_int = (int)(angular_velocity_*1000);
+    
+    char msg[MSG_LENGTH];
+    sprintf(msg, "@%d,%d,%d,%d,%de", id_, MQ_ACTION_DRIVE, linear_velocity_int, angular_velocity_int, 0);
+    
+    //ROS_INFO("Drive: %s", msg);
+    
+    serial_port.write(msg);
+    
+    return true;
+}
+
 void miniQ::setId(int id)
 {
     id_ = id;
