@@ -246,6 +246,47 @@ double calculateVelocities(double current_x, double current_y, double current_or
 	return delta_yaw;
 }
 
+void displayGoal(double goal_x, double goal_y)
+{
+	visualization_msgs::Marker goal_marker;
+	// Set the frame ID and timestamp.  See the TF tutorials for information on these.
+	goal_marker.header.frame_id = global_frame_id;
+	goal_marker.header.stamp = ros::Time::now();
+
+	// Set the namespace and id for this marker.  This serves to create a unique ID
+	// Any marker sent with the same namespace and id will overwrite the old one
+	goal_marker.ns = "goals";
+	goal_marker.id = robots[me].id;
+
+	// Set the marker type.  Initially this is CUBE, and cycles between that and SPHERE, ARROW, and CYLINDER
+	goal_marker.type = visualization_msgs::Marker::CYLINDER;
+
+	// Set the marker action.  Options are ADD and DELETE
+	goal_marker.action = visualization_msgs::Marker::ADD;
+
+	// Set the pose of the marker.  This is a full 6DOF pose relative to the frame/time specified in the header
+	goal_marker.pose.position.x = goal_x;
+	goal_marker.pose.position.y = goal_y;
+	goal_marker.pose.position.z = 0.0;
+	goal_marker.pose.orientation = tf::createQuaternionMsgFromYaw(0.0);
+
+	// Set the scale of the marker
+	goal_marker.scale.x = goal_tolerance*2.0;
+	goal_marker.scale.y = goal_tolerance*2.0;
+	goal_marker.scale.z = 0.01;
+
+	// Set the color -- be sure to set alpha to something non-zero!
+	goal_marker.color.r = 0.0f;
+	goal_marker.color.g = 1.0f;
+	goal_marker.color.b = 0.0f;
+	goal_marker.color.a = 0.5;
+
+	goal_marker.lifetime = ros::Duration();
+
+	// Publish the marker
+	marker_pub_ptr->publish(goal_marker);
+}
+
 void publishVelocities(double linear_velocity, double angular_velocity)
 {
 	// Send the new velocities to the robot...
@@ -275,6 +316,8 @@ void goalReceived(const geometry_msgs::PoseStamped::ConstPtr& msg)
     }
 
     geometry_msgs::PoseStamped goal = *msg;
+
+    displayGoal(goal.pose.position.x, goal.pose.position.y);
 
     state = SN_MOVING;
     distance_travelled = 0.0;
@@ -360,6 +403,8 @@ void asCallback(const move_base_msgs::MoveBaseGoalConstPtr& move_base_goal)
 	}
 
 	geometry_msgs::PoseStamped goal = move_base_goal->target_pose;
+
+	displayGoal(goal.pose.position.x, goal.pose.position.y);
     	
 	state = SN_MOVING_AS;
 	distance_travelled = 0.0;
