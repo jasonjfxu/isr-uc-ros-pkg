@@ -8,9 +8,9 @@
   <license>BSD</license>
   <review status="unreviewed" notes=""/>
   <url>http://ros.org/wiki/lse_miniq_bringup</url>
-  <depend stack="lse_miniq_driver" />
-  <depend stack="lse_miniq_description" />
-  <depend stack="move_base_simple" />
-  <depend stack="isr_maps" />
+  <depend package="lse_miniq_driver" />
+  <depend package="lse_miniq_description" />
+  <depend package="move_base_simple" />
+  <depend package="isr_maps" />
 
 </package>
