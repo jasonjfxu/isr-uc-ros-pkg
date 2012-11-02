@@ -30,6 +30,8 @@
 
 		<param name="gas_a" type="double" value="0.0" />
 		<param name="gas_b" type="double" value="0.0" />
+		
+		<param name="timeout" type="double" value="1.0" />
     </node>
 
 </launch>
