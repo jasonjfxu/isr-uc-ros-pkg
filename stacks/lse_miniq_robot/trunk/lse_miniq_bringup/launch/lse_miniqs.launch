@@ -1,0 +1,92 @@
+<launch>
+
+    <!-- Define a list of miniQ ids -->
+    <rosparam param="list_of_ids">[1, 2, 4, 5, 6]</rosparam>
+
+    <!-- Run the miniQ node -->
+    <node name="miniq_node" pkg="miniq_driver" type="multi_miniq_node" output="screen"></node>
+
+    <group ns="robot_1">
+	    <param name="tf_prefix" value="robot_1" />
+
+	    <!-- The robot urdf for visualization -->
+	    <param name="robot_description" command="$(find xacro)/xacro.py $(find miniq_description)/urdf/miniq.urdf" />
+	    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+	    <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
+
+	    <!-- Run simple navigation for robot 1 -->
+	    <node name="move_base_simple" pkg="move_base_simple" type="multi_move_base_simple" output="screen">
+		<param name="my_id" type="int" value="1" />
+		<rosparam file="$(find lse_miniq_bringup)/settings/navigation.yaml" command="load" />
+	    </node>
+    </group>
+
+    <group ns="robot_2">
+	    <param name="tf_prefix" value="robot_2" />
+
+	    <!-- The robot urdf for visualization -->
+	    <param name="robot_description" command="$(find xacro)/xacro.py $(find miniq_description)/urdf/miniq.urdf" />
+	    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+	    <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
+
+	    <!-- Run simple navigation for robot 2 -->
+	    <node name="move_base_simple" pkg="move_base_simple" type="multi_move_base_simple" output="screen">
+		<param name="my_id" type="int" value="2" />
+		<rosparam file="$(find lse_miniq_bringup)/settings/navigation.yaml" command="load" />
+	    </node>
+    </group>
+
+    <group ns="robot_4">
+	    <param name="tf_prefix" value="robot_4" />
+
+	    <!-- The robot urdf for visualization -->
+	    <param name="robot_description" command="$(find xacro)/xacro.py $(find miniq_description)/urdf/miniq.urdf" />
+	    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+	    <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
+
+	    <!-- Run simple navigation for robot 4 -->
+	    <node name="move_base_simple" pkg="move_base_simple" type="multi_move_base_simple" output="screen">
+		<param name="my_id" type="int" value="4" />
+		<rosparam file="$(find lse_miniq_bringup)/settings/navigation.yaml" command="load" />
+	    </node>
+    </group>
+
+    <group ns="robot_5">
+	    <param name="tf_prefix" value="robot_5" />
+
+	    <!-- The robot urdf for visualization -->
+	    <param name="robot_description" command="$(find xacro)/xacro.py $(find miniq_description)/urdf/miniq.urdf" />
+	    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+	    <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
+
+	    <!-- Run simple navigation for robot 5 -->
+	    <node name="move_base_simple" pkg="move_base_simple" type="multi_move_base_simple" output="screen">
+		<param name="my_id" type="int" value="5" />
+		<rosparam file="$(find lse_miniq_bringup)/settings/navigation.yaml" command="load" />
+	    </node>
+    </group>
+
+    <group ns="robot_6">
+	    <param name="tf_prefix" value="robot_6" />
+
+	    <!-- The robot urdf for visualization -->
+	    <param name="robot_description" command="$(find xacro)/xacro.py $(find miniq_description)/urdf/miniq.urdf" />
+	    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+	    <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
+
+	    <!-- Run simple navigation for robot 6 -->
+	    <node name="move_base_simple" pkg="move_base_simple" type="multi_move_base_simple" output="screen">
+		<param name="my_id" type="int" value="6" />
+		<rosparam file="$(find lse_miniq_bringup)/settings/navigation.yaml" command="load" />
+	    </node>
+    </group>
+
+    <!-- Run swistrack_tf_broadcaster node -->
+    <node name="swistrack_tf_broadcaster" pkg="swistrack_broadcaster" type="tf_broadcaster" output="screen">
+        <rosparam command="load" file="$(find lse_miniq_bringup)/settings/initial_poses.yaml" />
+    </node>
+
+    <!-- Map server -->
+    <node name="map_server" pkg="map_server" type="map_server" args="$(find isr_maps)/maps/lse_empty_arena.yaml" output="screen"></node>
+
+</launch>
