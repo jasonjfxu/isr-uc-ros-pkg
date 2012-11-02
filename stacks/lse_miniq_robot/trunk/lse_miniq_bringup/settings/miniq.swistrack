@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<swistrack>
+  <components>
+    <component type="InputCameraMegaVideo">
+      <enabledinterval value="1"/>
+      <parameter name="Doublescan" value="true"/>
+      <parameter name="Resolution" value="1"/>
+    </component>
+    <component type="ConvertToColor">
+      <enabledinterval value="1"/>
+    </component>
+    <component type="BackgroundSubtractionColor">
+      <enabledinterval value="1"/>
+      <parameter name="BackgroundImage" value="background.bmp"/>
+    </component>
+    <component type="BlobDetectionTwoColors">
+      <enabledinterval value="1"/>
+      <parameter name="Color1_AreaMax" value="1500"/>
+      <parameter name="Color1_AreaMin" value="300"/>
+      <parameter name="Color1_Color" value="#FE2943"/>
+      <parameter name="Color1_CompactnessMax" value="1.000000"/>
+      <parameter name="Color1_CompactnessMin" value="0.000000"/>
+      <parameter name="Color1_SelectionByArea" value="true"/>
+      <parameter name="Color1_SelectionByCompactness" value="true"/>
+      <parameter name="Color1_ThresholdB" value="30"/>
+      <parameter name="Color1_ThresholdG" value="10"/>
+      <parameter name="Color1_ThresholdR" value="30"/>
+      <parameter name="Color2_AreaMax" value="1500"/>
+      <parameter name="Color2_AreaMin" value="300"/>
+      <parameter name="Color2_Color" value="#2A8DFA"/>
+      <parameter name="Color2_CompactnessMax" value="1.000000"/>
+      <parameter name="Color2_CompactnessMin" value="0.000000"/>
+      <parameter name="Color2_SelectionByArea" value="true"/>
+      <parameter name="Color2_SelectionByCompactness" value="true"/>
+      <parameter name="Color2_ThresholdB" value="30"/>
+      <parameter name="Color2_ThresholdG" value="10"/>
+      <parameter name="Color2_ThresholdR" value="10"/>
+      <parameter name="mMaxNumberOfParticles" value="5"/>
+    </component>
+    <component type="NearestNeighborTracking">
+      <enabledinterval value="1"/>
+      <parameter name="MaxDistance" value="120.000000"/>
+      <parameter name="MaxNumber" value="5"/>
+    </component>
+    <component type="CalibrationLinear">
+      <enabledinterval value="1"/>
+      <parameter name="CalibrationPoints" value="camera_calibration.xml"/>
+    </component>
+    <component type="RosTest">
+      <enabledinterval value="1"/>
+    </component>
+  </components>
+  <server>
+    <port>3000</port>
+  </server>
+</swistrack>
