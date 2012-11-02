@@ -251,6 +251,16 @@ bool miniQ::setGasSensorCallibration(double a, double b)
     return true;
 }
 
+bool miniQ::setTimeout(double timeout)
+{
+    char msg[MSG_LENGTH];
+    sprintf(msg, "@%d,%d,%de", id_, MQ_ACTION_SET_TIMEOUT, (int)(timeout*1000));
+    
+    serial_port.write(msg);
+    
+    return true;
+}
+
 bool miniQ::updateWheelVelocities()
 {
     char msg[MSG_LENGTH];
