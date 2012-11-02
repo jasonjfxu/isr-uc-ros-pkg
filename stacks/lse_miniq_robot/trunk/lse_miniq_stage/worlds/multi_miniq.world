@@ -17,7 +17,7 @@ define laser ranger
 # The miniQ robot
 define miniq position
 (
-  size [0.122 0.122 0.02]
+  size [0.122 0.122 0.10]
   origin [0.0 0 0 0]
   gui_nose 1
   drive "diff"
@@ -65,10 +65,9 @@ floorplan
 )
 
 # Throw in a robot
-miniq( pose [1.0 1.0 0 0.0] name "miniQ0" color "red")
-miniq( pose [1.0 1.2 0 0.0] name "miniQ1" color "red")
-miniq( pose [1.0 1.4 0 0.0] name "miniQ2" color "red")
-miniq( pose [1.0 1.6 0 0.0] name "miniQ3" color "red")
-miniq( pose [1.0 1.8 0 0.0] name "miniQ4" color "red")
-miniq( pose [1.0 2.0 0 0.0] name "miniQ5" color "red")
+miniq( pose [2.5 0.3 0 90.0] name "miniQ0" color "red")
+miniq( pose [2.8 0.3 0 90.0] name "miniQ1" color "red")
+miniq( pose [3.1 0.3 0 90.0] name "miniQ2" color "red")
+miniq( pose [3.4 0.3 0 90.0] name "miniQ3" color "red")
+miniq( pose [3.7 0.3 0 90.0] name "miniQ4" color "red")
 
