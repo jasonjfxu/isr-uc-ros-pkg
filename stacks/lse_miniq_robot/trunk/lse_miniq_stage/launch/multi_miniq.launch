@@ -1,11 +1,11 @@
 <launch>
 
     <!-- Define a list of miniQ ids -->
-    <rosparam param="list_of_ids">[0, 1, 2, 3, 4, 5]</rosparam>
+    <rosparam param="list_of_ids">[0, 1, 2, 3, 4]</rosparam>
     <!-- <rosparam param="use_sim_time">true</rosparam> -->
 
     <!-- Run the miniQ in stage -->
-    <node name="stageros" pkg="stage" type="stageros" args="$(find miniq_stage)/worlds/multi_miniq.world" output="screen"></node>
+    <node name="stageros" pkg="stage" type="stageros" args="$(find lse_miniq_stage)/worlds/multi_miniq.world" output="screen"></node>
 
     <!-- Map server -->
     <node name="map_server" pkg="map_server" type="map_server" args="$(find isr_maps)/maps/lse_empty_arena.yaml" output="screen"></node>
@@ -13,7 +13,7 @@
     <group ns="robot_0">
 	    <param name="tf_prefix" value="robot_0" />	
 
-	    <node pkg="tf" type="static_transform_publisher" name="map_broadcaster" args="1.0 1.0 0 0 0 0 /map odom 50" />
+	    <node pkg="tf" type="static_transform_publisher" name="map_broadcaster" args="2.5 0.3 0 1.57 0 0 /map odom 50" />
 	    <node pkg="tf" type="static_transform_publisher" name="footprint_broadcaster" args="0 0 0 0 0 0 base_footprint base_link 50" />
 
 	    <!-- The robot urdf for visualization -->
@@ -22,24 +22,16 @@
 	    <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
 
 	    <!-- Run simple navigation for robot 0 -->
-	    <node name="move_base_simple" pkg="move_base_simple" type="multi_move_base_simple">
-
+	    <node name="move_base_simple" pkg="move_base_simple" type="multi_move_base_simple" output="screen">
 		<param name="my_id" value="0" />
-
-		<param name="max_angular_velocity" type="double" value="3.14" />
-	   	<param name="max_linear_velocity" type="double" value="0.2" />miniq.urdf
-		<param name="alpha" type="double" value="0.5" />
-	    	<param name="attraction_coefficient" type="double" value="0.5" />
-	   	<param name="repulsion_coefficient" type="double" value="0.5" />
-		<param name="distance_threshold" type="double" value="0.10" />
-	   	<param name="repulsion_threshold" type="double" value="0.20" />
+		<rosparam file="$(find lse_miniq_stage)/settings/navigation.yaml" command="load" />
 	    </node>
     </group>
 
     <group ns="robot_1">
 	    <param name="tf_prefix" value="robot_1" />	
 
-	    <node pkg="tf" type="static_transform_publisher" name="map_broadcaster" args="1.0 1.2 0 0 0 0 /map odom 50" />
+	    <node pkg="tf" type="static_transform_publisher" name="map_broadcaster" args="2.8 0.3 0 1.57 0 0 /map odom 50" />
 	    <node pkg="tf" type="static_transform_publisher" name="footprint_broadcaster" args="0 0 0 0 0 0 base_footprint base_link 50" />
 
 	    <!-- The robot urdf for visualization -->
@@ -48,24 +40,16 @@
 	    <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
 
 	    <!-- Run simple navigation for robot 1 -->
-	    <node name="move_base_simple" pkg="move_base_simple" type="multi_move_base_simple">
-
+	    <node name="move_base_simple" pkg="move_base_simple" type="multi_move_base_simple" output="screen">
 		<param name="my_id" value="1" />
-
-		<param name="max_angular_velocity" type="double" value="3.14" />
-	   	<param name="max_linear_velocity" type="double" value="0.2" />miniq.urdf
-		<param name="alpha" type="double" value="0.5" />
-	    	<param name="attraction_coefficient" type="double" value="0.5" />
-	   	<param name="repulsion_coefficient" type="double" value="0.5" />
-		<param name="distance_threshold" type="double" value="0.10" />
-	   	<param name="repulsion_threshold" type="double" value="0.20" />
+		<rosparam file="$(find lse_miniq_stage)/settings/navigation.yaml" command="load" />
 	    </node>
     </group>
 
     <group ns="robot_2">
  	    <param name="tf_prefix" value="robot_2" />
 
-	    <node pkg="tf" type="static_transform_publisher" name="map_broadcaster" args="1.0 1.4 0 0 0 0 /map odom 50" />
+	    <node pkg="tf" type="static_transform_publisher" name="map_broadcaster" args="3.1 0.3 0 1.57 0 0 /map odom 50" />
 	    <node pkg="tf" type="static_transform_publisher" name="footprint_broadcaster" args="0 0 0 0 0 0 base_footprint base_link 50" />
 
 	    <!-- The robot urdf for visualization -->
@@ -74,26 +58,16 @@
 	    <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
 
 	    <!-- Run simple navigation for robot 2 -->
-	    <node name="move_base_simple" pkg="move_base_simple" type="multi_move_base_simple">
-
+	    <node name="move_base_simple" pkg="move_base_simple" type="multi_move_base_simple" output="screen">
 		<param name="my_id" value="2" />
-    angular: 
-      x: 0.0
-
-		<param name="max_angular_velocity" type="double" value="3.14" />
-	   	<param name="max_linear_velocity" type="double" value="0.2" />
-		<param name="alpha" type="double" value="0.5" />
-	    	<param name="attraction_coefficient" type="double" value="0.5" />
-	   	<param name="repulsion_coefficient" type="double" value="0.5" />
-		<param name="distance_threshold" type="double" value="0.10" />
-	   	<param name="repulsion_threshold" type="double" value="0.20" />
+		<rosparam file="$(find lse_miniq_stage)/settings/navigation.yaml" command="load" />
 	    </node>
     </group>
 
     <group ns="robot_3">
  	    <param name="tf_prefix" value="robot_3" />
 
-	    <node pkg="tf" type="static_transform_publisher" name="map_broadcaster" args="1.0 1.6 0 0 0 0 /map odom 50" />
+	    <node pkg="tf" type="static_transform_publisher" name="map_broadcaster" args="3.4 0.3 0 1.57 0 0 /map odom 50" />
 	    <node pkg="tf" type="static_transform_publisher" name="footprint_broadcaster" args="0 0 0 0 0 0 base_footprint base_link 50" />
 
 	    <!-- The robot urdf for visualization -->
@@ -102,24 +76,16 @@
 	    <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
 
 	    <!-- Run simple navigation for robot 3 -->
-	    <node name="move_base_simple" pkg="move_base_simple" type="multi_move_base_simple">
-
+	    <node name="move_base_simple" pkg="move_base_simple" type="multi_move_base_simple" output="screen">
 		<param name="my_id" value="3" />
-
-		<param name="max_angular_velocity" type="double" value="3.14" />
-	   	<param name="max_linear_velocity" type="double" value="0.2" />
-		<param name="alpha" type="double" value="0.5" />
-	    	<param name="attraction_coefficient" type="double" value="0.5" />
-	   	<param name="repulsion_coefficient" type="double" value="0.5" />
-		<param name="distance_threshold" type="double" value="0.10" />
-	   	<param name="repulsion_threshold" type="double" value="0.20" />
+		<rosparam file="$(find lse_miniq_stage)/settings/navigation.yaml" command="load" />
 	    </node>
     </group>
 
     <group ns="robot_4">
  	    <param name="tf_prefix" value="robot_4" />
 
-	    <node pkg="tf" type="static_transform_publisher" name="map_broadcaster" args="1.0 1.8 0 0 0 0 /map odom 50" />
+	    <node pkg="tf" type="static_transform_publisher" name="map_broadcaster" args="3.7 0.3 0 1.57 0 0 /map odom 50" />
 	    <node pkg="tf" type="static_transform_publisher" name="footprint_broadcaster" args="0 0 0 0 0 0 base_footprint base_link 50" />
 
 	    <!-- The robot urdf for visualization -->
@@ -128,43 +94,9 @@
 	    <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
 
 	    <!-- Run simple navigation for robot 4 -->
-	    <node name="move_base_simple" pkg="move_base_simple" type="multi_move_base_simple">
-
+	    <node name="move_base_simple" pkg="move_base_simple" type="multi_move_base_simple" output="screen">
 		<param name="my_id" value="4" />
-
-		<param name="max_angular_velocity" type="double" value="3.14" />
-	   	<param name="max_linear_velocity" type="double" value="0.2" />
-		<param name="alpha" type="double" value="0.5" />
-	    	<param name="attraction_coefficient" type="double" value="0.5" />
-	   	<param name="repulsion_coefficient" type="double" value="0.5" />
-		<param name="distance_threshold" type="double" value="0.10" />
-	   	<param name="repulsion_threshold" type="double" value="0.20" />
-	    </node>
-    </group>
-
-    <group ns="robot_5">
-	    <param name="tf_prefix" value="robot_5" />
-
-	    <node pkg="tf" type="static_transform_publisher" name="map_broadcaster" args="1.0 2.0 0 0 0 0 /map odom 50" />
-	    <node pkg="tf" type="static_transform_publisher" name="footprint_broadcaster" args="0 0 0 0 0 0 base_footprint base_link 50" />
-
-	    <!-- The robot urdf for visualization -->
-	    <param name="robot_description" command="$(find xacro)/xacro.py $(find miniq_description)/urdf/miniq.urdf" />
-	    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
-	    <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
-
-	    <!-- Run simple navigation for robot 5 -->
-	    <node name="move_base_simple" pkg="move_base_simple" type="multi_move_base_simple">
-
-		<param name="my_id" value="5" />
-
-		<param name="max_angular_velocity" type="double" value="3.14" />
-	   	<param name="max_linear_velocity" type="double" value="0.2" />
-		<param name="alpha" type="double" value="0.5" />
-	    	<param name="attraction_coefficient" type="double" value="0.5" />
-	   	<param name="repulsion_coefficient" type="double" value="0.5" />
-		<param name="distance_threshold" type="double" value="0.10" />
-	   	<param name="repulsion_threshold" type="double" value="0.20" />
+		<rosparam file="$(find lse_miniq_stage)/settings/navigation.yaml" command="load" />
 	    </node>
     </group>
 
