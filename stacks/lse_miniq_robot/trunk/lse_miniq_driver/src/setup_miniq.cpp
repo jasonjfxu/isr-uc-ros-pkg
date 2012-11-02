@@ -103,6 +103,9 @@ int main(int argc, char** argv)
 	double gas_b;
 	pn.param("gas_b", gas_b, 0.0);
     
+    double timeout;
+	pn.param("timeout", timeout, 0.0);
+    
 	if(!miniQ::openPort((char*)port.c_str(), baudrate))
 	{
 		ROS_FATAL("miniQ -- Failed to open serial port %s at %d baud!", port.c_str(), baudrate);
@@ -165,6 +168,10 @@ int main(int argc, char** argv)
 	else ROS_INFO("miniQ -- DONE.");		
 
 	ros::Duration(1.0).sleep();
+    
+    ROS_INFO("miniQ -- Setting the timeout to %lf", timeout);
+	if(!robot.setTimeout(timeout)) ROS_ERROR("miniQ -- ERROR!");
+	else ROS_INFO("miniQ -- DONE.");	
 
 	ROS_INFO("miniQ -- Setup was successfully! Goodbye!");
 

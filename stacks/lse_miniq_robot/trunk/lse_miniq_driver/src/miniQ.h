@@ -55,9 +55,9 @@ public:
     	MQ_ACTION_DRIVE_DIRECT = 3,
     	// Get robot sensors
     	MQ_ACTION_GET_ODOMETRY = 4,
-    	MQ_ACTION_GET_ENCODER_PULSES = 5,
-	MQ_ACTION_GET_WHEEL_VELOCITIES = 6,
-   	MQ_ACTION_GET_GAS_SENSOR = 7,
+        MQ_ACTION_GET_ENCODER_PULSES = 5,
+        MQ_ACTION_GET_WHEEL_VELOCITIES = 6,
+        MQ_ACTION_GET_GAS_SENSOR = 7,
     	MQ_ACTION_GET_IR_BUMPER = 8,
     	MQ_ACTION_GET_LINE_SENSOR = 9,
     	MQ_ACTION_GET_BATTERY = 10,
@@ -71,18 +71,20 @@ public:
     	MQ_ACTION_GET_ODOMETRY_CALIBRATION = 16,
     	MQ_ACTION_SET_ID = 17,
     	MQ_ACTION_GET_ID = 18,
-   	MQ_ACTION_SET_MODE = 19,
+        MQ_ACTION_SET_MODE = 19,
     	MQ_ACTION_GET_MODE = 20,
     	MQ_ACTION_SET_GAS_CALIBRATION = 21,
-   	MQ_ACTION_GET_GAS_CALIBRATION = 22,
+        MQ_ACTION_GET_GAS_CALIBRATION = 22,
     	MQ_ACTION_SET_BATTERY_TYPE = 23,
     	MQ_ACTION_GET_BATTERY_TYPE = 24,
+        MQ_ACTION_SET_TIMEOUT = 25,
+    	MQ_ACTION_GET_TIMEOUT = 26,
     	// Group messages
     	// Group 1 - Odometry, gas sensor
-    	MQ_ACTION_GET_GROUP_1 = 25,
+    	MQ_ACTION_GET_GROUP_1 = 27,
     	// Group 2 - Odometry, gas sensor, IR bumper
-    	MQ_ACTION_GET_GROUP_2 = 26,
-    	MQ_ACTION_COUNT = 27
+    	MQ_ACTION_GET_GROUP_2 = 28,
+    	MQ_ACTION_COUNT = 29
         
     } miniQaction;
 
@@ -229,6 +231,7 @@ public:
     bool setPIDGains(int kp, int ki, int kd, miniQPID pid);
     bool setOdometryCallibration(double odometry_d, double odometry_yaw);
     bool setGasSensorCallibration(double a, double b);
+    bool setTimeout(double timeout);
 
     void setPWM(int left_pwm, int left_dir, int right_pwm, int right_dir);
 
