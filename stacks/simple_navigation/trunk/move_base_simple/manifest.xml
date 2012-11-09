@@ -1,5 +1,7 @@
 <package>
-    <description brief="move_base_simple">move_base_simple</description>
+    <description brief="move_base_simple">
+    	Move base simple implements a simple VFH navigation algorithm for single and multiple robots.
+    </description>
     <author>Gonçalo Cabrita</author>
     <license>BSD</license>  
     <review status="unreviewed" notes=""/>
