@@ -1,5 +1,7 @@
 <stack>
-  <description brief="simple_navigation">simple_navigation</description>
+  <description brief="simple_navigation">
+  	Simple navigation algorithms to be used on robots with low processing power.
+  </description>
   <author>Maintained by Gonçalo Cabrita</author>
   <license>BSD</license>  
   <review status="unreviewed" notes=""/>
