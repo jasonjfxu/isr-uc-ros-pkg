@@ -1,0 +1,16 @@
+<package>
+  <description brief="mrl_robots_2dnav">
+
+     Parameters and launch files for using the 2D navigation stack on the Stingbot and Traxbot robots.
+
+  </description>
+  <author>David Portugal and André Araújo</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/mrl_robots_2dnav</url>
+  <depend package="move_base"/>
+  <depend package="mrl_robots_drivers"/>
+  <depend package="hokuyo_node"/>
+</package>
+
+

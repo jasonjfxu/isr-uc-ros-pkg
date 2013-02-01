@@ -1,0 +1,38 @@
+#Roomba:
+controller_frequency: 5.0 #cmds_vel/sec
+#planner_patience: 1.0
+#controller_patience: 5.0
+#clearing_rotation_allowed: false
+
+TrajectoryPlannerROS:  
+  max_vel_x: 0.4
+  min_vel_x: 0.2  
+  max_rotational_vel: 1.0 
+  min_in_place_rotational_vel: 0.4 
+
+  acc_lim_th: 0.8
+  acc_lim_x: 0.4
+  acc_lim_y: 0.4
+
+#  acc_lim_th: 0.25
+#  acc_lim_x: 0.05
+#  acc_lim_y: 0.05
+
+  holonomic_robot: false
+
+#Roomba:
+
+  yaw_goal_tolerance: 6.28
+  xy_goal_tolerance: 0.25
+
+#  heading_lookahead: 0.325
+#  goal_distance_bias: 0.8
+  path_distance_bias: 0.4 #default=0.6
+  sim_time: 3.0 #default = 1.0
+#  oscillation_reset_dist: 0.05
+
+#  vx_samples: 6 #default = 3
+#  vtheta_samples: 20 #default = 20
+
+  dwa: false #roomba: false
+

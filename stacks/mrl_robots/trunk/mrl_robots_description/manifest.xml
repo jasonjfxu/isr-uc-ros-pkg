@@ -1,0 +1,15 @@
+<package>
+  <description brief="mrl_robots_description">
+
+     URDF file descriptions for the MRL Robots.
+
+  </description>
+  <author>David Portugal (Integration), André Araújo (Traxbot 3D Model), Walter Miani (Stingbot 3D Model), Bruno Patrão (Editing) and Pedro Trindade (Editing)</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/mrl_robots_description</url>
+  <depend package="gazebo"/>
+
+</package>
+
+

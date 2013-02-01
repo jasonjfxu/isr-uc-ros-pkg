@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<launch>
+  <node pkg="mrl_robots_drivers" type="traxbot_node" name="traxbot_node" args="/dev/ttyACM0" output="screen">
+  </node>
+
+  <node pkg="hokuyo_node" type="hokuyo_node" name="hokuyo_node" output="screen">
+    <param name="port" value="/dev/ttyACM1" />
+  </node>
+
+  <node pkg="tf" type="static_transform_publisher" name="base_link_to_laser" args="0.085 0.0 0.045 0.0 0.0 0.0 1.0 /base_link /laser 100" />
+
+</launch>
