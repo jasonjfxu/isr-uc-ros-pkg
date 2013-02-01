@@ -1,0 +1,240 @@
+<?xml version="1.0"?>
+<robot name="stingbot">
+  
+	<link name="base_link">
+    <inertial>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <mass
+        value="0" />
+      <inertia
+        ixx="0"
+        ixy="0"
+        ixz="0"
+        iyy="0"
+        iyz="0"
+        izz="0" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 3.1415" />
+      <geometry>
+        <mesh filename="package://mrl_robots_description/mesh/stingbot_parts/chasis.stl" scale="0.002 0.002 0.002" />
+      </geometry>
+      <material name="">
+        <color rgba="0.933 0.463 0.0 1.0" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 3.1415" />
+      <geometry>
+        <mesh filename="package://mrl_robots_description/mesh/stingbot_parts/chasis.stl" scale="0.002 0.002 0.002" />
+      </geometry>
+    </collision>
+  </link>  
+  
+  
+  
+  
+ <link
+    name="acrylic">
+    <inertial>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <mass
+        value="0" />
+      <inertia
+        ixx="0"
+        ixy="0"
+        ixz="0"
+        iyy="0"
+        iyz="0"
+        izz="0" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 3.1415" />
+      <geometry>
+        <mesh
+          filename="package://mrl_robots_description/mesh/stingbot_parts/acrylic.stl" scale="0.002 0.002 0.002"/>
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.6 0.6 0.6 0.35" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 3.1415" />
+      <geometry>
+        <mesh
+          filename="package://mrl_robots_description/mesh/stingbot_parts/acrylic.stl" scale="0.002 0.002 0.002"/>
+      </geometry>
+    </collision>
+  </link>  
+  
+  
+    	<joint name="chassis_acrylic_joint" type="fixed">
+		<origin xyz="0 0 0" rpy="0 0 0"/>
+		<parent link="base_link"/>
+		<child link="acrylic"/>
+	</joint>
+  
+  
+  
+  
+  <link
+    name="batteries">
+    <inertial>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <mass
+        value="0" />
+      <inertia
+        ixx="0"
+        ixy="0"
+        ixz="0"
+        iyy="0"
+        iyz="0"
+        izz="0" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 3.1415" />
+      <geometry>
+        <mesh
+          filename="package://mrl_robots_description/mesh/stingbot_parts/batteries.stl" scale="0.002 0.002 0.002"/>
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.309 0.580 0.804 1.0" /> 
+	  </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 3.1415" />
+      <geometry>
+        <mesh
+          filename="package://mrl_robots_description/mesh/stingbot_parts/batteries.stl" scale="0.002 0.002 0.002"/>
+      </geometry>
+    </collision>
+  </link>
+  
+    
+    	<joint name="chassis_batteries_joint" type="fixed">
+		<origin xyz="0 0 0" rpy="0 0 0"/>
+		<parent link="base_link"/>
+		<child link="batteries"/>
+	</joint>
+  
+  
+    <link
+    name="metals">
+    <inertial>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <mass
+        value="0" />
+      <inertia
+        ixx="0"
+        ixy="0"
+        ixz="0"
+        iyy="0"
+        iyz="0"
+        izz="0" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 3.1415" />
+      <geometry>
+        <mesh
+          filename="package://mrl_robots_description/mesh/stingbot_parts/metals.stl" scale="0.002 0.002 0.002" />
+      </geometry>
+      <material
+        name="">
+          <color rgba="0.5 0.5 0.5 1.0" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 3.1415" />
+      <geometry>
+        <mesh
+          filename="package://mrl_robots_description/mesh/stingbot_parts/metals.stl" scale="0.002 0.002 0.002"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  
+    	<joint name="chassis_metals_joint" type="fixed">
+		<origin xyz="0 0 0" rpy="0 0 0"/>
+		<parent link="base_link"/>
+		<child link="metals"/>
+	</joint>  
+  
+  
+  
+ <link
+    name="wheels_sonars">
+    <inertial>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <mass
+        value="0" />
+      <inertia
+        ixx="0"
+        ixy="0"
+        ixz="0"
+        iyy="0"
+        iyz="0"
+        izz="0" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 3.1415" />
+      <geometry>
+        <mesh
+          filename="package://mrl_robots_description/mesh/stingbot_parts/wheels_sonars.stl" scale="0.002 0.002 0.002"/>
+      </geometry>
+      <material
+        name="">
+        <color rgba="0.2 0.2 0.2 1.0" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 3.1415" />
+      <geometry>
+        <mesh
+          filename="package://mrl_robots_description/mesh/stingbot_parts/wheels_sonars.stl" scale="0.002 0.002 0.002"/>
+      </geometry>
+    </collision>
+  </link>  
+  
+  
+      	<joint name="chassis_wheels_joint" type="fixed">
+		<origin xyz="0 0 0" rpy="0 0 0"/>
+		<parent link="base_link"/>
+		<child link="wheels_sonars"/>
+	</joint>  
+  
+
+</robot>

@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<launch>
+  <master auto="start"/>
+
+  <!-- Run the map server -->
+  <node name="map_server" pkg="map_server" type="map_server" args="$(find mrl_robots_2dnav)/maps/mrl_arena.pgm 0.01" respawn="false"/>
+
+  <!--- Run AMCL -->
+  <include file="$(find mrl_robots_2dnav)/amcl/amcl_mrl_arena.launch" />
+
+  <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+
+    <rosparam file="$(find mrl_robots_2dnav)/arena_params_traxbot/costmap_common_params.yaml" command="load" ns="global_costmap" />
+    <rosparam file="$(find mrl_robots_2dnav)/arena_params_traxbot/costmap_common_params.yaml" command="load" ns="local_costmap" />
+    <rosparam file="$(find mrl_robots_2dnav)/arena_params_traxbot/local_costmap_params.yaml" command="load" />
+    <rosparam file="$(find mrl_robots_2dnav)/arena_params_traxbot/global_costmap_params.yaml" command="load" />
+    <rosparam file="$(find mrl_robots_2dnav)/arena_params_traxbot/base_local_planner_params.yaml" command="load" />
+  </node>
+
+</launch>

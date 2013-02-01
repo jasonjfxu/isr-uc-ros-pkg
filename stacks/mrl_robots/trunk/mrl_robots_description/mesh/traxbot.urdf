@@ -1,0 +1,194 @@
+<?xml version="1.0"?>
+<robot name="traxbot">
+
+	<!--<link name="base_link"></link>
+
+	<link name="stingbot_frame">
+		<visual>
+			<origin rpy="0.0 0 0" xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="package://stingbot_description/mesh/stingbot.dae" />
+			</geometry>
+		</visual>
+	</link>
+
+	<joint name="world2stingbot" type="continuous">
+		<parent link="base_link"/>
+		<child link="stingbot_frame"/>
+		<origin rpy="0 0 0" xyz="0 0 0"/>
+	      </joint> -->
+	      
+<!--chassis-->	      
+    <link
+      name="base_link"> 
+	<inertial>
+	  <origin xyz="-0.0149981782424793 -0.0349809405562937 0.0140772763498253" rpy="0 0 0" />
+	  <mass value="0.124910312739102" />
+	  <inertia ixx="0.000386495563459737" ixy="-6.11559049104616E-05" ixz="5.40436406924131E-09" iyy="0.00101301336802307" iyz="-1.7898560352296E-08" izz="0.000695422084265238" />
+	</inertial>
+	<visual>
+	  <!--<origin xyz="0 0 0" rpy="0 0 0" />-->
+	    <origin xyz="0 0 0.025" rpy="-1.5705 0 3.1415" /> <!-- 1.57075-->
+	  <geometry>
+	    <mesh filename="package://mrl_robots_description/mesh/traxbot_parts/chassi.STL" />
+	  </geometry>
+	  <material name="">
+	      <color rgba="0.933 0.463 0.0 1.0" /> <!-- ORANGE -->
+	  </material>
+	</visual>
+	<collision>
+	  <origin xyz="0 0 0.025" rpy="-1.5705 0 3.1415" />
+	  <geometry>
+	    <mesh filename="package://mrl_robots_description/mesh/traxbot_parts/chassi.STL" />
+	  </geometry>
+	</collision>
+      </link>
+      
+
+<!--acrylic-->
+  <link
+    name="acrylic_support">
+    <inertial>
+      <origin
+        xyz="-0.00462285904100312 -0.0920628918130356 0.013408571071902"
+        rpy="0 0 0" />
+      <mass
+        value="0.255780680181752" />
+      <inertia
+        ixx="0.000784882089106079"
+        ixy="9.6127434466611E-22"
+        ixz="-1.43877727795942E-19"
+        iyy="0.00229054657299704"
+        iyz="4.71658760369002E-20"
+        izz="0.00150673459129938" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0.025"
+        rpy="-1.5705 0 3.1415" />
+      <geometry>
+        <mesh
+	  filename="package://mrl_robots_description/mesh/traxbot_parts/acrylic_support.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.6 0.6 0.6 0.35" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0.025"
+        rpy="-1.5705 0 3.1415" />
+      <geometry>
+        <mesh
+          filename="package://mrl_robots_description/mesh/traxbot_parts/acrylic_support.STL" />
+      </geometry>
+    </collision>
+  </link> 
+  
+  	<joint name="chassis_acrylic_joint" type="fixed">
+		<origin xyz="0 0 0" rpy="0 0 0"/>
+		<parent link="base_link"/>
+		<child link="acrylic_support"/>
+	</joint>
+	
+<!--tracks, battery & caster wheel-->	
+  <link
+    name="tracks_bat_caster">
+    <inertial>
+      <origin
+        xyz="-0.00927195109867125 -0.00457785661699442 0.0132760244791211"
+        rpy="0 0 0" />
+      <mass
+        value="0.259853872411689" />
+      <inertia
+        ixx="0.000725199011404441"
+        ixy="4.92296632931373E-05"
+        ixz="2.27119297470133E-05"
+        iyy="0.00134102601029168"
+        iyz="-5.1196240251421E-06"
+        izz="0.000839684734562503" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0.025"
+        rpy="-1.5705 0 3.1415" />
+      <geometry>
+        <mesh
+          filename="package://mrl_robots_description/mesh/traxbot_parts/tracks_bat_caster.STL" />
+      </geometry>
+      <material
+        name="">
+	  <!--<color rgba="0.796078431372549 0.823529411764706 0.937254901960784 1" />-->
+	  <color rgba="0.4 0.4 0.4 1.0" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0.025"
+        rpy="-1.5705 0 3.1415" />
+      <geometry>
+        <mesh
+          filename="package://mrl_robots_description/mesh/traxbot_parts/tracks_bat_caster.STL" />
+      </geometry>
+    </collision>
+  </link>
+  
+  
+    	<joint name="chassis_tracks_joint" type="fixed">
+		<origin xyz="0 0 0" rpy="0 0 0"/>
+		<parent link="base_link"/>
+		<child link="tracks_bat_caster"/>
+	</joint>
+	
+
+ <!--side wheels and sonars -->
+  <link
+    name="wheels_sonars">
+    <inertial>
+      <origin
+        xyz="-0.100239488546049 -0.041008827320776 0.012665618179318"
+        rpy="0 0 0" />
+      <mass
+        value="0.0231359189987207" />
+      <inertia
+        ixx="0.000188118536971804"
+        ixy="1.87439783835499E-05"
+        ixz="2.05906399186075E-07"
+        iyy="0.000182271313427262"
+        iyz="3.19550777538589E-07"
+        izz="4.41297044977878E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0.025"
+        rpy="-1.5705 0 3.1415" />
+      <geometry>
+        <mesh
+          filename="package://mrl_robots_description/mesh/traxbot_parts/wheels_sonars.STL" />
+      </geometry>
+      <material
+        name="">
+        <color rgba="0.1 0.1 0.1 1.0" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0.025"
+        rpy="-1.5705 0 3.1415" />
+      <geometry>
+        <mesh
+          filename="package://mrl_robots_description/mesh/traxbot_parts/wheels_sonars.STL" />
+      </geometry>
+    </collision>
+  </link>
+  
+      	<joint name="chassis_wheels_joint" type="fixed">
+		<origin xyz="0 0 0" rpy="0 0 0"/>
+		<parent link="base_link"/>
+		<child link="wheels_sonars"/>
+	</joint>
+      
+
+</robot>

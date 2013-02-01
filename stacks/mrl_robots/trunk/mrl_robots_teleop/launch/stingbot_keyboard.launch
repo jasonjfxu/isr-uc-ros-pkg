@@ -1,0 +1,9 @@
+
+<launch>
+
+ <!-- StingBot Driver-->
+  <node pkg="mrl_robots_drivers" type="stingbot_node" name="stingbot_node" args="/dev/ttyACM0"/>
+
+  <node pkg="mrl_robots_teleop" type="keyboard_teleop.py" name="key_teleop" output="screen"/>
+
+</launch>

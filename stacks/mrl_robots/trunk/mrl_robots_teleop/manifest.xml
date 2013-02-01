@@ -1,0 +1,17 @@
+<package>
+  <description brief="mrl_robots_teleop">
+
+     Teleoperation Package for the Stingbot and Traxbot robot. Keyboard and Wiimote Support Provided.
+
+  </description>
+  <author>David Portugal</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/mrl_robots_teleop</url>
+  <depend package="roscpp"/>
+  <depend package="rospy"/>
+  <depend package="geometry_msgs"/>
+  <depend package="wiimote"/>
+</package>
+
+

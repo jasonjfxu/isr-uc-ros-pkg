@@ -1,0 +1,24 @@
+
+<launch>
+
+ <!-- StingBot Driver-->
+  <node pkg="mrl_robots_drivers" type="stingbot_node" name="stingbot_node" args="/dev/ttyACM0" output="screen"/>
+
+
+ <!-- joy node -->
+   <node respawn="true" pkg="wiimote"  type="wiimote_node.py" name="wiimote" output="screen"/>
+
+
+ <!-- Limit topic frequency -->
+  <node pkg="topic_tools" type="throttle" name="throttle" args="messages joy 20.0" output="screen"/>
+
+
+ <!-- Axes -->
+  <param name="axis_linear" value="1" type="int"/>
+  <param name="axis_angular" value="0" type="int"/>
+  <param name="scale_linear" value="0.25" type="double"/>
+  <param name="scale_angular" value="1.0" type="double"/>
+
+  <node pkg="mrl_robots_teleop" type="stingbot_teleop_wii" name="stingbot_teleop"/>
+
+</launch>
