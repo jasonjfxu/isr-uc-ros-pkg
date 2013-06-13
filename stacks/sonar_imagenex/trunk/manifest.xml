@@ -1,0 +1,19 @@
+<package>
+  <description brief="sonar_imagenex">
+
+     Hardware driver for the Imagenex range of sonars.
+
+  </description>
+  <author>João Sousa</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/sonar_imagenex</url>
+
+  <depend package="roscpp"/>
+  <depend package="cereal_port"/>
+  <depend package="std_msgs"/>
+  <depend package="tf"/>
+  <depend package="sensor_msgs"/>
+  <depend package="message_filters"/>
+  <depend package="geometry_msgs"/>
+</package>
