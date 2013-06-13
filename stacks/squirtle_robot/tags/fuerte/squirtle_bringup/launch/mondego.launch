@@ -1,0 +1,8 @@
+<launch>
+
+    <!-- The river urdf for visualization -->
+    <param name="river_description" command="$(find xacro)/xacro.py $(find squirtle_description)/urdf/mondego_river.urdf" />
+    <node pkg="tf" type="static_transform_publisher" name="bridge_broadcaster" args="89 35 5 1.5 0 0 world bridge 50" />
+    <node pkg="tf" type="static_transform_publisher" name="base_station_broadcaster" args="0 0 0 0 0 0 world base_station 50" />
+
+</launch>

@@ -1,0 +1,14 @@
+<stack>
+  <description brief="squirtle_robot">
+  	This is the Squirtle ASV, created by the ISR for environmental monitoring.
+  </description>
+  <author>Maintained by João Sousa and Jorge Fraga</author>
+  <license>BSD</license>  
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/squirtle_robot</url>
+  <depend stack="ros" />
+  <depend stack="simple_navigation" />
+  <depend stack="lse_messages" />
+  <depend stack="lse_resources" />
+
+</stack>

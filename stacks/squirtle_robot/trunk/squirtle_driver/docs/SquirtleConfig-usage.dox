@@ -1,0 +1,10 @@
+\subsubsection usage Usage
+\verbatim
+<node name="squirtle_model_dynamic_reconfigure" pkg="squirtle_driver" type="squirtle_model_dynamic_reconfigure">
+  <param name="in_place_rotation_scale" type="double" value="0.0" />
+  <param name="speed_scale" type="double" value="0.0" />
+  <param name="rotation_scale" type="double" value="0.0" />
+  <param name="linear_actuator_rotation_scale" type="double" value="0.0" />
+</node>
+\endverbatim
+

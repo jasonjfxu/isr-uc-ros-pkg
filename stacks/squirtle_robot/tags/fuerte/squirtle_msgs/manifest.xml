@@ -1,0 +1,15 @@
+<package>
+  <description brief="squirtle_msgs">
+
+     This package contains messages used by the Squirtle ASV.
+
+  </description>
+  <author>João Sousa and Jorge Fraga</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/squirtle_msgs</url>
+  <depend package="roscpp"/>
+
+</package>
+
+

@@ -1,0 +1,69 @@
+# World file for simulating a boat on the mondego river
+# Author: Gonçalo Cabrita
+
+# Laser sensor
+define laser ranger
+(
+  sensor(
+    range [0.0  50.0]
+    fov 270.25
+    samples 1081
+  )
+
+  color "black"
+  size [0.05 0.05 0.1]
+)
+
+# The boat robot
+define boat position
+(
+  size [0.122 0.122 0.10]
+  origin [0.0 0 0 0]
+  gui_nose 1
+  drive "diff"
+
+  laser(pose [ 0.050 0.000 0 0.000 ])
+)
+
+define floorplan model
+(
+  # Sombre, sensible, artistic
+  color "gray30"
+
+  # Most maps will need a bounding box
+  boundary 1
+
+  gui_nose 0
+  gui_grid 0
+
+  gui_outline 0
+  gripper_return 0
+  fiducial_return 0
+  ranger_return 1
+)
+
+# Set the resolution of the underlying raytrace model in meters
+resolution 0.02
+# Simulation timestep in milliseconds
+interval_sim 100
+
+window
+( 
+  size [ 800.000 600.000 ] 
+
+  rotate [ 0.000 -1.560 ]
+  scale 0.3
+)
+
+# Load an environment bitmap
+floorplan
+( 
+  name "mondego"
+  bitmap "mondego.pgm"
+  size [1616.0 3272.0 0.5]
+  pose [808.0 1636.0 0 0.0]
+)
+
+# Throw in a robot
+boat( pose [1500.0 300.0 0.0 90.0] name "boat" color "red")
+

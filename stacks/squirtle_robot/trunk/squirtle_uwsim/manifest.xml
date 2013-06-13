@@ -1,0 +1,14 @@
+<package>
+  <description brief="squirtle_uwsim">
+
+     This package contains ROS launch files and UWSim world files for simulating the Squirtle ASV in UWSim.
+
+  </description>
+  <author>João Sousa and Jorge Fraga</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/squirtle_uwsim</url>
+
+</package>
+
+

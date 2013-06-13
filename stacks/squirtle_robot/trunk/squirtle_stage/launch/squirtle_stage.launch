@@ -1,0 +1,16 @@
+<launch>
+
+    <!-- Run the miniQ in stage -->
+    <node name="stageros" pkg="stage" type="stageros" args=" $(find squirtle_stage)/worlds/squirtle_mondego.world" output="screen"></node>
+    
+    <!-- Map server -->
+    <node name="map_server" pkg="map_server" type="map_server" args="$(find squirtle_stage)/worlds/mondego.yaml" output="screen"></node>
+
+    <node pkg="tf" type="static_transform_publisher" name="world_broadcaster" args="1500.0 300.0 0.0 1.57 0.0 0.0 /map odom 50" />
+
+    <!-- The robot urdf for visualization -->
+    <param name="robot_description" command="$(find xacro)/xacro.py $(find squirtle_description)/urdf/squirtle.urdf" />
+    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
+
+</launch>

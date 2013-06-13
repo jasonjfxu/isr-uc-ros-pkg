@@ -1,0 +1,11 @@
+obstacle_range: 20.0
+raytrace_range: 25.0
+
+footprint: [[1.5, 1], [1.5, -1], [-1.5, -1], [-1.5, 1]]
+
+inflation_radius: 2.0
+
+observation_sources: laser_scan_sensor sonar_sensor
+
+laser_scan_sensor: {sensor_frame: frame_name, data_type: LaserScan, topic: topic_name, marking: true, clearing: true}
+sonar_sensor: {sensor_frame: frame_name, data_type: LaserScan, topic: topic_name, marking: true, clearing: true}

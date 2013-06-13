@@ -1,0 +1,17 @@
+<package>
+  <description brief="squirtle_teleop">
+
+     This package contains ROS launch files and nodes for teleoperating the Squirtle ASV.
+
+  </description>
+  <author>João Sousa and Jorge Fraga</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/squirtle_teleop</url>
+  <depend package="joy"/>
+  <depend package="geometry_msgs"/>
+  <depend package="roscpp"/>
+
+</package>
+
+
