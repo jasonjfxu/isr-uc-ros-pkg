@@ -1,0 +1,15 @@
+<package>
+  <description brief="squirtle_bringup">
+
+     This package holds all the files required to start the Squirtle ASV.
+
+  </description>
+  <author>João Sousa and Jorge Fraga</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/squirtle_bringup</url>
+  <depend package="squirtle_driver" />
+  <depend package="squirtle_description" />
+  <depend package="move_base" />
+
+</package>

@@ -1,0 +1,23 @@
+time stamp
+
+float32 battery_voltage
+float32 battery_current
+float32 battery_temperature
+
+float32 solar_panel_voltage
+float32 solar_panel_current
+float32 solar_panel_temperature
+
+float32 left_motor_current
+float32 right_motor_current
+float32 left_motor_pwm
+float32 right_motor_pwm
+float32 left_motor_speed
+float32 right_motor_speed
+
+float32 motor_driver_temperature
+
+bool left_hull_leak
+bool right_hull_leak
+bool front_box_leak
+bool rear_box_leak

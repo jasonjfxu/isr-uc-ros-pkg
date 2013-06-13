@@ -1,0 +1,18 @@
+<package>
+  <description brief="squirtle_driver">
+
+     Hardware driver for the Squirtle ASV.
+
+  </description>
+  <author>João Sousa and Jorge Fraga</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/squirtle_driver</url>
+  <depend package="roscpp"/>
+  <depend package="geometry_msgs"/>
+  <depend package="cereal_port"/>
+  <depend package="squirtle_msgs"/>
+  <depend package="lse_sensor_msgs"/>
+  <depend package="dynamic_reconfigure"/>
+
+</package>

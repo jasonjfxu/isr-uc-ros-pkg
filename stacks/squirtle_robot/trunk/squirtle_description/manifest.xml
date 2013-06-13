@@ -1,0 +1,14 @@
+<package>
+  <description brief="squirtle_description">
+
+     Description files for the Squirtle ASV.
+
+  </description>
+  <author>João Sousa and Jorge Fraga</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/squirtle_description</url>
+  <depend package="joint_state_publisher" />
+  <depend package="robot_state_publisher" />
+
+</package>

@@ -1,0 +1,9 @@
+\subsubsection parameters ROS parameters
+
+Reads and maintains the following parameters on the ROS server
+
+- \b "~in_place_rotation_scale" : \b [double] Affects the motors' signals for in place rotations. min: 0.0, default: 0.0, max: 1.0
+- \b "~speed_scale" : \b [double] Allways affects the motors' signals. min: 0.0, default: 0.0, max: 1.0
+- \b "~rotation_scale" : \b [double] Affects the motors' signals during linear motion. min: 0.0, default: 0.0, max: 1.0
+- \b "~linear_actuator_rotation_scale" : \b [double] Affects the linear actuator's signal during linear motion. min: 0.0, default: 0.0, max: 1.0
+

@@ -1,0 +1,14 @@
+<package>
+  <description brief="squirtle_stage">
+
+     This package contains ROS launch files and Stage world files for simulating the Squirtle ASV in Stage.
+
+  </description>
+  <author>João Sousa and Jorge Fraga</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/squirtle_stage</url>
+
+</package>
+
+

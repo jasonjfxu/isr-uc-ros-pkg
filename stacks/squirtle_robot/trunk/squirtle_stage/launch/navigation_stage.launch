@@ -1,0 +1,13 @@
+<launch>
+
+    <node pkg="move_base" type="move_base" name="move_base" output="screen" respawn="false">
+
+    	<rosparam file="$(find squirtle_stage)/settings/costmap_common_params.yaml" command="load" ns="global_costmap" />
+    	<rosparam file="$(find squirtle_stage)/settings/costmap_common_params.yaml" command="load" ns="local_costmap" />
+    	<rosparam file="$(find squirtle_stage)/settings/local_costmap_params.yaml" command="load" />
+    	<rosparam file="$(find squirtle_stage)/settings/global_costmap_params.yaml" command="load" />
+    	<rosparam file="$(find squirtle_stage)/settings/base_local_planner_params.yaml" command="load" />
+
+    </node>
+
+</launch>

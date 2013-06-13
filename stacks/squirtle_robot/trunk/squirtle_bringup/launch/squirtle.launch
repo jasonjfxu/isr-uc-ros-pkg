@@ -1,0 +1,70 @@
+<launch>
+
+    <!-- The robot driver for visualization -->
+    <node name="squirtle_node" pkg="squirtle_driver" type="squirtle_node" output="screen" respawn="true" />
+
+    <!-- The Sonar driver -->
+    <node name="sonar_imagenex" pkg="sonar_imagenex" type="sonar_imagenex" output="screen"/>
+    	<param name="train_angle" value="90" />
+    	<param name="sector_width" value="45" />
+	<param name="frequency" value="10" />
+    	<param name="initial_range" value="5" />
+	<param name="gain" value="5" />
+    </node>
+
+    <!-- Convert the Sonar scans to a laser message for the navigation stack to use -->
+    <!-- Todo... -->
+
+    <!-- The SICK laser driver -->
+    <!-- <node name="sickld" pkg="sicktoolbox_wrapper" type="sickld">
+    	<param name="ipaddress" value="192.168.1.10" />
+    	<param name="port" value="49152" />
+    </node> -->
+
+    <!-- The Squirtle water monitorization suit driver -->
+    <!-- Todo... -->
+
+    <!-- The XSens MTi driver -->
+    <node name="mti_node" pkg="lse_xsens_mti" type="mti_node" />
+
+    <!-- The GPS RTKlib driver -->
+    
+    
+    <!-- Convert the GPS message to odometry -->
+    <node name="gps_conv" pkg="gps_common" type="utm_odometry_node">
+    	<remap from="fix" to="/gps/fix" />
+    	<param name="rot_covariance" value="99999" />
+    	<param name="frame_id" value="gps" />
+    </node>
+
+    <!-- Camera drivers -->
+    <node name="left_ueye_camera" pkg="ueye_camera" type="ueye_node" output="screen" >
+	
+    </node>
+    <node name="right_ueye_camera" pkg="ueye_camera" type="ueye_node" output="screen" >
+	
+    </node> -->
+
+    <!-- Visual odometry -->
+    <!-- <node name="stereo_odometer" pkg="viso2_ros" type="stereo_odometer" output="screen" >
+	
+    </node> -->
+
+    <!-- The EKF for fusion -->
+    <node pkg="robot_pose_ekf" type="robot_pose_ekf" name="robot_pose_ekf" >
+    	<param name="output_frame" value="/world"/>
+    	<param name="freq" value="30.0"/>
+    	<param name="sensor_timeout" value="1.0"/>
+    	<param name="odom_used" value="true"/>
+    	<param name="imu_used" value="true"/>
+        <param name="vo_used" value="false"/>
+    	<param name="debug" value="false"/>
+    	<param name="self_diagnose" value="false"/>
+    </node>
+
+    <!-- The robot urdf for visualization -->
+    <param name="robot_description" command="$(find xacro)/xacro.py $(find squirtle_description)/urdf/squirtle.urdf" />
+    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
+
+</launch>

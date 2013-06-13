@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+
+<robot name="mondego_river">
+        
+	<!-- world axis -->
+	<link name="world">
+		<visual>
+			<origin xyz="0 0 0" rpy="0 0 0" />
+			<geometry>
+				<box size="346.0 346.0 10.0" />
+			</geometry>
+			<material name="mondego">
+				<texture filename="package://squirtle_description/meshes/backgrounds/mondego.png" /> 
+			</material>
+		</visual>
+	</link>
+	
+	<!-- base station -->
+	<link name="base_station">
+		<visual>
+			<origin xyz="74 137 5" rpy="0 0 0" />
+			<geometry>
+				<box size="0.001 0.001 0.001" />
+			</geometry>
+		</visual>
+	</link>
+	
+	<joint name="world_base_station_joint" type="fixed">
+		<parent link="world"/>
+		<child link="base_station" />
+		<origin xyz="-28 124 5" rpy="0 0 -1.57" />
+	</joint>
+	
+	<joint name="world_bridge_joint" type="fixed">
+		<parent link="world"/>
+		<child link="bridge" />
+		<origin xyz="319 95 5" rpy="0 0 1.66" />
+	</joint>
+	
+	<!-- bridge -->
+	<link name="bridge">
+		<visual>
+			<origin xyz="0 0 0" rpy="0 0 0" />
+			<geometry>
+				<mesh filename="package://squirtle_description/meshes/bridge.dae"/>
+			</geometry>
+		</visual>
+	</link>
+	
+</robot>
