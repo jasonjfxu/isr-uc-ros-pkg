@@ -1,0 +1,11 @@
+<stack>
+  <description brief="gps_rtk">
+  	RTK GPS stack for ROS.
+  </description>
+  <author>Gonçalo Cabrita and Jorge Fraga</author>
+  <license>BSD</license>  
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/gps_rtk</url>
+  <depend stack="ros" />
+
+</stack>
