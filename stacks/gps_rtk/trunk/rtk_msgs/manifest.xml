@@ -1,0 +1,15 @@
+<package>
+  <description brief="rtk_msgs">
+
+     ROS messages to support the gps_rtk stack.
+
+  </description>
+  <author>Gonçalo Cabrita and Jorge Fraga</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/rtk_msgs</url>
+  <depend package="roscpp"/>
+
+</package>
+
+
