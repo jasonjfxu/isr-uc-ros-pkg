@@ -34,3 +34,6 @@ target_link_libraries(rtk_robot_node rtklib)
 
 rosbuild_add_executable(rtk_base_station_node src/rtk_base_station_node.cpp)
 target_link_libraries(rtk_base_station_node cereal_port)
+
+rosbuild_add_executable(rtk_ppp_node src/rtk_ppp_node.cpp)
+target_link_libraries(rtk_ppp_node rtklib)
