@@ -40,15 +40,18 @@
 #include <sensor_msgs/NavSatFix.h>
 #include <std_msgs/ByteMultiArray.h>
 #include <rtk_msgs/Status.h>
+#include <rtk_msgs/ECEFCoordinates.h>
 
 #define BUFFSIZE 32768
 
-#define RTK_ROBOT		0
+#define RTK_ROBOT           0
 #define RTK_BASE_STATION 	1
 
 #define DLL
 
 rtksvr_t server;
+
+rtk_msgs::ECEFCoordinates ecef_base_station;
 
 void baseStationCallback(const std_msgs::ByteMultiArray::ConstPtr& msg)
 {
@@ -76,6 +79,15 @@ void baseStationCallback(const std_msgs::ByteMultiArray::ConstPtr& msg)
         server.npb[RTK_BASE_STATION] += n;
         rtksvrunlock(&server);
     }
+}
+
+void ecefCallback(const rtk_msgs::ECEFCoordinates::ConstPtr& msg)
+{
+    ecef_base_station = *msg;
+
+    server.rtk.rb[0] = msg->position.x;
+    server.rtk.rb[1] = msg->position.y;
+    server.rtk.rb[2] = msg->position.z;
 }
 
 /* update navigation data ----------------------------------------------------*/
@@ -307,12 +319,37 @@ int main(int argc,char **argv)
     ros::NodeHandle nn;
     ros::NodeHandle pn("~");
 
-    double base_x;
-    double base_y;
-    double base_z;
-    pn.param("base_x", base_x, 0.0);
-    pn.param("base_y", base_y, 0.0);
-    pn.param("base_z", base_z, 0.0);
+    ros::Subscriber ecef_sub;
+    if(pn.getParam("base_position/x", ecef_base_station.position.x) && pn.getParam("base_position/y", ecef_base_station.position.y) && pn.getParam("base_position/z", ecef_base_station.position.z))
+    {
+        ROS_INFO("RTK -- Loading base station parameters from the parameter server...");
+
+        XmlRpc::XmlRpcValue position_covariance;
+        if( pn.getParam("base_position/covariance", position_covariance) )
+        {
+            ROS_ASSERT(position_covariance.getType() == XmlRpc::XmlRpcValue::TypeDouble);
+
+            if(position_covariance.size() != 9)
+            {
+                ROS_WARN("RTK -- The base station covariances are not complete! Using default values...");
+            }
+            else
+            {
+                for(int i=0 ; i<position_covariance.size() ; ++i)
+                {
+                    ROS_ASSERT(position_covariance[i].getType() == XmlRpc::XmlRpcValue::TypeDouble);
+
+                    ecef_base_station.position_covariance[i] = static_cast<double>(position_covariance[i]);
+                }
+            }
+        }
+    }
+    else
+    {
+        ROS_INFO("RTK -- Subscribing to the base station for online parameters...");
+
+        ecef_sub = nn.subscribe("base_station/gps/ecef", 50, ecefCallback);
+    }
 
     double rate;
     pn.param("rate", rate, 2.0);
@@ -327,6 +364,7 @@ int main(int argc,char **argv)
 
     ros::Publisher gps_pub = nn.advertise<sensor_msgs::NavSatFix>("gps/fix", 50);
     ros::Publisher status_pub = nn.advertise<rtk_msgs::Status>("gps/status", 50);
+
     ros::Subscriber gps_sub = nn.subscribe("base_station/gps/raw_data", 50, baseStationCallback);
 
     int n;
@@ -353,9 +391,9 @@ int main(int argc,char **argv)
     options.minfix = 3;
     options.ionoopt = IONOOPT_BRDC;
     options.tropopt = TROPOPT_SAAS;
-    options.rb[0] = base_x;
-    options.rb[1] = base_y;
-    options.rb[2] = base_z;
+    options.rb[0] = ecef_base_station.position.x;
+    options.rb[1] = ecef_base_station.position.y;
+    options.rb[2] = ecef_base_station.position.z;
 
     strinitcom();
     server.cycle = 10;
@@ -512,7 +550,7 @@ int main(int argc,char **argv)
         fobs[RTK_ROBOT] = decoderaw(&server, RTK_ROBOT);
         fobs[RTK_BASE_STATION] = decoderaw(&server, RTK_BASE_STATION);
 
-	ROS_DEBUG("RTK -- Got %d observations.", fobs[RTK_ROBOT]);
+        ROS_DEBUG("RTK -- Got %d observations.", fobs[RTK_ROBOT]);
         /* for each rover observation data */
         for(int i=0 ; i<fobs[RTK_ROBOT] ; i++)
         {
@@ -536,8 +574,8 @@ int main(int argc,char **argv)
             gps_msg.header.stamp = ros::Time::now();
             gps_msg.header.frame_id = gps_frame_id;
 
-	    rtk_msgs::Status status_msg;
-	    status_msg.stamp = gps_msg.header.stamp;
+            rtk_msgs::Status status_msg;
+            status_msg.stamp = gps_msg.header.stamp;
 
             if(server.rtk.sol.stat != SOLQ_NONE)
             {
@@ -561,15 +599,15 @@ int main(int argc,char **argv)
                     gps_msg.altitude = alt;
 
                     gps_msg.position_covariance_type = sensor_msgs::NavSatFix::COVARIANCE_TYPE_KNOWN;
-                    gps_msg.position_covariance[0] = sde;
-                    gps_msg.position_covariance[1] = sdne;
-                    gps_msg.position_covariance[2] = sdeu;
-                    gps_msg.position_covariance[3] = sdne;
-                    gps_msg.position_covariance[4] = sdn;
-                    gps_msg.position_covariance[5] = sdun;
-                    gps_msg.position_covariance[6] = sdeu;
-                    gps_msg.position_covariance[7] = sdun;
-                    gps_msg.position_covariance[8] = sdu;
+                    gps_msg.position_covariance[0] = sde + ecef_base_station.position_covariance[0];
+                    gps_msg.position_covariance[1] = sdne + ecef_base_station.position_covariance[1];
+                    gps_msg.position_covariance[2] = sdeu + ecef_base_station.position_covariance[2];
+                    gps_msg.position_covariance[3] = sdne + ecef_base_station.position_covariance[3];
+                    gps_msg.position_covariance[4] = sdn + ecef_base_station.position_covariance[4];
+                    gps_msg.position_covariance[5] = sdun + ecef_base_station.position_covariance[5];
+                    gps_msg.position_covariance[6] = sdeu + ecef_base_station.position_covariance[6];
+                    gps_msg.position_covariance[7] = sdun + ecef_base_station.position_covariance[7];
+                    gps_msg.position_covariance[8] = sdu + ecef_base_station.position_covariance[8];
 
                     gps_msg.status.status = Q==5 ? sensor_msgs::NavSatStatus::STATUS_FIX : sensor_msgs::NavSatStatus::STATUS_GBAS_FIX;
                     gps_msg.status.service = sensor_msgs::NavSatStatus::SERVICE_GPS;
