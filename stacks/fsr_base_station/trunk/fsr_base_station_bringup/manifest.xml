@@ -1,0 +1,13 @@
+<package>
+  <description brief="fsr_base_station_bringup">
+
+     This package holds all the files required to start the FSR base station.
+
+  </description>
+  <author>Gonçalo Cabrita</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/fsr_base_station_bringup</url>
+  <depend package="rtk_ros" />
+
+</package>

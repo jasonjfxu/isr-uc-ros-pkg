@@ -1,0 +1,12 @@
+<launch>
+
+    <!-- The GPS RTK driver -->
+    <node name="rtk_base_station_node" pkg="rtk_ros" type="rtk_base_station_node" />
+
+    <!-- The PPP node -->
+    <node name="rtk_ppp_node" pkg="rtk_ros" type="rtk_ppp_node" />
+
+    <!-- The tf publisher -->
+    <node name="tf_publisher" pkg="fsr_base_station_drivers" type="tf_publisher" />
+
+</launch>
