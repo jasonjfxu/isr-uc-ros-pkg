@@ -46,8 +46,7 @@
 
 #define BUFFSIZE 32768
 
-#define RTK_ROBOT		0
-#define RTK_BASE_STATION 	1
+#define RTK_BUFFER 0
 
 #define DLL
 
@@ -57,26 +56,26 @@ void baseStationCallback(const std_msgs::ByteMultiArray::ConstPtr& msg)
 {
     int n = msg->data.size();
 	
-    unsigned char *p = server.buff[RTK_ROBOT]+server.nb[RTK_ROBOT];
-    unsigned char *q = server.buff[RTK_ROBOT]+server.buffsize;
+    unsigned char *p = server.buff[RTK_BUFFER]+server.nb[RTK_BUFFER];
+    unsigned char *q = server.buff[RTK_BUFFER]+server.buffsize;
 
-    if(server.nb[RTK_ROBOT] + n < server.buffsize)
+    if(server.nb[RTK_BUFFER] + n < server.buffsize)
     {
 	for(int i=0 ; i<n ; i++)
 	{
-        *(server.buff[RTK_ROBOT] + server.nb[RTK_ROBOT] + i) = msg->data[i];
+        	*(server.buff[RTK_BUFFER] + server.nb[RTK_BUFFER] + i) = msg->data[i];
 	}
-    server.nb[RTK_ROBOT] += n;
+    	server.nb[RTK_BUFFER] += n;
 
 	/* write receiver raw/rtcm data to log stream */
         strwrite(server.stream+6, p, n);
-        server.nb[RTK_ROBOT] += n;
+        server.nb[RTK_BUFFER] += n;
             
         /* save peek buffer */
         rtksvrlock(&server);
-        n = n < server.buffsize - server.npb[RTK_ROBOT] ? n : server.buffsize - server.npb[RTK_ROBOT];
-        memcpy(server.pbuf[RTK_ROBOT] + server.npb[RTK_ROBOT], p, n);
-        server.npb[RTK_ROBOT] += n;
+        n = n < server.buffsize - server.npb[RTK_BUFFER] ? n : server.buffsize - server.npb[RTK_BUFFER];
+        memcpy(server.pbuf[RTK_BUFFER] + server.npb[RTK_BUFFER], p, n);
+        server.npb[RTK_BUFFER] += n;
         rtksvrunlock(&server);
     }
 }
@@ -203,25 +202,6 @@ static void updatesvr(rtksvr_t *svr, int ret, obs_t *obs, nav_t *nav, int sat,
         for (i=0;i<MAXSAT;i++) {
             if (!svr->rtcm[index].ssr[i].update) continue;
             svr->rtcm[index].ssr[i].update=0;
-            
-#if 0 /* omitted in v.2.4.1 */
-            iode=svr->rtcm[index].ssr[i].iode;
-            sys=satsys(i+1,&prn);
-            
-            /* check corresponding ephemeris exists */
-            if (sys==SYS_GPS||sys==SYS_GAL||sys==SYS_QZS) {
-                if (svr->nav.eph[i       ].iode!=iode&&
-                    svr->nav.eph[i+MAXSAT].iode!=iode) {
-                    continue;
-                }
-            }
-            else if (sys==SYS_GLO) {
-                if (svr->nav.geph[prn-1          ].iode!=iode&&
-                    svr->nav.geph[prn-1+MAXPRNGLO].iode!=iode) {
-                    continue;
-                }
-            }
-#endif
             svr->nav.ssr[i]=svr->rtcm[index].ssr[i];
         }
         svr->nmsg[index][7]++;
@@ -241,26 +221,13 @@ static int decoderaw(rtksvr_t *svr, int index)
     obs_t *obs;
     nav_t *nav;
     sbsmsg_t *sbsmsg=NULL;
-#if 0
-    gtime_t time=svr->rtk.sol.time;
-#endif
+
     int i,ret,sat,fobs=0;
     
     tracet(4,"decoderaw: index=%d\n",index);
     
     rtksvrlock(svr);
     
-#if 0 /* omitted in v.2.4.1 */
-    /* adjust rtcm or raw time to solution time */
-    if (time.time) {
-        if (fabs(timediff(svr->rtcm[index].time,time))>3600.0) {
-            svr->rtcm[index].time=time;
-        }
-        if (fabs(timediff(svr->raw[index].time,time))>3600.0) {
-            svr->raw[index].time=time;
-        }
-    }
-#endif
     for (i=0;i<svr->nb[index];i++) {
         
         /* input rtcm/receiver raw data from stream */
@@ -303,40 +270,30 @@ static int decoderaw(rtksvr_t *svr, int index)
 
 int main(int argc,char **argv)
 {
-    ros::init(argc, argv, "rtk_robot");
+    ros::init(argc, argv, "rtk_ppp");
 
-    ROS_INFO("RTKlib for ROS Robot Edition");
-
+    ROS_INFO("PPP for ROS v0.1");
 
     ros::NodeHandle nn;
     ros::NodeHandle pn("~");
 
-   /* double base_x;
-    double base_y;
-    double base_z;
-    //pn.param("base_x", base_x, 0.0);
-   // pn.param("base_y", base_y, 0.0);
-    //pn.param("base_z", base_z, 0.0);*/
-
     double rate;
     pn.param("rate", rate, 2.0);
 
-    std::string gps_base_frame_id;
-    pn.param<std::string>("base_station_frame_id", gps_base_frame_id, "base_station/gps");
+    std::string base_station_frame_id;
+    pn.param<std::string>("base_station_frame_id", base_station_frame_id, "base_station/gps");
 
-//    std::string port;
-//    pn.param<std::string>("port", port, "ttyACM1");
-//    int baudrate;
-//    pn.param("baudrate", baudrate, 115200);
+    ros::Publisher ecef_pub = nn.advertise<rtk_msgs::ECEFCoordinates>("base_station/gps/ecef", 50);
+    ros::Publisher utm_pub = nn.advertise<rtk_msgs::UTMCoordinates>("base_station/gps/utm",50);
+    ros::Publisher status_pub = nn.advertise<rtk_msgs::Status>("base_station/gps/status",50);
 
-    ros::Publisher ecef_pub = nn.advertise<rtk_msgs::ECEFCoordinates>("base_station/ecef", 50);
-    ros::Publisher utm_pub = nn.advertise<rtk_msgs::UTMCoordinates>("base_station/utm",50);
-    ros::Publisher status_pub = nn.advertise<rtk_msgs::Status>("base_station/status",50);
     ros::Subscriber gps_sub = nn.subscribe("base_station/gps/raw_data", 50, baseStationCallback);
 
     rtk_msgs::ECEFCoordinates base_ecef_position_msg;
     rtk_msgs::UTMCoordinates base_utm_position_msg;
+
     int n;
+
     //********************* rtklib stuff *********************
     rtksvrinit(&server);
 
@@ -430,8 +387,6 @@ int main(int argc,char **argv)
 
     /* open input streams */
     int stream_type[8] = {0, 0, 0, 0, 0, 0, 0, 0};
-//    char gps_path[64];
-//    sprintf(gps_path, "%s:%d:8:n:1:off", port.c_str(), baudrate);
     char * paths[] = {"", "", "", "", "", "", "", ""};
     char * cmds[] = {"", "", ""};
     
@@ -496,8 +451,8 @@ int main(int argc,char **argv)
     {
         tick = tickget();
 
-        unsigned char *p = server.buff[RTK_ROBOT]+server.nb[RTK_ROBOT];
-        unsigned char *q = server.buff[RTK_ROBOT]+server.buffsize;
+        unsigned char *p = server.buff[RTK_BUFFER]+server.nb[RTK_BUFFER];
+        unsigned char *q = server.buff[RTK_BUFFER]+server.buffsize;
         
         ROS_DEBUG("RTK -- Getting data from GPS...");
         /* read receiver raw/rtcm data from input stream */
@@ -505,28 +460,27 @@ int main(int argc,char **argv)
 
         /* write receiver raw/rtcm data to log stream */
         strwrite(server.stream+5, p, n);
-        server.nb[RTK_ROBOT] += n;
+        server.nb[RTK_BUFFER] += n;
 
         /* save peek buffer */
         rtksvrlock(&server);
-        n = n < server.buffsize - server.npb[RTK_ROBOT] ? n : server.buffsize - server.npb[RTK_ROBOT];
-        memcpy(server.pbuf[RTK_ROBOT] + server.npb[RTK_ROBOT], p, n);
-        server.npb[RTK_ROBOT] += n;
+        n = n < server.buffsize - server.npb[RTK_BUFFER] ? n : server.buffsize - server.npb[RTK_BUFFER];
+        memcpy(server.pbuf[RTK_BUFFER] + server.npb[RTK_BUFFER], p, n);
+        server.npb[RTK_BUFFER] += n;
         rtksvrunlock(&server);
 
         ROS_DEBUG("RTK -- Decoding GPS data...");
         /* decode data */
-        fobs[RTK_ROBOT] = decoderaw(&server, RTK_ROBOT);
-        fobs[RTK_BASE_STATION] = decoderaw(&server, RTK_BASE_STATION);
+        fobs[RTK_BUFFER] = decoderaw(&server, RTK_BUFFER);
 
-        ROS_DEBUG("RTK -- Got %d observations.", fobs[RTK_ROBOT]);
+        ROS_DEBUG("RTK -- Got %d observations.", fobs[RTK_BUFFER]);
         /* for each rover observation data */
-        for(int i=0 ; i<fobs[RTK_ROBOT] ; i++)
+        for(int i=0 ; i<fobs[RTK_BUFFER] ; i++)
         {
             obs.n = 0;
-            for(int j=0 ; j<server.obs[RTK_ROBOT][i].n && obs.n<MAXOBS*2 ; j++)
+            for(int j=0 ; j<server.obs[RTK_BUFFER][i].n && obs.n<MAXOBS*2 ; j++)
             {
-                obs.data[obs.n++] = server.obs[RTK_ROBOT][i].data[j];
+                obs.data[obs.n++] = server.obs[RTK_BUFFER][i].data[j];
             }
             for(int j=0 ; j<server.obs[1][0].n && obs.n<MAXOBS*2 ; j++)
             {
@@ -539,9 +493,8 @@ int main(int argc,char **argv)
             rtkpos(&server.rtk, obs.data, obs.n, &server.nav);
             rtksvrunlock(&server);
 
-
             base_ecef_position_msg.header.stamp = ros::Time::now();
-            base_ecef_position_msg.header.frame_id = gps_base_frame_id;
+            base_ecef_position_msg.header.frame_id = base_station_frame_id;
 
             base_utm_position_msg.header = base_ecef_position_msg.header;
 
@@ -614,11 +567,6 @@ int main(int argc,char **argv)
                     status_msg.fix_quality = Q;
                     status_msg.number_of_satellites = nsat;
                 }
-            }
-            else
-            {
-
-
             }
 
             ROS_DEBUG("RTK -- Publishing ROS msg...");
