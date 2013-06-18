@@ -33,6 +33,9 @@ rosbuild_add_executable(squirtle_node src/squirtle_node.cpp src/Squirtle.cpp)
 target_link_libraries(squirtle_node cereal_port)
 rosbuild_link_boost(squirtle_node signals)
 
+rosbuild_add_executable(squirtle_localization_node src/squirtle_localization_node.cpp)
+rosbuild_link_boost(squirtle_localization_node signals)
+
 #add dynamic reconfigure api
 rosbuild_find_ros_package(dynamic_reconfigure)
 include(${dynamic_reconfigure_PACKAGE_PATH}/cmake/cfgbuild.cmake)

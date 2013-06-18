@@ -19,7 +19,9 @@
     <node name="mti_node" pkg="lse_xsens_mti" type="mti_node" />
 
     <!-- The GPS RTK driver -->
-    <node name="rtk_robot_node" pkg="rtk_ros" type="rtk_robot_node" />
+    <node name="rtk_robot_node" pkg="rtk_ros" type="rtk_robot_node" >
+	<rosparam file="$(find squirtle_bringup)/settings/ecef_base_station_mondego.yaml" command="load" />
+    </node>
 
     <!-- Localization module -->
     <node name="squirtle_localization_node" pkg="squirtle_driver" type="squirtle_localization_node" output="screen">
