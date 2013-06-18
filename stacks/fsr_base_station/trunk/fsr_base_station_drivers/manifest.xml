@@ -1,0 +1,15 @@
+<package>
+  <description brief="fsr_base_station_drivers">
+
+     Drivers for the FSR base station. This package includes a tf publisher node and a communication management node.
+
+  </description>
+  <author>Gonçalo Cabrita</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/fsr_base_station_drivers</url>
+  <depend package="roscpp"/>
+  <depend package="tf"/>
+  <depend package="rtk_msgs"/>
+
+</package>
