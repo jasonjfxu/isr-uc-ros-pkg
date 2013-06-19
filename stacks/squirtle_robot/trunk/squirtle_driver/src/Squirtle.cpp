@@ -209,8 +209,10 @@ void Squirtle::drive(int left_motor, int right_motor, int linear_actuator)
     num_bytes = sprintf(msg_to_send, "MDC L %d R %d;", left_motor, right_motor);
     serial_port.write(msg_to_send, num_bytes);
 
+    int linear_actuator_scaled = (int)(((linear_actuator + 100) * CENTER_LINEAR_ACTUATOR) / 100);
+
     // Message to linear actuator
-    num_bytes = sprintf(msg_to_send, "MDO O %d;", linear_actuator);
+    num_bytes = sprintf(msg_to_send, "MDO O %d;", linear_actuator_scaled);
     serial_port.write(msg_to_send, num_bytes);
 }
 
