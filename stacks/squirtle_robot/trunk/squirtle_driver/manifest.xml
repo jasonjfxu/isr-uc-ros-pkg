@@ -14,5 +14,6 @@
   <depend package="squirtle_msgs"/>
   <depend package="lse_sensor_msgs"/>
   <depend package="dynamic_reconfigure"/>
+  <depend package="rtk_ros"/>
 
 </package>
