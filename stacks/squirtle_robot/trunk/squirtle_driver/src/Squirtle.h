@@ -55,7 +55,7 @@ public:
     
     bool openPort(char * port, int baudrate);
     bool initialize();
-    bool startStreaming(int motors, int fluorometer, int pm);
+    bool setStreaming(int motors, int fluorometer, int pm);
     void streamCallback(std::string * msg);
 
     bool parseMotorData(const char * msg);

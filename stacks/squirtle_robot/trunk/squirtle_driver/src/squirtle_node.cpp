@@ -137,7 +137,7 @@ int main(int argc, char** argv)
     {
         if(ros::Time::now() - start_time > ros::Duration(5.0))
         {
-            ROS_FATAL("Squirtle -- Failed to initialize the Squirtle ASV!");
+            ROS_FATAL("Squirtle -- Failed to get the START message!");
             ROS_BREAK();
         }
         r.sleep();
@@ -146,8 +146,10 @@ int main(int argc, char** argv)
 
     // And finally we tell the Arduino to start streaming data
     ROS_INFO("Squirtle -- Starting data stream...");
-    if(!robot.startStreaming(100, 500, 2000))
+    if(!robot.setStreaming(100, 500, 2000))
     {
+        robot.setStreaming(0, 0, 0);
+        
         ROS_FATAL("Squirtle -- Failed to start streaming!");
         ROS_BREAK();
     }
@@ -180,6 +182,9 @@ int main(int argc, char** argv)
 		ros::spinOnce();
 		r.sleep();
 	}
+    
+    robot.drive(0, 0, 0);
+    robot.setStreaming(0, 0, 0);
 	
 	return 0;
 }
