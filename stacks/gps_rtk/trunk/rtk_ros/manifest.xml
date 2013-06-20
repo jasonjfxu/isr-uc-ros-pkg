@@ -17,6 +17,7 @@
   <depend package="rtklib"/>
   <depend package="cereal_port"/>
   <depend package="rtk_msgs"/>
+  <depend package="angles"/>
 
 </package>
 

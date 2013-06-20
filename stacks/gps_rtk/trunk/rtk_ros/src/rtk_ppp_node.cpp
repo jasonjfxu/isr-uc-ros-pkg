@@ -43,6 +43,7 @@
 #include <rtk_msgs/UTMCoordinates.h>
 #include <rtk_msgs/ECEFCoordinates.h>
 #include <rtk_ros/UTMConversion.h>
+#include <angles/angles.h>
 
 #define BUFFSIZE 32768
 
@@ -61,13 +62,13 @@ void baseStationCallback(const std_msgs::ByteMultiArray::ConstPtr& msg)
 
     if(server.nb[RTK_BUFFER] + n < server.buffsize)
     {
-	for(int i=0 ; i<n ; i++)
-	{
+        for(int i=0 ; i<n ; i++)
+        {
         	*(server.buff[RTK_BUFFER] + server.nb[RTK_BUFFER] + i) = msg->data[i];
-	}
+        }
     	server.nb[RTK_BUFFER] += n;
 
-	/* write receiver raw/rtcm data to log stream */
+        /* write receiver raw/rtcm data to log stream */
         strwrite(server.stream+6, p, n);
         server.nb[RTK_BUFFER] += n;
             
@@ -520,11 +521,11 @@ int main(int argc,char **argv)
 
                     //convert to ECEF and fill ECEF message
                     double geodetic[3], ecef[3];
-                    geodetic[0]= lat;
-                    geodetic[1] = longi;
+                    geodetic[0] = angles::from_degress(lat);
+                    geodetic[1] = angles::from_degress(longi);
                     geodetic[2] = alt;
 
-                    pos2ecef(geodetic,ecef);
+                    pos2ecef(geodetic, ecef);
 
                     base_ecef_position_msg.position.x = ecef[0];
                     base_ecef_position_msg.position.y = ecef[1];
@@ -562,7 +563,6 @@ int main(int argc,char **argv)
                     base_utm_position_msg.position_covariance[6] = sdeu;
                     base_utm_position_msg.position_covariance[7] = sdun;
                     base_utm_position_msg.position_covariance[8] = sdu;
-
 
                     status_msg.fix_quality = Q;
                     status_msg.number_of_satellites = nsat;
