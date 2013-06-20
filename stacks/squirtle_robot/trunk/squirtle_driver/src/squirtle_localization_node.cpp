@@ -140,7 +140,7 @@ int main(int argc, char** argv)
 	tf_listener = new tf::TransformListener();
 
 	message_filters::Subscriber<sensor_msgs::Imu> * imu_sub = new message_filters::Subscriber<sensor_msgs::Imu>();
-	imu_sub->subscribe(n, "imu", 20);
+	imu_sub->subscribe(n, "imu/data", 20);
     tf::MessageFilter<sensor_msgs::Imu> * tf_filter_imu = new tf::MessageFilter<sensor_msgs::Imu>(*imu_sub, *tf_listener, odom_frame_id, 20);
     tf_filter_imu->registerCallback( boost::bind(imuCallback, _1) );
 
