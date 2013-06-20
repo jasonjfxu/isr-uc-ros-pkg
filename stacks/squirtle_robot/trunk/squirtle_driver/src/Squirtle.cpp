@@ -195,12 +195,14 @@ bool Squirtle::parseLM35Data(const char * msg)
 
 void Squirtle::drive(int left_motor, int right_motor, int linear_actuator)
 {
+    linear_actuator *= SQUIRTLE_DIRECTION_LINEAR_ACTUATOR;
+    
     if(left_motor > SQUIRTLE_MAX_MOTOR) left_motor = SQUIRTLE_MAX_MOTOR;
     if(right_motor > SQUIRTLE_MAX_MOTOR) right_motor = SQUIRTLE_MAX_MOTOR;
     if(left_motor < SQUIRTLE_MIN_MOTOR) left_motor = SQUIRTLE_MIN_MOTOR;
     if(right_motor < SQUIRTLE_MIN_MOTOR) right_motor = SQUIRTLE_MIN_MOTOR;
     if(linear_actuator > SQUIRTLE_MAX_LINEAR_ACTUATOR) linear_actuator = SQUIRTLE_MAX_LINEAR_ACTUATOR;
-    if(linear_actuator < -SQUIRTLE_MIN_LINEAR_ACTUATOR) linear_actuator = SQUIRTLE_MIN_LINEAR_ACTUATOR;
+    if(linear_actuator < SQUIRTLE_MIN_LINEAR_ACTUATOR) linear_actuator = SQUIRTLE_MIN_LINEAR_ACTUATOR;
 
     int num_bytes;
     char msg_to_send[64];
@@ -216,14 +218,12 @@ void Squirtle::drive(int left_motor, int right_motor, int linear_actuator)
     }
     else if(linear_actuator < 0)
     {
-        linear_actuator_scaled = -1*(SQUIRTLE_BOTTOM_LIMIT_LINEAR_ACTUATOR + (-1*linear_actuator) * (SQUIRTLE_CENTER_LINEAR_ACTUATOR - SQUIRTLE_BOTTOM_LIMIT_LINEAR_ACTUATOR) / (-1*SQUIRTLE_MIN_LINEAR_ACTUATOR));
+        linear_actuator_scaled = SQUIRTLE_BOTTOM_LIMIT_LINEAR_ACTUATOR + ((-1*SQUIRTLE_MIN_LINEAR_ACTUATOR)-(-1*linear_actuator)) * (SQUIRTLE_CENTER_LINEAR_ACTUATOR - SQUIRTLE_BOTTOM_LIMIT_LINEAR_ACTUATOR) / (-1*SQUIRTLE_MIN_LINEAR_ACTUATOR);
     }
 
     // Message to linear actuator
     num_bytes = sprintf(msg_to_send, "MDO O %d;", linear_actuator_scaled);
     serial_port.write(msg_to_send, num_bytes);
-    
-    ROS_INFO("Setting speeds %d $d $d", left_motor, right_motor, linear_actuator_scaled);
 }
 
 // EOF
