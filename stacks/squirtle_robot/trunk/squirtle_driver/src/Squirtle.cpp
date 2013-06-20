@@ -74,7 +74,7 @@ bool Squirtle::initialize()
     return true;
 }
 
-bool Squirtle::startStreaming(int motors, int fluorometer, int pm)
+bool Squirtle::setStreaming(int motors, int fluorometer, int pm)
 {
     char msg_to_send[64];
 
