@@ -81,7 +81,7 @@ int main(int argc, char ** argv)
             fprintf(yaml_file, "base_position:\n  x: %lf\n  y: %lf\n  z: %lf\n\n  covariance: [", utm_msg.position.x, utm_msg.position.y, utm_msg.position.z);
             for(int i=0 ; i<utm_msg.position_covariance.size() ; i++)
             {
-                fprintf(yaml_file, "%d%c", utm_msg.position_covariance[i], i==utm_msg.position_covariance.size()-1 ? ']' : ',');
+                fprintf(yaml_file, "%lf%c", utm_msg.position_covariance[i], (i==utm_msg.position_covariance.size()-1 ? ']' : ','));
             }
             waiting_for_message = false;
         }

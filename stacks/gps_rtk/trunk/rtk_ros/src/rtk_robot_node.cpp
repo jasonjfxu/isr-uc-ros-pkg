@@ -84,10 +84,10 @@ void baseStationCallback(const std_msgs::ByteMultiArray::ConstPtr& msg)
 void ecefCallback(const rtk_msgs::ECEFCoordinates::ConstPtr& msg)
 {
     ecef_base_station = *msg;
-
-    server.rtk.rb[0] = msg->position.x;
-    server.rtk.rb[1] = msg->position.y;
-    server.rtk.rb[2] = msg->position.z;
+    
+    server.rtk.opt.rb[0] = msg->position.x;
+    server.rtk.opt.rb[1] = msg->position.y;
+    server.rtk.opt.rb[2] = msg->position.z;
 }
 
 /* update navigation data ----------------------------------------------------*/
@@ -108,10 +108,6 @@ static void updatesvr(rtksvr_t *svr, int ret, obs_t *obs, nav_t *nav, int sat,
     gtime_t tof;
     double pos[3],del[3]={0},dr[3];
     int i,n=0,prn,sbssat=svr->rtk.opt.sbassatsel;
-#if 0
-    int sys,iode;
-#endif
-    tracet(4,"updatesvr: ret=%d sat=%2d index=%d\n",ret,sat,index);
     
     if (ret==1) { /* observation data */
         if (iobs<MAXOBSBUF) {
@@ -127,7 +123,6 @@ static void updatesvr(rtksvr_t *svr, int ret, obs_t *obs, nav_t *nav, int sat,
         svr->nmsg[index][0]++;
     }
     else if (ret==2) { /* ephemeris */
-    	printf("updatesvr, 122: navsel: %d, index: %d\n",svr->navsel,index);
         if (satsys(sat,&prn)!=SYS_GLO) {
             if (!svr->navsel||svr->navsel==index+1) {
                 eph1=nav->eph+sat-1;
@@ -212,25 +207,6 @@ static void updatesvr(rtksvr_t *svr, int ret, obs_t *obs, nav_t *nav, int sat,
         for (i=0;i<MAXSAT;i++) {
             if (!svr->rtcm[index].ssr[i].update) continue;
             svr->rtcm[index].ssr[i].update=0;
-            
-#if 0 /* omitted in v.2.4.1 */
-            iode=svr->rtcm[index].ssr[i].iode;
-            sys=satsys(i+1,&prn);
-            
-            /* check corresponding ephemeris exists */
-            if (sys==SYS_GPS||sys==SYS_GAL||sys==SYS_QZS) {
-                if (svr->nav.eph[i       ].iode!=iode&&
-                    svr->nav.eph[i+MAXSAT].iode!=iode) {
-                    continue;
-                }
-            }
-            else if (sys==SYS_GLO) {
-                if (svr->nav.geph[prn-1          ].iode!=iode&&
-                    svr->nav.geph[prn-1+MAXPRNGLO].iode!=iode) {
-                    continue;
-                }
-            }
-#endif
             svr->nav.ssr[i]=svr->rtcm[index].ssr[i];
         }
         svr->nmsg[index][7]++;
@@ -250,26 +226,13 @@ static int decoderaw(rtksvr_t *svr, int index)
     obs_t *obs;
     nav_t *nav;
     sbsmsg_t *sbsmsg=NULL;
-#if 0
-    gtime_t time=svr->rtk.sol.time;
-#endif
+
     int i,ret,sat,fobs=0;
     
     tracet(4,"decoderaw: index=%d\n",index);
     
     rtksvrlock(svr);
     
-#if 0 /* omitted in v.2.4.1 */
-    /* adjust rtcm or raw time to solution time */
-    if (time.time) {
-        if (fabs(timediff(svr->rtcm[index].time,time))>3600.0) {
-            svr->rtcm[index].time=time;
-        }
-        if (fabs(timediff(svr->raw[index].time,time))>3600.0) {
-            svr->raw[index].time=time;
-        }
-    }
-#endif
     for (i=0;i<svr->nb[index];i++) {
         
         /* input rtcm/receiver raw data from stream */
@@ -287,8 +250,6 @@ static int decoderaw(rtksvr_t *svr, int index)
         }
         else {
             ret=input_raw(svr->raw+index,svr->format[index],svr->buff[index][i]);
-            /*if(index < 2 && index >= 0 && ret)
-                ROS_INFO("ret: %d index: %d\n", ret,index);*/
 
             obs=&svr->raw[index].obs;
             nav=&svr->raw[index].nav;
@@ -299,7 +260,7 @@ static int decoderaw(rtksvr_t *svr, int index)
         if (ret>0) updatesvr(svr,ret,obs,nav,sat,sbsmsg,index,fobs);
         
         /* observation data received */
-        if (ret==1) {
+        if(ret==1) {
             if (fobs<MAXOBSBUF) fobs++; else svr->prcout++;
         }
     }
@@ -327,7 +288,7 @@ int main(int argc,char **argv)
         XmlRpc::XmlRpcValue position_covariance;
         if( pn.getParam("base_position/covariance", position_covariance) )
         {
-            ROS_ASSERT(position_covariance.getType() == XmlRpc::XmlRpcValue::TypeDouble);
+            ROS_ASSERT(position_covariance.getType() == XmlRpc::XmlRpcValue::TypeArray);
 
             if(position_covariance.size() != 9)
             {
