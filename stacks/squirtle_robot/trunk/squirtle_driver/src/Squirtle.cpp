@@ -223,7 +223,7 @@ void Squirtle::drive(int left_motor, int right_motor, int linear_actuator)
     num_bytes = sprintf(msg_to_send, "MDO O %d;", linear_actuator_scaled);
     serial_port.write(msg_to_send, num_bytes);
     
-    ROS_INFO("Setting speeds %d $d $d", left_motor, right_motor linear_actuator_scaled);
+    ROS_INFO("Setting speeds %d $d $d", left_motor, right_motor, linear_actuator_scaled);
 }
 
 // EOF
