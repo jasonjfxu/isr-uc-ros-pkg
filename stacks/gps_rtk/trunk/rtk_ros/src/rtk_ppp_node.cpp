@@ -99,10 +99,6 @@ static void updatesvr(rtksvr_t *svr, int ret, obs_t *obs, nav_t *nav, int sat,
     gtime_t tof;
     double pos[3],del[3]={0},dr[3];
     int i,n=0,prn,sbssat=svr->rtk.opt.sbassatsel;
-#if 0
-    int sys,iode;
-#endif
-    tracet(4,"updatesvr: ret=%d sat=%2d index=%d\n",ret,sat,index);
     
     if (ret==1) { /* observation data */
         if (iobs<MAXOBSBUF) {
@@ -118,7 +114,6 @@ static void updatesvr(rtksvr_t *svr, int ret, obs_t *obs, nav_t *nav, int sat,
         svr->nmsg[index][0]++;
     }
     else if (ret==2) { /* ephemeris */
-    	printf("updatesvr, 122: navsel: %d, index: %d\n",svr->navsel,index);
         if (satsys(sat,&prn)!=SYS_GLO) {
             if (!svr->navsel||svr->navsel==index+1) {
                 eph1=nav->eph+sat-1;
@@ -225,8 +220,6 @@ static int decoderaw(rtksvr_t *svr, int index)
 
     int i,ret,sat,fobs=0;
     
-    tracet(4,"decoderaw: index=%d\n",index);
-    
     rtksvrlock(svr);
     
     for (i=0;i<svr->nb[index];i++) {
@@ -246,8 +239,6 @@ static int decoderaw(rtksvr_t *svr, int index)
         }
         else {
             ret=input_raw(svr->raw+index,svr->format[index],svr->buff[index][i]);
-            /*if(index < 2 && index >= 0 && ret)
-                ROS_INFO("ret: %d index: %d\n", ret,index);*/
 
             obs=&svr->raw[index].obs;
             nav=&svr->raw[index].nav;
@@ -521,8 +512,8 @@ int main(int argc,char **argv)
 
                     //convert to ECEF and fill ECEF message
                     double geodetic[3], ecef[3];
-                    geodetic[0] = angles::from_degress(lat);
-                    geodetic[1] = angles::from_degress(longi);
+                    geodetic[0] = angles::from_degrees(lat);
+                    geodetic[1] = angles::from_degrees(longi);
                     geodetic[2] = alt;
 
                     pos2ecef(geodetic, ecef);
