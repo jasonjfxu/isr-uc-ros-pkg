@@ -70,7 +70,7 @@ int main(int argc, char** argv)
 		XmlRpc::XmlRpcValue position_covariance;
 		if( pn.getParam("base_position/covariance", position_covariance) )
 		{
-		    ROS_ASSERT(position_covariance.getType() == XmlRpc::XmlRpcValue::TypeDouble);
+		    ROS_ASSERT(position_covariance.getType() == XmlRpc::XmlRpcValue::TypeArray);
 
 		    if(position_covariance.size() != 9)
 		    {
