@@ -29,7 +29,7 @@
 	<joint name="world_mondego_joint" type="fixed">
 		<parent link="world"/>
 		<child link="mondego" />
-		<origin xyz="548811.454358155 4450122.57607714 0" rpy="0 0 0" />
+		<origin xyz="548811.454358155 4450122.57607714 0" rpy="0 0 1.57" />
 	</joint>
 	
 	<!-- bridge -->

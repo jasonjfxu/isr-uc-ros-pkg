@@ -1,15 +1,10 @@
 <launch>
 
-    <!-- The robot urdf for visualization -->
-    <param name="robot_description" command="$(find xacro)/xacro.py $(find squirtle_description)/urdf/squirtle.urdf" />
-    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+    <!-- The river urdf for visualization -->
+    <group ns="mondego">
+        <param name="robot_description" command="$(find xacro)/xacro.py $(find squirtle_description)/urdf/mondego_river.urdf" />
+        <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
     <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
-
-    <param name="river_description" command="$(find xacro)/xacro.py $(find squirtle_description)/urdf/mondego_river.urdf" />
-
-    <node pkg="tf" type="static_transform_publisher" name="world_broadcaster" args="-22 87 5 0 0 0 world base_footprint 50" />
-
-    <node pkg="tf" type="static_transform_publisher" name="base_station_broadcaster" args="0 0 0 0 0 0 world base_station 50" />
-    <node pkg="tf" type="static_transform_publisher" name="bridge_broadcaster" args="89 35 5 1.5 0 0 world bridge 50" />
+    </group>
 
 </launch>
