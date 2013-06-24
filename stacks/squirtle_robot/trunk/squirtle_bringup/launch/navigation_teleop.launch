@@ -1,0 +1,21 @@
+<launch>
+
+    <node pkg="move_base" type="move_base" name="move_base" output="screen" respawn="false">
+    	<rosparam file="$(find squirtle_bringup)/settings/costmap_common_params.yaml" command="load" ns="global_costmap" />
+    	<rosparam file="$(find squirtle_bringup)/settings/costmap_common_params.yaml" command="load" ns="local_costmap" />
+    	<rosparam file="$(find squirtle_bringup)/settings/local_costmap_params.yaml" command="load" />
+    	<rosparam file="$(find squirtle_bringup)/settings/global_costmap_params.yaml" command="load" />
+    	<rosparam file="$(find squirtle_bringup)/settings/base_local_planner_params.yaml" command="load" />
+	<remap from="cmd_vel" to="move_base/cmd_vel"/>
+    </node>
+
+    <node pkg="joy" type="joy_node" name="joystick"/>
+
+    <node pkg="squirtle_teleop" type="squirtle_joystick" name="squirtle_joystick">
+        <param name="scale_angular" value="1.5"/>
+        <param name="scale_linear" value="0.5"/>
+	<param name="multiplex" value="true"/>
+        <remap from="teleop/cmd_vel" to="cmd_vel"/>
+    </node>
+
+</launch>
