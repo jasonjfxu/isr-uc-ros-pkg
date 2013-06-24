@@ -65,12 +65,12 @@ tf::Transform t_world_gps;
 tf::Transform t_odom_imu;
 tf::Transform t_odom_gps;
 
-sensor_msgs::Imu imu_msg;
-sensor_msgs::NavSatFix gps_msg;
+//sensor_msgs::Imu imu_msg;
+//sensor_msgs::NavSatFix gps_msg;
 
 void imuCallback(const boost::shared_ptr<const sensor_msgs::Imu>& msg)
 {
-    imu_msg = *msg;
+    //imu_msg = *msg;
 
     geometry_msgs::PoseStamped pose;
     pose.header.frame_id = msg->header.frame_id;
@@ -92,7 +92,10 @@ void imuCallback(const boost::shared_ptr<const sensor_msgs::Imu>& msg)
     tf::Quaternion q_imu;
 
     tf::quaternionMsgToTF(msg->orientation, q_imu);
+    t_world_imu.setOrigin(tf::Vector3(0.0, 0.0, 0.0));
     t_world_imu.setRotation(q_imu + tf::createQuaternionFromYaw(M_PI/2.0 + true_north_compensation));
+    
+    ROS_INFO("Squirtle Localization - %s - IMU yaw in UTM - yaw:%lf", __FUNCTION__, tf::getYaw(msg->orientation) + M_PI/2.0 + true_north_compensation);
 
     tf::quaternionMsgToTF(imu_pose.pose.orientation, q_imu);
     t_odom_imu.setOrigin(tf::Vector3(imu_pose.pose.position.x, imu_pose.pose.position.y, imu_pose.pose.position.z));
@@ -101,7 +104,7 @@ void imuCallback(const boost::shared_ptr<const sensor_msgs::Imu>& msg)
 
 void gpsCallback(const boost::shared_ptr<const sensor_msgs::NavSatFix>& msg)
 {
-    gps_msg = *msg;
+    //gps_msg = *msg;
 
     geometry_msgs::PoseStamped pose;
     pose.header.frame_id = msg->header.frame_id;
@@ -124,6 +127,9 @@ void gpsCallback(const boost::shared_ptr<const sensor_msgs::NavSatFix>& msg)
     int zone_number; char zone_letter;
     GPStoUTM(msg->latitude, msg->longitude, y, x, zone_number, zone_letter);
     t_world_gps.setOrigin(tf::Vector3(x, y, 5.0));
+    t_world_gps.setRotation(tf::createQuaternionFromYaw(0.0));
+    
+    ROS_INFO("Squirtle Localization - %s - GPS position in UTM - x:%lf y:%lf", __FUNCTION__, x, y);
 
     t_odom_gps.setOrigin(tf::Vector3(gps_pose.pose.position.x, gps_pose.pose.position.y, gps_pose.pose.position.z));
     tf::Quaternion q_gps;
@@ -179,17 +185,6 @@ int main(int argc, char** argv)
         tf::Transform t_world_odom;
         t_world_odom.setOrigin(t_world_odom_translation.getOrigin());
         t_world_odom.setRotation(t_world_odom_rotation.getRotation());
-        /*double x, y;
-        int zone_number; char zone_letter;
-        GPStoUTM(gps_msg.latitude, gps_msg.longitude, y, x, zone_number, zone_letter);
-        t_world_odom.setOrigin(tf::Vector3(x, y, 5.0));
-        double yaw = tf::getYaw(imu_msg.orientation);
-	ROS_INFO("Imu yaw is %lf", yaw);
-	yaw = yaw + M_PI/2.0 + true_north_compensation;
-	tf::Quaternion q = tf::createQuaternionFromYaw(yaw);
-	ROS_INFO("Imu yaw is %lf", yaw);
-	q.normalize();
-        t_world_odom.setRotation(q);*/
 
         tf_broadcaster.sendTransform(tf::StampedTransform(t_world_odom, ros::Time::now(), global_frame_id, odom_frame_id));
 
