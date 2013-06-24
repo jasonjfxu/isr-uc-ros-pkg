@@ -50,19 +50,24 @@ public:
 
 private:
   void joyCallback(const sensor_msgs::Joy::ConstPtr& joy);
+  void velCallback(const geometry_msgs::Twist::ConstPtr& vel);
   void publish();
 
   ros::NodeHandle ph_, nh_;
 
-  int linear_, angular_, deadman_axis_;
+  int linear_, angular_, button_a_, button_b_;
   double l_scale_, a_scale_;
   ros::Publisher vel_pub_;
+  ros::Subscriber vel_sub_;
   ros::Subscriber joy_sub_;
 
   geometry_msgs::Twist last_published_;
   boost::mutex publish_mutex_;
-  bool deadman_pressed_;
+  bool button_a_pressed_;
+  bool button_b_pressed_;
   ros::Timer timer_;
+
+  bool mux_;
 
 };
 
@@ -70,17 +75,22 @@ SquirtleTeleop::SquirtleTeleop():
   ph_("~"),
   linear_(1),
   angular_(0),
-  deadman_axis_(4),
+  button_a_(0),
+  button_b_(1),
   l_scale_(0.3),
   a_scale_(0.9)
 {
   ph_.param("axis_linear", linear_, linear_);
   ph_.param("axis_angular", angular_, angular_);
-  ph_.param("axis_deadman", deadman_axis_, deadman_axis_);
+  ph_.param("button_a", button_a_, button_a_);
+  ph_.param("button_b", button_b_, button_b_);
   ph_.param("scale_angular", a_scale_, a_scale_);
   ph_.param("scale_linear", l_scale_, l_scale_);
 
+  ph_.param("multiplex", mux_, false);
+
   vel_pub_ = nh_.advertise<geometry_msgs::Twist>("teleop/cmd_vel", 1);
+  if(mux_) vel_sub_ = nh_.subscribe<geometry_msgs::Twist>("move_base/cmd_vel", 10, &SquirtleTeleop::velCallback, this);
   joy_sub_ = nh_.subscribe<sensor_msgs::Joy>("joy", 10, &SquirtleTeleop::joyCallback, this);
 
   timer_ = nh_.createTimer(ros::Duration(0.1), boost::bind(&SquirtleTeleop::publish, this));
@@ -88,19 +98,39 @@ SquirtleTeleop::SquirtleTeleop():
 
 void SquirtleTeleop::joyCallback(const sensor_msgs::Joy::ConstPtr& joy)
 { 
-  geometry_msgs::Twist vel;
-  vel.angular.z = a_scale_*joy->axes[angular_];
-  vel.linear.x = l_scale_*joy->axes[linear_];
-  last_published_ = vel;
-  deadman_pressed_ = joy->buttons[deadman_axis_];
+  button_a_pressed_ = joy->buttons[button_a_];
+  button_b_pressed_ = joy->buttons[button_b_];
 
+  geometry_msgs::Twist vel;
+  if(button_a_pressed_)
+  {
+    vel.angular.z = a_scale_*joy->axes[angular_];
+    vel.linear.x = joy->axes[linear_] == 0.0 ? 0.01 : l_scale_*joy->axes[linear_];
+  }
+  else if(button_b_pressed_)
+  {
+      vel.angular.z = a_scale_*joy->axes[angular_];
+      vel.linear.x = 0.0;
+  }
+
+  last_published_ = vel;
+}
+
+void SquirtleTeleop::velCallback(const geometry_msgs::Twist::ConstPtr& vel)
+{
+    boost::mutex::scoped_lock lock(publish_mutex_);
+
+    if(!button_a_pressed_ && !button_b_pressed_)
+    {
+        vel_pub_.publish(*vel);
+    }
 }
 
 void SquirtleTeleop::publish()
 {
   boost::mutex::scoped_lock lock(publish_mutex_);
 
-  if (deadman_pressed_)
+  if(button_a_pressed_ || button_b_pressed_)
   {
     vel_pub_.publish(last_published_);
   }
