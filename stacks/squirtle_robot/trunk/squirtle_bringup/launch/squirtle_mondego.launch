@@ -7,20 +7,22 @@
     <node name="sonar_imagenex" pkg="sonar_imagenex" type="sonar_imagenex" output="screen" >
     	<param name="train_angle" value="90" />
     	<param name="sector_width" value="45" />
-	<param name="frequency" value="10" />
+        <param name="frequency" value="10" />
     	<param name="initial_range" value="5" />
-	<param name="gain" value="5" />
+        <param name="gain" value="5" />
     </node>
 
     <!-- Convert the Sonar scans to a laser message for the navigation stack to use -->
     <node name="sonar_to_laser_node" pkg="sonar_imagenex" type="sonar_to_laser" output="screen"/>
 
     <!-- The XSens MTi driver -->
-    <node name="mti_node" pkg="lse_xsens_mti" type="mti_node" />
+    <node name="mti_node" pkg="lse_xsens_mti" type="mti_node" >
+        <param name="frame_id" value="imu"/>
+    </node>
 
     <!-- The GPS RTK driver -->
     <node name="rtk_robot_node" pkg="rtk_ros" type="rtk_robot_node" >
-	<rosparam file="$(find squirtle_bringup)/settings/ecef_base_station_mondego.yaml" command="load" />
+        <rosparam file="$(find squirtle_bringup)/settings/ecef_base_station_mondego.yaml" command="load" />
     </node>
 
     <!-- Localization module -->

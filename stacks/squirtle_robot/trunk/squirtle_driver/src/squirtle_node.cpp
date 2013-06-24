@@ -102,7 +102,7 @@ int main(int argc, char** argv)
 	ros::NodeHandle pn("~");
     
     	std::string port;
-	pn.param<std::string>("port", port, "/dev/ttyUSB0");
+	pn.param<std::string>("port", port, "/dev/arduino");
     	int baudrate;
     	pn.param("baudrate", baudrate, 19200);
 	
