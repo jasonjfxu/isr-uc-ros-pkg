@@ -17,7 +17,7 @@
 		<visual>
 			<origin xyz="0 0 0" rpy="0 0 0" />
 			<geometry>
-				<box size="346.0 346.0 10.0" />
+				<box size="346.0 346.0 0.0" />
 			</geometry>
 
 			<material name="mondego">
