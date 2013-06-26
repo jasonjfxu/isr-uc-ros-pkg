@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+
+<robot name="isr_garage">
+        
+	<!-- world axis -->
+	<link name="world">
+		<visual>
+			<origin xyz="0 0 0" rpy="0 0 0" />
+			<geometry>
+				<box size="0.001 0.001 0.001" />
+			</geometry>
+		</visual>
+	</link>
+
+	<!-- isr -->
+	<link name="isr">
+		<visual>
+			<origin xyz="0 0 0" rpy="0 0 0" />
+			<geometry>
+				<box size="60.0 50.0 10.0" />
+			</geometry>
+
+			<material name="isr">
+				<texture filename="package://squirtle_description/meshes/backgrounds/isr.png" /> 
+			</material>
+		</visual>
+	</link>
+
+	<joint name="world_isr_joint" type="fixed">
+		<parent link="world"/>
+		<child link="isr" />
+		<origin xyz="549533.504750104 4448643.58010772 0" rpy="0 0 1.57" />
+	</joint>
+	
+	
+</robot>
