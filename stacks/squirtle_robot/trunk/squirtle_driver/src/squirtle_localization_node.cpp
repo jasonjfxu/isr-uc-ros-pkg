@@ -32,7 +32,7 @@
 *  ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 *  POSSIBILITY OF SUCH DAMAGE.
 *
-* Author: Gonçalo Cabrita on 17/06/2013
+* Author: Gonçalo Cabrita and Jorge Fraga on 17/06/2013
 *********************************************************************/
 
 #include <ros/ros.h>
@@ -93,7 +93,9 @@ void imuCallback(const boost::shared_ptr<const sensor_msgs::Imu>& msg)
 
     tf::quaternionMsgToTF(msg->orientation, q_imu);
     t_world_imu.setOrigin(tf::Vector3(0.0, 0.0, 0.0));
-    t_world_imu.setRotation(q_imu + tf::createQuaternionFromYaw(M_PI/2.0 + true_north_compensation));
+
+    tf::Quaternion temp = q_imu * tf::createQuaternionFromYaw(M_PI/2.0 + true_north_compensation);
+    t_world_imu.setRotation(temp.normalized());
     
     ROS_INFO("Squirtle Localization - %s - IMU yaw in UTM - yaw:%lf", __FUNCTION__, tf::getYaw(msg->orientation) + M_PI/2.0 + true_north_compensation);
 
@@ -150,10 +152,10 @@ int main(int argc, char** argv)
 	double rate;
 	pn.param("rate", rate, 2.0);
 
-	pn.param("true_north__compensation", true_north_compensation, 0.0499164166);
+    pn.param("true_north_compensation", true_north_compensation, 0.0499164166);
     
 	pn.param<std::string>("global_frame_id", global_frame_id, "/world");
-	pn.param<std::string>("odom_frame_id", odom_frame_id, "odom");
+    pn.param<std::string>("odom_frame_id", odom_frame_id, "odom");
 	
 	tf_listener = new tf::TransformListener();
 
@@ -184,7 +186,7 @@ int main(int argc, char** argv)
 
         tf::Transform t_world_odom;
         t_world_odom.setOrigin(t_world_odom_translation.getOrigin());
-        t_world_odom.setRotation(t_world_odom_rotation.getRotation());
+        t_world_odom.setRotation((t_world_odom_rotation.getRotation()).normalized());
 
         tf_broadcaster.sendTransform(tf::StampedTransform(t_world_odom, ros::Time::now(), global_frame_id, odom_frame_id));
 
@@ -200,7 +202,7 @@ int main(int argc, char** argv)
         odom_msg.pose.pose.position.z = position.getZ();
 
         // Odometry orientation
-        tf::quaternionTFToMsg(t_world_odom_rotation.getRotation(), odom_msg.pose.pose.orientation);
+        tf::quaternionTFToMsg((t_world_odom_rotation.getRotation()).normalized(), odom_msg.pose.pose.orientation);
 
         // TODO: Finish this, add covariance...
         //odom_msg.pose.covariance...
