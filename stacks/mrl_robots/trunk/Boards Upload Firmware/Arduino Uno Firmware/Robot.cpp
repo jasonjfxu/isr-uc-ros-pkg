@@ -46,25 +46,47 @@ void Robot::robotSetup() {
 
 int Robot::getRange(int pin_num) {
 
-  int aux_sensorValue=0, sensorValue=0, cnt=0;
-  int samples = 20;
+ 
+  //int aux_sensorValue=0, sensorValue=0, cnt=0;
+  //int samples = 20;
+  int sensorValue = 0;
+  
+  //int sonar_array[20];
 
-  delay(10);
+  
 
-  while (cnt != samples) {
+  //while (cnt != samples) {
      digitalWrite(12, HIGH);					// Activate chain reading on sonars
+     //delay(6);
      sensorValue = analogRead(pin_num);
      sensorValue = 1.767 * pow(sensorValue,0.9465) - 0.3759;     // Convert Scale
-     aux_sensorValue = aux_sensorValue + sensorValue;
-     cnt = cnt + 1;
-     digitalWrite(12, LOW);
+     //aux_sensorValue = aux_sensorValue + sensorValue;
+     //sonar_array[cnt] = sensorValue;
+     //cnt = cnt + 1;
+     //digitalWrite(12, LOW);
+   //}
+   //cnt=0;
+   //sensorValue = round( aux_sensorValue / samples); 
+   //int size = sizeof(sonar_array)/sizeof(int);
+   /*
+   int out, in, swapper;
+   for(out=0 ; out < samples; out++) {  // outer loop
+     for(in=out; in< samples; in++)  {  // inner loop
+       if( sonar_array[in] > sonar_array[in+1] ) {   // out of order?
+        // swap them:
+         swapper = sonar_array[in];
+         sonar_array [in] = sonar_array[in+1];
+         sonar_array[in+1] = swapper;
+       }
+     }
    }
-   cnt=0;
-   sensorValue = round( aux_sensorValue / samples); 
-  
+        
+   sensorValue = size % 2 ? sonar_array[size / 2] : (sonar_array[size / 2 - 1] + sonar_array[size / 2]) / 2;
+  */
    return sensorValue;
    
 }
+
 
 void Robot::encodersReset(){     // This function resets the encoder values to 0
  
@@ -88,6 +110,7 @@ double Robot::EEPROMReadDouble(int ee){
 	  *p++ = EEPROM.read(ee++);
     return value;
 }
+
 
 
 
