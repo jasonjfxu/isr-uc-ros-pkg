@@ -1,7 +1,7 @@
 <package>
   <description brief="mrl_robots_sensors">
 
-     Drivers to control and adquiring data from the sensors set eqquiped in the StingBot and Traxbot robots in ROS. Developed at ISR, University of Coimbra
+     Drivers to control and acquiring data from the sensors set equipped in the StingBot and Traxbot robots in ROS. Developed at ISR, University of Coimbra
  
   </description>
   <author>André Araújo and Nuno Ferreira</author>
